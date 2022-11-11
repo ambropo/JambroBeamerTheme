@@ -5,11 +5,11 @@ Ambrogio Cesa-Bianchi's theme for Beamer. Its main feature is to allow to commen
 
 ## Installation
 
-To use the theme, simply download the `beamerthemejambro.sty' to the folder containing your presentation. Then load the theme using `\usetheme{jambro}` in the preamble of your Beamer document.
+To use the theme, simply download the `beamerthemejambro.sty` to the folder containing your presentation. Then load the theme using `\usetheme{jambro}` in the preamble of your Beamer document.
 
 ## Manual and examples
 
-The file `Manual.pdf' (and corresponding .tex file) provides more information on the features of the theme and a series of examples.
+The file `Manual.pdf` (and corresponding .tex file) provides more information on the features of the theme and a series of examples.
 
 The following code shows a minimal example of a Beamer presentation using Metropolis.
 
@@ -27,5 +27,5 @@ The following code shows a minimal example of a Beamer presentation using Metrop
 \end{document}
 ```
 
-License
+## License
 The theme is licensed under a GNU General Public License v3.0
