@@ -1,5 +1,5 @@
 # Jambro Beamer theme
-Ambrogio Cesa-Bianchi's theme for Beamer. Its main feature is to allow annotation of text, figures, and tables using arrows (Tikz) and handwritten-like text (Augie).
+Ambrogio Cesa-Bianchi's theme for Beamer. It's a relatively minimal theme with a list of the sections in the footline. Its main feature is to allow annotation of text, figures, and tables using arrows (Tikz) and handwritten-like text (Augie).
 
 <img width="420" alt="Screenshot2" src="https://user-images.githubusercontent.com/45069084/201375060-75b98059-c461-4ab8-81b8-f39472bb8578.png"> <img width="420" alt="screenshot1" src="https://user-images.githubusercontent.com/45069084/201373761-2ae948e3-750d-4ba8-9326-b179e1d0fb0f.png"> 
 
