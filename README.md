@@ -1,7 +1,5 @@
 # Jambro Beamer theme
-Ambrogio Cesa-Bianchi's theme for Beamer.
-
-Jambro is a simple Beamer theme. It allows to comment on text and figures using handwritten-like text, using Tikz, e.g.:
+Ambrogio Cesa-Bianchi's theme for Beamer. Its main feature is to allow to comment on text, figures and tables using Tikz and handwritten-like text, e.g.:
 
 <img width="764" alt="screenshot" src="https://user-images.githubusercontent.com/45069084/201373761-2ae948e3-750d-4ba8-9326-b179e1d0fb0f.png">
 
