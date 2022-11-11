@@ -1,0 +1,14 @@
+.DS_Store
+*.sty
+*.tex
+*.nav
+*.bib
+*.out
+*.snm
+*.gz
+*.toc
+*.vrb
+*.aux
+*.log
+*.bbl
+*.blg
