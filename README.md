@@ -11,7 +11,7 @@ To use the theme, simply download the `beamerthemejambro.sty` to the folder cont
 
 The file `Manual.pdf` (and corresponding .tex file) provides more information on the features of the theme and a series of examples.
 
-The following code shows a minimal example of a Beamer presentation using Metropolis.
+The following code shows a minimal example of a Beamer presentation using jambro.
 
 ```
 \documentclass{beamer}
