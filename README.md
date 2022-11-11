@@ -1,7 +1,7 @@
 # Jambro Beamer theme
 Ambrogio Cesa-Bianchi's theme for Beamer. Its main feature is to allow to comment on text, figures and tables using Tikz and handwritten-like text, e.g.:
 
-<img width="360" alt="screenshot1" src="https://user-images.githubusercontent.com/45069084/201373761-2ae948e3-750d-4ba8-9326-b179e1d0fb0f.png"><img width="360" alt="Screenshot2" src="https://user-images.githubusercontent.com/45069084/201375060-75b98059-c461-4ab8-81b8-f39472bb8578.png">
+<img width="360" alt="Screenshot2" src="https://user-images.githubusercontent.com/45069084/201375060-75b98059-c461-4ab8-81b8-f39472bb8578.png"> <img width="360" alt="screenshot1" src="https://user-images.githubusercontent.com/45069084/201373761-2ae948e3-750d-4ba8-9326-b179e1d0fb0f.png"> 
 
 To use the theme, simply download the .sty file to the folder containing your presentation. Then load the theme using `\usetheme{jambro}` in the preamble of your Beamer document.
 
