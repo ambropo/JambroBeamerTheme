@@ -1,5 +1,0 @@
-\beamer@sectionintoc {1}{Introduction}{2}{0}{1}
-\beamer@sectionintoc {2}{Tables \& Figures}{4}{0}{2}
-\beamer@sectionintoc {3}{Arrows \& Handwriting}{9}{0}{3}
-\beamer@sectionintoc {4}{Highlighting}{17}{0}{4}
-\beamer@sectionintoc {5}{Sketches}{25}{0}{5}
