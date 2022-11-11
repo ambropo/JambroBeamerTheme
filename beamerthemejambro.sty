@@ -1,0 +1,326 @@
+%% This is file `jambrostyle.sty'
+%% ---------------------------------------------------------------------------
+%% Copyright 2022 Ambrogio Cesa-Bianchi and the LaTeX community. 
+%% 
+%% This work is licensed under a Creative Commons Attribution-ShareAlike 4.0
+%% International License (https://creativecommons.org/licenses/by-sa/4.0/).
+%% ---------------------------------------------------------------------------
+
+\RequirePackage{amssymb}
+\RequirePackage{amsfonts}
+\RequirePackage{amsmath}
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[T1]{fontenc}
+\RequirePackage{pgfpages}
+\RequirePackage{comment}
+\RequirePackage{graphicx}
+\RequirePackage[labelsep=space,labelfont=bf,skip=1pt,sf,small]{caption}
+\RequirePackage{booktabs}
+\RequirePackage{bbding}
+\RequirePackage[absolute,overlay]{textpos}
+\RequirePackage{mathtools}
+\RequirePackage{setspace}
+\RequirePackage{pifont}
+\RequirePackage{changepage}
+\RequirePackage{moresize}
+\RequirePackage{arevmath}
+\RequirePackage{colortbl,xcolor}
+\RequirePackage{tabularx}
+\RequirePackage{eurosym}
+\RequirePackage{tikz}
+\RequirePackage{soul}
+\RequirePackage{upgreek}
+\RequirePackage{verbatim}
+\RequirePackage{fancyvrb}
+\RequirePackage{newverbs}
+\RequirePackage{xkeyval}
+\RequirePackage{listings}
+\setlength{\marginparwidth}{2cm} 
+\RequirePackage[bordercolor=white,backgroundcolor=script,linecolor=black]{todonotes}
+\RequirePackage{mdframed}
+\RequirePackage{courier}
+\RequirePackage{fancyvrb}
+\RequirePackage{framed}
+\RequirePackage{animate}
+\RequirePackage{hyperref}
+\RequirePackage{braket}
+\RequirePackage{subdepth}
+\RequirePackage{natbib}
+
+% Aspect ratio
+%-----------------------------------------------------
+\geometry{paperheight=9cm,paperwidth=16cm}
+\newif\if@OptionFourThree
+\@OptionFourThreefalse
+\DeclareOption{3to2}{\@OptionFourThreetrue}
+\ProcessOptions
+\if@OptionFourThree
+\geometry{paperheight=12cm,paperwidth=18cm}
+\else
+\fi
+
+% Base colors
+%-----------------------------------------------------
+\definecolor{title}{RGB}{7,40,91}           % darker blue for titles
+\definecolor{main}{RGB}{57,83,124}          % dark blue for items and math 
+\definecolor{text}{RGB}{0,0,0}              % color for main text 
+\definecolor{light}{RGB}{255, 255, 255}     % white for background
+\definecolor{bubble}{RGB}{230,233,239} 	    % light blue for bubble
+\definecolor{stabilo}{RGB}{235, 203, 139}   % gold for highlighting 
+\definecolor{carandache}{RGB}{218,165,32}   % gold for underlying
+
+% Red option 
+%-----------------------------------------------------
+\newif\if@OptionRed
+\@OptionRedfalse
+\DeclareOption{red}{\@OptionRedtrue}
+\ProcessOptions
+\if@OptionRed
+\definecolor{title}{RGB}{153,0,0}
+\definecolor{main}{RGB}{173,51,51}
+\definecolor{text}{RGB}{0,0,0}
+\definecolor{light}{RGB}{255, 255, 255}
+\definecolor{bubble}{RGB}{245,230,230} 
+\definecolor{stabilo}{RGB}{235, 203, 139}
+\definecolor{carandache}{RGB}{153,0,0}
+\else
+\fi
+
+% Night option (overrides red)
+%-----------------------------------------------------
+\newif\if@OptionNight
+\@OptionNightfalse
+\DeclareOption{night}{\@OptionNighttrue}
+\ProcessOptions
+\if@OptionNight
+\definecolor{title}{RGB}{129, 161, 193}
+\definecolor{main}{RGB}{154, 180, 205}
+\definecolor{text}{RGB}{216, 222, 233} 
+\definecolor{light}{RGB}{46, 52, 64} 
+\definecolor{bubble}{RGB}{67,76,94} 
+\definecolor{stabilo}{RGB}{126,100,121}
+\definecolor{carandache}{RGB}{148,111,169}
+\else
+\fi
+
+% Colors 
+%-----------------------------------------------------
+\definecolor{note}{RGB}{49,79,179}
+\definecolor{red}{RGB}{153,0,0}
+\definecolor{blue}{RGB}{7,40,91}
+\definecolor{gold}{RGB}{218,165,32}
+\definecolor{green}{RGB}{0,179,0}
+\definecolor{purple}{RGB}{150,40,160}
+\definecolor{brick}{RGB}{203, 92, 65}
+\definecolor{maroon}{RGB}{128,0,0}
+\definecolor{script}{RGB}{255,248,225}
+\definecolor{shadecolor}{rgb}{255,248,225}
+\definecolor{matlabgreen}{RGB}{0,153,0}
+\definecolor{matlabpurple}{RGB}{127,0,255}
+\definecolor{matlabblue}{RGB}{0,42,252}
+\definecolor{cmd}{gray}{0.99}
+\definecolor{hlightPurple}{RGB}{126,100,121}
+\definecolor{hlightYellow}{RGB}{235, 203, 139}
+
+% Other colors
+%-----------------------------------------------------
+\definecolor{NordDarkBlack}{HTML}{2E3440}      % nord0
+\definecolor{NordBlack}{HTML}{3B4252}          % nord1
+\definecolor{NordBrightBlack}{HTML}{4C566A}    % nord3
+\definecolor{NordWhite}{HTML}{D8DEE9}          % nord4
+\definecolor{NordBrighterWhite}{HTML}{E5E9F0}  % nord5
+\definecolor{NordBrightestWhite}{HTML}{ECEFF4} % nord6
+\definecolor{NordCyan}{HTML}{8FBCBB}           % nord7
+\definecolor{NordBrightCyan}{HTML}{88C0D0}     % nord8
+\definecolor{NordBlue}{HTML}{81A1C1}           % nord9
+\definecolor{NordBrightBlue}{HTML}{5E81AC}     % nord10
+\definecolor{NordRed}{HTML}{BF616A}            % nord11
+\definecolor{NordOrange}{HTML}{D08770}         % nord12
+\definecolor{NordGreen}{HTML}{A3BE8C}          % nord14
+
+% Fira option: normal / light
+%-----------------------------------------------------
+\newif\if@OptionFira
+\@OptionFirafalse
+\DeclareOption{light}{\@OptionFiratrue}
+\ProcessOptions
+\if@OptionFira
+\RequirePackage[sfdefault,book,light]{FiraSans}
+\renewcommand*\oldstylenums[1]{{\firaoldstyle #1}}
+\else
+\RequirePackage[sfdefault,book]{FiraSans}
+\renewcommand*\oldstylenums[1]{{\firaoldstyle #1}}
+\fi
+
+% Cabin option
+%-----------------------------------------------------
+\newif\if@OptionCabin
+\@OptionCabinfalse
+\DeclareOption{cabin}{\@OptionCabintrue}
+\ProcessOptions
+\if@OptionCabin
+\RequirePackage[sfdefault]{cabin}
+\else
+\fi
+
+% Roboto option
+%-----------------------------------------------------
+\newif\if@OptionRoboto
+\@OptionRobotofalse
+\DeclareOption{roboto}{\@OptionRobototrue}
+\ProcessOptions
+\if@OptionRoboto
+\RequirePackage[sfdefault,light]{roboto}
+\else
+\fi
+
+% Highlighting
+%-----------------------------------------------------
+\makeatletter
+\let\HL\hl
+\renewcommand\hl{%
+	\let\set@color\beamerorig@set@color
+	\let\reset@color\beamerorig@reset@color
+	\HL}
+\makeatother
+\newcommand{\hlight}[1]{{\sethlcolor{stabilo}\hl{#1}}}
+
+% Beamer features
+%-----------------------------------------------------
+\useinnertheme{rounded}
+\setbeamertemplate{navigation symbols}{}
+
+% Beamer colors
+%-----------------------------------------------------
+\setbeamertemplate{section in head/foot shaded}[default][30]
+\setbeamercolor{button}{fg=light,bg=main}
+\setbeamercolor{titlelike}{fg=title,bg=light}
+\setbeamercolor{frametitle}{fg=title,bg=light}
+\setbeamercolor{math text}{fg=title!95}
+\setbeamercolor{section in head/foot}{fg=light,bg=title}
+\setbeamercolor{background canvas}{bg=light}
+\setbeamercolor{normal text}{fg=text}
+\setbeamercolor{author in head/foot}{fg=light,bg=title}
+\setbeamercolor{title in head/foot}{fg=light,bg=title}
+\setbeamerfont{section in head/foot}{series=\bfseries}
+\setbeamerfont{frametitle}{series=\bfseries}
+
+% Page setup
+%-----------------------------------------------------
+\defbeamertemplate*{headline}{shadow theme}{\leavevmode\hbox{}}
+
+% Footline set up
+%-----------------------------------------------------
+% With all sections
+\defbeamertemplate*{footline}{shadow theme}{\leavevmode\hbox{\begin{beamercolorbox}[wd=1.02\paperwidth, ht=2.5ex, dp=1.125ex, leftskip=.3cm plus1fil,rightskip=0.3cm]{author in head/foot}\insertsectionnavigationhorizontal{.90\textwidth}{}{} \hspace{.3cm} \hfill \# \insertframenumber\end{beamercolorbox}}}
+
+% One section at the time
+%\defbeamertemplate*{footline}{shadow theme}{\leavevmode\hbox{\begin{beamercolorbox}[wd=1.01\paperwidth, ht=2.5ex, dp=1.125ex, leftskip=.3cm plus1fil,rightskip=0.3cm]{author in head/foot}\insertshorttitle \insertsection \hspace{.3cm} \hfill \insertframenumber\end{beamercolorbox}}}
+
+
+% Itemize set up
+%-----------------------------------------------------
+\defbeamertemplate{itemize item}{first}{\augiefamily*} % change triangle with first to set this up 
+\setbeamertemplate{itemize items}[triangle]
+\defbeamertemplate{itemize subitem}{second}{{\ssmall\raisebox{.03cm}{\ding{81}}}}
+\setbeamertemplate{itemize subitem}[second]
+\defbeamertemplate{itemize subsubitem}{third}{{\ssmall\raisebox{.03cm}{\ding{59}}}}
+\setbeamertemplate{itemize subsubitem}[third]
+\setbeamertemplate{enumerate items}[default]
+\setbeamercolor{itemize item}{fg=main}
+\setbeamercolor{itemize subitem}{fg=main}
+\setbeamercolor{itemize subsubitem}{fg=main}
+\setbeamercolor{enumerate item}{fg=main}
+\setbeamercolor{enumerate subitem}{fg=main}
+
+% Bubbles
+%-----------------------------------------------------
+\newcommand{\NB}[1]{\todo[textcolor=text,color=bubble,inline,caption={}]{#1}}
+
+% Minuscule font
+%-----------------------------------------------------
+\makeatletter
+\newcommand{\miniscule}{\@setfontsize\miniscule{4}{6}}% \tiny: 5/6
+\makeatother
+
+% New font size for tables 
+%-----------------------------------------------------
+\makeatletter
+\newcommand*\tablesize{\@setfontsize\tablesize{7.25}{8.0}}
+\makeatother
+
+% Define notesize for notes to figures/tables
+%-----------------------------------------------------
+\let\notesize\footnotesize
+\renewcommand{\arraystretch}{1.15}
+\newcolumntype{Y}{>{\centering\arraybackslash\leavevmode}X}
+\newcolumntype{S}{>{\centering\arraybackslash\leavevmode\color{gray!25}}X}
+
+% Show notes
+%-----------------------------------------------------
+\newenvironment{changemargin}[2]{\begin{list}{}{\setlength{\topsep}{0pt}\setlength{\leftmargin}{#1}\setlength{\rightmargin}{#2}\setlength{\listparindent}{\parindent}\setlength{\itemindent}{\parindent}\setlength{\parsep}{\parskip}}\item[]}{\end{list}}
+
+% Slides margins
+%----------------------------------------------------
+\setbeamersize{text margin left=0.3cm,text margin right=0.1cm}
+
+% Title slide set up
+%----------------------------------------------------
+\setbeamerfont{frametitle}{series=\bfseries,size={\fontsize{14}{15}}}
+\setbeamerfont{title}{series=\bfseries,size={\fontsize{18}{19}}}
+\setbeamerfont{frametitle}{series=\bfseries}
+
+% Other stuff
+%-----------------------------------------------------
+\def\EE{\mathbb{E}}
+\def\newblock{\hskip .11em plus .33em minus .07em }
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
+
+% Frames for verbatim
+%-----------------------------------------------------
+\newenvironment{xframe}[1][]
+{\begin{frame}[fragile,environment=xframe,#1]}{\end{frame}}
+\lstset{basicstyle=\ttfamily\color{black!85}}
+\let\code\lstinline
+\presetkeys{todonotes}{inline}{}
+
+% Remove annoying over-full box warnings 
+%-----------------------------------------------------
+\vfuzz2pt 
+\hfuzz2pt
+
+% Tikz options
+%-----------------------------------------------------
+\usetikzlibrary{calc,positioning,tikzmark,patterns,arrows,decorations,decorations.pathmorphing,decorations.text,decorations.pathreplacing}
+\makeatletter
+\pgfset{
+	/pgf/decoration/randomness/.initial=2,
+	/pgf/decoration/wavelength/.initial=150
+}
+\pgfdeclaredecoration{sketch}{init}{
+	\state{init}[width=0pt,next state=draw,persistent precomputation={\pgfmathsetmacro\pgf@lib@dec@sketch@t0}]{}%
+	\state{draw}[width=\pgfdecorationsegmentlength,auto corner on length=\pgfdecorationsegmentlength,persistent precomputation={\pgfmathsetmacro\pgf@lib@dec@sketch@t{mod(\pgf@lib@dec@sketch@t + pow(\pgfkeysvalueof{/pgf/decoration/randomness},rand),\pgfkeysvalueof{/pgf/decoration/wavelength})}}]{\pgfmathparse{sin(2*\pgf@lib@dec@sketch@t*pi/\pgfkeysvalueof{/pgf/decoration/wavelength}r)}\pgfpathlineto{\pgfqpoint{\pgfdecorationsegmentlength}{\pgfmathresult\pgfdecorationsegmentamplitude}}}%
+	\state{final}{}}
+\tikzset{pencil/.style={carandache,line width=0.25mm,decorate,decoration={sketch,segment length=1.5pt,amplitude=0.5pt}}}
+\tikzset{nstyle/.style={inner sep=0pt,anchor=base}}
+\tikzset{tstyle/.style={remember picture,baseline}}
+\tikzset{tpstyle/.style={overlay, remember picture}}
+\tikzset{arrow/.style={pencil,carandache,line width=0.25mm}}
+\tikzset{snake/.style={decorate,carandache,line width=0.25mm,decoration={snake,post length=1.5mm,pre length=1.5mm}}}
+%\tikzset{
+	%action/.style={->,thick,postaction={decorate,decoration={raise=4pt,text along path,text align=center,text={|\small|#1}}}},
+	%photon/.style={->,decorate,decoration={snake,post length=2mm,pre length=2mm}}
+	%}
+\makeatother
+%\pgfmathsetseed{1}
+
+% Hand writing font
+%-----------------------------------------------------
+\DeclareRobustCommand{\hand}{%
+	\fontfamily{augie}\fontseries{b}\fontshape{n}\selectfont}
+\DeclareTextFontCommand{\textaugie}{\hand}
+
+% Symbols in Tables from Stata output
+%-----------------------------------------------------
+\newcommand{\sym}[1]{{#1}} 
