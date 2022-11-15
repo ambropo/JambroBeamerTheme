@@ -308,7 +308,7 @@
 %=============================================================
 
 \begin{frame}
-	{Underlying}
+	{Highlighting}
 	\begin{itemize}
 		\item Highlight text with the \hlight{\texttt{\textbackslash hlight\{\}}} command \bigskip
 		\item Or highlight text with a `pencil underline' effect using Tikz \medskip
@@ -381,6 +381,7 @@
 	\end{table}
 	\begin{tikzpicture}[tpstyle]
 		\node[pencil,draw, minimum height=0.4cm, minimum width=1.1cm] (box1) at (node1) {};
+		\draw[arrow,->] ([xshift=2pt]box1.east) to[bend left] +(+0.7,-0.1) node[anchor=west,opacity=1] {\hand This is a large number};
 	\end{tikzpicture}
 \end{frame}
 
