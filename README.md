@@ -9,8 +9,7 @@ Jambro a relatively minimal theme with only an outline of presentation's section
 
 The theme supports different colors (blue is default, red can be specified) and a night mode:
 
-<img width="370" alt="red" src="https://user-images.githubusercontent.com/45069084/201955212-cbb5db2e-974f-449e-bb3a-572a63ec7755.png">
-<img width="370" alt="night" src="https://user-images.githubusercontent.com/45069084/201954770-dbd3600a-cd50-4142-9fd3-34d1d059ad38.png">
+<img width="370" alt="red" src="https://user-images.githubusercontent.com/45069084/201955212-cbb5db2e-974f-449e-bb3a-572a63ec7755.png"> <img width="370" alt="night" src="https://user-images.githubusercontent.com/45069084/201954770-dbd3600a-cd50-4142-9fd3-34d1d059ad38.png">
 
 ## Installation
 
