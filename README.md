@@ -3,7 +3,7 @@ Ambrogio Cesa-Bianchi's theme for Beamer.
 
 ## Features
 
-Jambro a relatively minimal theme with only an outline of presentation's sections in the footline. Its main feature is to allow annotation of text, figures, and tables using arrows (Tikz) and handwritten-like text (Augie):
+Jambro a relatively minimal theme with only an outline of the presentation's sections in the footline. Its main feature is to allow annotation of text, figures, and tables using arrows (Tikz) and handwritten-like text (Augie):
 
 <img width="370" alt="arrow" src="https://user-images.githubusercontent.com/45069084/201375060-75b98059-c461-4ab8-81b8-f39472bb8578.png"> <img width="370" alt="arrow" src="https://user-images.githubusercontent.com/45069084/201373761-2ae948e3-750d-4ba8-9326-b179e1d0fb0f.png"> 
 
