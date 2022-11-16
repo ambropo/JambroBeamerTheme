@@ -17,7 +17,7 @@ To use the theme, simply download the `beamerthemejambro.sty` to the folder cont
 
 ## Manual and examples
 
-A [slide deck](https://github.com/ambropo/JambroBeamerTheme/blob/main/Manual.pdf "Manual") (`Manual.pdf` and corresponding `Manual.tex` file) provides more information on the features of the theme and a series of examples.
+A [slide deck](https://github.com/ambropo/JambroBeamerTheme/blob/main/Demo.pdf "Demo") (`Demo.pdf` and corresponding `Demo.tex` file) provides more information on the features of the theme and a series of examples.
 
 The following code shows a minimal example of a Beamer presentation using jambro.
 
