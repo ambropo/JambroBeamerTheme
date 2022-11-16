@@ -1,6 +1,5 @@
 .DS_Store
 *.sty
-*.tex
 *.nav
 *.bib
 *.out
