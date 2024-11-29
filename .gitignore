@@ -11,4 +11,4 @@
 *.log
 *.bbl
 *.blg
-_old/
+_old/*
