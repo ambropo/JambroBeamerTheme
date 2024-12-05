@@ -7,14 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 ### Added
-New Commands:
+- **New Commands**:
+  - `\lapis[color]{text}`: Underlines text using TikZ with the specified color. Defaults to "baseline gold" if no color is provided.
 
-\lapis[color]{text}: Underlines text using TikZ with the specified color. Defaults to "baseline gold" if no color is provided.
-New Options:
-
-shownotes: Compiles speaking notes alongside the slides, ideal for presentations with detailed speaker notes.
-handout: Generates handouts with a 2x1 slide layout (portrait). Works well in combination with the shownotes option.
-
+- **New Options**:
+  - `shownotes`: Compiles speaking notes alongside the slides, ideal for presentations with detailed speaker notes.
+  - `handout`: Generates handouts with a 2x1 slide layout (portrait). Works well in combination with the `shownotes` option.
 ### Changed
 - Placeholder for changes.
 
