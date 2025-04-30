@@ -2,24 +2,24 @@
 
 All notable changes to this project will be documented in this file.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/), and this project adheres to [Semantic Versioning](https://semver.org/).
+## Version 1.1 — *2022-04-30*
 
-## Unreleased
 ### Added
 - **New Commands**:
-  - `\lapis[color]{text}`: Underlines text using TikZ with the specified color. Defaults to "baseline gold" if no color is provided.
+  - `\lapis[color]{text}`: Underlines text using TikZ in the specified color. Defaults to *baseline gold* if no color is provided.
+  - `\stabilo[color]{text}`: Highlights text using TikZ in the specified color. Defaults to *baseline gold* if no color is provided.
 
 - **New Options**:
-  - `shownotes`: Compiles speaking notes alongside the slides, ideal for presentations with detailed speaker notes.
-  - `handout`: Generates handouts with a 2x1 slide layout (portrait). Works well in combination with the `shownotes` option.
-### Changed
-- Placeholder for changes.
+  - `shownotes`: Compiles detailed speaker notes alongside slides — useful for rehearsals or presentation printouts.
+  - `handout`: Produces handouts with a 2×1 slide-per-page layout (portrait orientation). Can be combined with `shownotes` for annotated handouts.
 
-### Fixed
-- Placeholder for fixes.
+### Changed
+- The `\hlight` command for text highlighting has been replaced by `\stabilo`.
 
 ---
 
-## Version 1.0 [2022-11-15]
+## Version 1.0 — *2022-11-15*
+
 ### Added
 - Initial release of the Jambro Beamer Theme.
+
