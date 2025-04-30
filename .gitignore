@@ -13,3 +13,4 @@
 *.blg
 _old/*
 ZtempZ_*
+.Rhistory
