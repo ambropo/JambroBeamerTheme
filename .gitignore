@@ -11,6 +11,6 @@
 *.log
 *.bbl
 *.blg
-_old/*
+_AUX_/*
 ZtempZ_*
 .Rhistory
