@@ -3,17 +3,12 @@ Ambrogio Cesa-Bianchi's theme for Beamer. This version: 1.1
 
 ## Features
 
-Jambro a relatively minimal theme with only an outline of the presentation's sections in the footline. Its main feature is to allow annotation of text, figures, and tables using arrows (Tikz) and handwritten-like text (Augie), as well as highlighting and underlying with pencil like style.
+Jambro is a custom Beamer theme designed with a strong focus on clarity and readability. It features a clean, minimalist layout, a subtle and professional color palette, modern typography, and a spacious design that makes it especially well suited for academic and policy-oriented presentations.
 
-<img width="370" alt="arrow" src="https://user-images.githubusercontent.com/45069084/201375060-75b98059-c461-4ab8-81b8-f39472bb8578.png"> 
+Its main features include annotation tools for text, figures, and tables using TikZ-based arrows and handwritten-style fonts (e.g., Augie), as well as highlighting, underlining, and boxing elements with pencil-like effects. The theme supports different colors (blue is default, red can be specified), a night mode, different fonts, and a handout mode with notes.
 
-<img width="370" alt="arrow" src="https://user-images.githubusercontent.com/45069084/201373761-2ae948e3-750d-4ba8-9326-b179e1d0fb0f.png"> 
-
-The theme supports different colors (blue is default, red can be specified) and a night mode:
-
-<img width="370" alt="red" src="https://user-images.githubusercontent.com/45069084/201955212-cbb5db2e-974f-449e-bb3a-572a63ec7755.png"> 
-
-<img width="370" alt="night" src="https://user-images.githubusercontent.com/45069084/201954770-dbd3600a-cd50-4142-9fd3-34d1d059ad38.png">
+<img width="370" alt="arrow" src="https://user-images.githubusercontent.com/45069084/201375060-75b98059-c461-4ab8-81b8-f39472bb8578.png"> <img width="370" alt="arrow" src="https://user-images.githubusercontent.com/45069084/201373761-2ae948e3-750d-4ba8-9326-b179e1d0fb0f.png"> 
+<img width="370" alt="red" src="https://user-images.githubusercontent.com/45069084/201955212-cbb5db2e-974f-449e-bb3a-572a63ec7755.png"> <img width="370" alt="night" src="https://user-images.githubusercontent.com/45069084/201954770-dbd3600a-cd50-4142-9fd3-34d1d059ad38.png">
 
 ## Getting Started
 

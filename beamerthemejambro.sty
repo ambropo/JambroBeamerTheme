@@ -471,21 +471,42 @@
 {\begin{frame}[fragile,environment=xframe,#1]}%
     {\end{frame}}
 % Style for listings (e.g., \begin{lstlisting})
-    \lstset{basicstyle=\ttfamily\color{black!85}}
-    % Shortcut for inline code
-    \let\code\lstinline
-    % Default to inline mode for todonotes
-    \presetkeys{todonotes}{inline}{}
-    
-    %% === Suppress Overfull/Underfull Warnings ===
-    \vfuzz2pt
-    \hfuzz2pt
-    
-    %% === Handwriting Font ===
-    \DeclareRobustCommand{\hand}{%
-        \fontfamily{augie}\fontseries{b}\fontshape{n}\selectfont
-    }
-    \DeclareTextFontCommand{\textaugie}{\hand}
-    
-    %% === Table Symbol Macro (e.g., for Stata output) ===
-    \newcommand{\sym}[1]{{#1}}
+\lstset{basicstyle=\ttfamily\color{black!85}}
+% Shortcut for inline code
+\let\code\lstinline
+% Default to inline mode for todonotes
+\presetkeys{todonotes}{inline}{}
+
+%% === Suppress Overfull/Underfull Warnings ===
+\vfuzz2pt
+\hfuzz2pt
+
+%% === Handwriting Font ===
+\DeclareRobustCommand{\hand}{%
+    \fontfamily{augie}\fontseries{b}\fontshape{n}\selectfont
+}
+\DeclareTextFontCommand{\textaugie}{\hand}
+
+%% === Table Symbol Macro (e.g., for Stata output) ===
+\newcommand{\sym}[1]{{#1}}
+
+%% === Table of contents ===
+\makeatletter
+% Section entries: number right-aligned, text in small caps
+\setbeamertemplate{section in toc}{
+    \leavevmode\leftskip=2ex%
+    \usebeamerfont*{section in toc}%
+    \begin{tabular}{@{}p{2em}l}
+        \raggedleft\textcolor{main}{\large \hand*} & \textcolor{black}{{\inserttocsection}}
+    \end{tabular}
+}
+
+% Subsection entries: number right-aligned, text in small caps
+\setbeamertemplate{subsection in toc}{
+    \leavevmode\leftskip=4ex%
+    \usebeamerfont*{subsection in toc}%
+    \begin{tabular}{@{}p{3em}l}
+        \raggedleft\textcolor{main}{[\inserttocsectionnumber.\inserttocsubsectionnumber]} & \textcolor{black}{\textsc{\inserttocsubsection}}
+    \end{tabular}\par
+}
+\makeatother
