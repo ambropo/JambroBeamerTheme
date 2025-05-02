@@ -245,69 +245,6 @@
 
 
 
-%=============================================================
-%  CUSTOM COMMANDS
-%=============================================================
-
-% === Underlining: \lapis command ===
-% Usage: \lapis{word} or \lapis[red]{word}
-% Draws a hand-drawn underline using TikZ (default: pencil style)
-\newcommand{\lapis}[2][]{%
-    \def\FirstArg{#1}%
-    \ifx\FirstArg\empty
-    % No optional color/style
-    \tikz[tstyle]{\node[nstyle](node1){#2}}%
-    \begin{tikzpicture}[tpstyle]
-        \draw[pencil,very thick] ([yshift=-2pt]node1.south west) to ([yshift=-2pt]node1.south east);
-    \end{tikzpicture}%
-    \hspace{-0.05cm}%
-    \else
-    % With optional style/color (e.g., [red], [snake])
-    \tikz[tstyle]{\node[nstyle](node1){#2}}%
-    \begin{tikzpicture}[tpstyle]
-        \draw[pencil,very thick,#1] ([yshift=-2pt]node1.south west) to ([yshift=-2pt]node1.south east);
-    \end{tikzpicture}%
-    \hspace{-0.05cm}%
-    \fi
-}
-
-% === Highlighting: \stabilo command ===
-% Usage: \stabilo{word} or \stabilo[yellow]{word}
-% Applies color highlight using soul and hlight (default: hlight)
-\makeatletter
-\let\HL\hl
-\renewcommand\hl{%
-    \let\set@color\beamerorig@set@color
-    \let\reset@color\beamerorig@reset@color
-    \HL}
-\makeatother
-
-\newcommand{\stabilo}[2][hlight]{%
-    {\sethlcolor{#1}\hl{#2}}%
-}
-
-
-% === Inline Bubble Notes ===
-% Usage: \NB{your comment}
-% Creates an inline to-do bubble using defined bubble and text colors
-\newcommand{\NB}[1]{%
-    \todo[textcolor=text, color=bubble, inline, caption={}]{#1}%
-}
-
-% === Font Size: Minuscule ===
-% Usage: {\miniscule Your tiny text}
-% Defines a font size smaller than \tiny
-\makeatletter
-\newcommand{\miniscule}{\@setfontsize\miniscule{4}{6}} % \tiny is 5pt/6pt
-\makeatother
-
-% === Font Size: Tables ===
-% Usage: {\tablesize Table content}
-% Defines a smaller font size for dense table content
-\makeatletter
-\newcommand*\tablesize{\@setfontsize\tablesize{7.25}{8.0}}
-\makeatother
-
 
 
 %=============================================================
@@ -368,68 +305,6 @@
 \setbeamercolor{enumerate item}{fg=main}
 \setbeamercolor{enumerate subitem}{fg=main}
 
-
-
-%=============================================================
-%  TIKZ
-%=============================================================
-
-%% === TikZ Libraries and Decorations ===
-\usetikzlibrary{
-    calc,
-    positioning,
-    tikzmark,
-    patterns,
-    arrows,
-    decorations,
-    decorations.pathmorphing,
-    decorations.text,
-    decorations.pathreplacing,
-    fit
-}
-\usepgflibrary{shapes.geometric} % legacy shapes lib
-
-%% === Custom TikZ Decoration: Hand-drawn Sketch Line ===
-\makeatletter
-\pgfset{
-    /pgf/decoration/randomness/.initial=2,
-    /pgf/decoration/wavelength/.initial=150
-}
-
-\pgfdeclaredecoration{sketch}{init}{
-    \state{init}[width=0pt,next state=draw,
-    persistent precomputation={\pgfmathsetmacro\pgf@lib@dec@sketch@t0}]{}%
-    \state{draw}[
-    width=\pgfdecorationsegmentlength,
-    auto corner on length=\pgfdecorationsegmentlength,
-    persistent precomputation={
-        \pgfmathsetmacro\pgf@lib@dec@sketch@t{
-            mod(\pgf@lib@dec@sketch@t + pow(\pgfkeysvalueof{/pgf/decoration/randomness}, rand),
-            \pgfkeysvalueof{/pgf/decoration/wavelength})
-        }
-    }]{
-        \pgfmathparse{
-            sin(2*\pgf@lib@dec@sketch@t*pi/\pgfkeysvalueof{/pgf/decoration/wavelength}r)
-        }
-        \pgfpathlineto{
-            \pgfqpoint{\pgfdecorationsegmentlength}{\pgfmathresult\pgfdecorationsegmentamplitude}
-        }
-    }
-    \state{final}{}
-}
-\makeatother
-
-%% === Custom TikZ Styles ===
-\tikzset{
-    pencil/.style={carandache, line width=0.25mm, decorate,
-        decoration={sketch, segment length=1.5pt, amplitude=0.5pt}},
-    nstyle/.style={inner sep=0pt, anchor=base},
-    tstyle/.style={remember picture, baseline},
-    tpstyle/.style={overlay, remember picture},
-    arrow/.style={pencil, carandache, line width=0.25mm},
-    snake/.style={decorate, carandache, line width=0.25mm,
-        decoration={snake, post length=1.5mm, pre length=1.5mm}}
-}
 
 
 
@@ -509,4 +384,185 @@
         \raggedleft\textcolor{main}{[\inserttocsectionnumber.\inserttocsubsectionnumber]} & \textcolor{black}{\textsc{\inserttocsubsection}}
     \end{tabular}\par
 }
+\makeatother
+
+
+
+%=============================================================
+%  TIKZ
+%=============================================================
+
+%% === TikZ Libraries and Decorations ===
+\usetikzlibrary{
+    calc,
+    positioning,
+    tikzmark,
+    patterns,
+    arrows,
+    decorations,
+    decorations.pathmorphing,
+    decorations.text,
+    decorations.pathreplacing,
+    fit
+}
+\usepgflibrary{shapes.geometric} % legacy shapes lib
+
+%% === Custom TikZ Decoration: Hand-drawn Sketch Line ===
+\makeatletter
+\pgfset{
+    /pgf/decoration/randomness/.initial=2,
+    /pgf/decoration/wavelength/.initial=150
+}
+
+\pgfdeclaredecoration{sketch}{init}{
+    \state{init}[width=0pt,next state=draw,
+    persistent precomputation={\pgfmathsetmacro\pgf@lib@dec@sketch@t0}]{}%
+    \state{draw}[
+    width=\pgfdecorationsegmentlength,
+    auto corner on length=\pgfdecorationsegmentlength,
+    persistent precomputation={
+        \pgfmathsetmacro\pgf@lib@dec@sketch@t{
+            mod(\pgf@lib@dec@sketch@t + pow(\pgfkeysvalueof{/pgf/decoration/randomness}, rand),
+            \pgfkeysvalueof{/pgf/decoration/wavelength})
+        }
+    }]{
+        \pgfmathparse{
+            sin(2*\pgf@lib@dec@sketch@t*pi/\pgfkeysvalueof{/pgf/decoration/wavelength}r)
+        }
+        \pgfpathlineto{
+            \pgfqpoint{\pgfdecorationsegmentlength}{\pgfmathresult\pgfdecorationsegmentamplitude}
+        }
+    }
+    \state{final}{}
+}
+\makeatother
+
+%% === Custom TikZ Styles ===
+\tikzset{
+    pencil/.style={carandache, line width=0.04cm, decorate,
+        decoration={sketch, segment length=1.5pt, amplitude=0.5pt}},
+    nstyle/.style={inner sep=0pt, anchor=base},
+    tstyle/.style={remember picture, baseline},
+    tpstyle/.style={overlay, remember picture},
+    arrow/.style={pencil, carandache, line width=0.04cm},
+    snake/.style={decorate, carandache, line width=0.04cm,
+        decoration={snake, post length=1.5mm, pre length=1.5mm}},
+    pencilboxstyle/.style={pencil,draw,line width=0.04cm,inner xsep=0.5pt,inner ysep=0.5pt,baseline}    
+}
+
+
+
+%=============================================================
+%  CUSTOM COMMANDS
+%=============================================================
+
+% === Underlining: \lapis command ===
+% Usage: \lapis{word} or \lapis[red]{word}
+% Draws a hand-drawn underline using TikZ (default: pencil style)
+\newcommand{\lapis}[2][]{%
+    \def\FirstArg{#1}%
+    \ifx\FirstArg\empty
+    % No optional color/style
+    \tikz[tstyle]{\node[nstyle](node1){#2}}%
+    \begin{tikzpicture}[tpstyle]
+        \draw[pencil,very thick] ([yshift=-2pt]node1.south west) to ([yshift=-2pt]node1.south east);
+    \end{tikzpicture}%
+    \hspace{-0.05cm}%
+    \else
+    % With optional style/color (e.g., [red], [snake])
+    \tikz[tstyle]{\node[nstyle](node1){#2}}%
+    \begin{tikzpicture}[tpstyle]
+        \draw[pencil,very thick,#1] ([yshift=-2pt]node1.south west) to ([yshift=-2pt]node1.south east);
+    \end{tikzpicture}%
+    \hspace{-0.05cm}%
+    \fi
+}
+
+% === Highlighting: \stabilo command ===
+% Usage: \stabilo{word} or \stabilo[yellow]{word}
+% Applies color highlight using soul and hlight (default: hlight)
+\makeatletter
+\let\HL\hl
+\renewcommand\hl{%
+    \let\set@color\beamerorig@set@color
+    \let\reset@color\beamerorig@reset@color
+    \HL}
+\makeatother
+
+\newcommand{\stabilo}[2][hlight]{%
+    {\sethlcolor{#1}\hl{#2}}%
+}
+
+% === Framing: \lapisbox command ===
+% Usage: \lapisbox{word} or \lapisbox[label=foo,color=red]{word}
+% Draws a hand-drawn box around text using TikZ (default: pencil style)
+\makeatletter
+% Define keys for pencilbox options
+\pgfkeys{
+    /pencilbox/.is family, /pencilbox,
+    label/.estore in=\lapisbox@label,
+    color/.estore in=\lapisbox@color,
+}
+% Default values
+\def\lapisbox@label{}
+\def\lapisbox@color{gold}
+\newcommand{\lapisbox}[2][]{%
+    % Parse key-value options
+    \pgfkeys{/pencilbox, #1}%
+    \tikzset{
+        pencilboxstyle/.style={
+            pencil,
+            draw,
+            \lapisbox@color!80,
+            line width=0.04cm,
+            fill=yellow!0,
+            inner xsep=1.2pt,
+            inner ysep=1.4pt,
+            baseline
+        }
+    }%
+    \hspace{-0.1cm}%
+    \raisebox{0pt}[0pt][0pt]{%
+            \ifx\lapisbox@label\@empty
+            \tikz[baseline=(X.base), remember picture]{%
+                \node[pencilboxstyle, text=.] (X) {\strut #2};
+            }
+            \else
+            \tikz[baseline=(\lapisbox@label.base), remember picture]{%
+                \node[pencilboxstyle, text=.=] (\lapisbox@label) {\strut #2};
+            }
+            \fi
+        }%
+    \hspace{-0.1cm}%
+}
+\makeatother
+
+% === TikZ anchor node ===
+% Usage: \marker{name}{content}
+% Creates a styled TikZ node with name `name` and content `content`
+\newcommand{\marker}[2]{%
+    \tikz[remember picture, baseline=(#1.base)]{%
+        \node[nstyle, name=#1] (#1) {\strut #2};%
+    }%
+}
+
+% === Inline Bubble Notes ===
+% Usage: \NB{your comment}
+% Creates an inline to-do bubble using defined bubble and text colors
+\newcommand{\NB}[1]{%
+    \todo[textcolor=text, color=bubble, inline, caption={}]{#1}%
+}
+
+% === Font Size: Minuscule ===
+% Usage: {\miniscule Your tiny text}
+% Defines a font size smaller than \tiny
+\makeatletter
+\newcommand{\miniscule}{\@setfontsize\miniscule{4}{6}} % \tiny is 5pt/6pt
+\makeatother
+
+% === Font Size: Tables ===
+% Usage: {\tablesize Table content}
+% Defines a smaller font size for dense table content
+\makeatletter
+\newcommand*\tablesize{\@setfontsize\tablesize{7.25}{8.0}}
 \makeatother

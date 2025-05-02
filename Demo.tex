@@ -2,6 +2,23 @@
 \usetheme{jambro}
 \graphicspath{{./graphics/}}
 
+\usepackage{listings}
+\usepackage{xcolor}
+
+\lstdefinestyle{beamer-code}{
+    basicstyle=\ttfamily\footnotesize, % Courier font
+    backgroundcolor=\color{gray!10},   % Light gray background
+    frame=single,                      % Box around the code
+    breaklines=true,                   % Line breaking
+    columns=fullflexible,
+    keepspaces=true,
+    showstringspaces=false
+}
+
+\newenvironment{codeblock}
+{\lstset{style=beamer-code}}{}
+
+
 % Authors/institutes/date/etc
 %--------------------------------
 \title[]{Jambro Beamer Template}
@@ -42,7 +59,7 @@
         \item Getting started:
         \begin{itemize}
             \item After the usual \texttt{\textbackslash documentclass\{beamer\}}, load the theme with \texttt{\textbackslash usetheme\{jambro\}} \smallskip
-            \item The file \texttt{beamerthemejambro.sty} must be in the same folder as your Beamer presentation.
+            \item The file \texttt{beamerthemejambro.sty} must be in the same folder as your Beamer presentation
         \end{itemize}
     \end{itemize}
 \end{frame}
@@ -68,12 +85,43 @@
 \end{flushleft}
 
 %=============================================================
+\begin{frame}[t,fragile]
+    {Arrows and handwritten notes}\bigskip
+    \begin{itemize}
+        \item The theme embeds a way to introduce handwritten notes using arrows \bigskip\medskip
+        \item Imagine you want to clarify something about \marker{node1}{$x$} \bigskip\medskip\pause
+        \item The theme allows to add arrows and handwritten notes using \texttt{\textbackslash hand} command and Tikz \medskip
+        \begin{itemize}
+            \item Use command \texttt{\textbackslash marker\{\textit{mylabel}\}\{\textit{text}\}} to anchor the arrow \medskip
+            \item Then use standard Tikz syntax \par\medskip
+            \hspace{-2cm}
+            \begin{minipage}{\textwidth}
+                \scriptsize
+                \begin{verbatim}
+                \begin{tikzpicture}[tpstyle]
+                    \draw[arrow,->] ([yshift=2pt]node1.north east) to[bend left] +(0.7,+0.3) %
+                    node[anchor=west] {\hand A comment from the north};
+                \end{tikzpicture}		
+                \end{verbatim}
+            \end{minipage}           
+            \begin{tikzpicture}[tpstyle]
+                \draw[arrow,->] ([yshift=2pt]node1.north east) to[bend left] +(0.7,+0.3) node[anchor=west] {\hand A comment from the north};
+            \end{tikzpicture}		
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+%.......................................................
+\begin{flushleft}
+    \underline{\textbf{Notes}}\setlength{\parskip}{.15cm}\notesize\newline\par
+\end{flushleft}
+
+%=============================================================
 \begin{frame}[t]
     {Arrows and handwritten notes}\bigskip
     \begin{itemize}
         \item The theme embeds a way to introduce handwritten notes using arrows \bigskip\medskip
-        \item Imagine you want to clarify something about \tikz[tstyle]{\node[nstyle](node1){$x$}} \bigskip\medskip\pause
-        \item The theme allows to add arrows and handwritten notes using Tikz in combination with the \texttt{\textbackslash hand} command \medskip
+        \item Imagine you want to clarify something about \marker{node1}{$x$} \bigskip\medskip
+       \item The theme allows to add arrows and handwritten notes using \texttt{\textbackslash hand} command and Tikz \medskip
         \begin{itemize}
             \item Arrows can start from different cardinal points 
             \begin{tikzpicture}[tpstyle]
@@ -93,8 +141,8 @@
     {Arrows and handwritten notes}\bigskip
     \begin{itemize}
         \item The theme embeds a way to introduce handwritten notes using arrows \bigskip\medskip
-        \item Imagine you want to clarify something about \tikz[tstyle]{\node[nstyle](node1){$x$}} \bigskip\medskip
-        \item The theme allows to add arrows and handwritten notes using Tikz in combination with the \texttt{\textbackslash hand} command \medskip
+        \item Imagine you want to clarify something about \marker{node1}{$x$} \bigskip\medskip
+       \item The theme allows to add arrows and handwritten notes using \texttt{\textbackslash hand} command and Tikz \medskip
         \begin{itemize}
             \item Arrows can start from different cardinal points... \medskip
             \item ...have different colors and opacity... \medskip
@@ -115,8 +163,8 @@
     {Arrows and handwritten notes}\bigskip
     \begin{itemize}
         \item The theme embeds a way to introduce handwritten notes using arrows \bigskip\medskip
-        \item Imagine you want to clarify something about \tikz[tstyle]{\node[nstyle](node1){$x$}} \bigskip\medskip
-        \item The theme allows to add arrows and handwritten notes using Tikz in combination with the \texttt{hand} command \medskip
+        \item Imagine you want to clarify something about \marker{node1}{$x$} \bigskip\medskip
+       \item The theme allows to add arrows and handwritten notes using \texttt{\textbackslash hand} command and Tikz \medskip
         \begin{itemize}
             \item Arrows can start from different cardinal points... \medskip
             \item ...have different colors and opacity... \medskip
@@ -138,8 +186,8 @@
     {Arrows and handwritten notes}\bigskip
     \begin{itemize}
         \item The theme embeds a way to introduce handwritten notes using arrows \bigskip\medskip
-        \item Imagine you want to clarify something about \tikz[tstyle]{\node[nstyle](node1){$x$}} \bigskip\medskip
-        \item The theme allows to add arrows and handwritten notes using Tikz in combination with the \texttt{hand} command \medskip
+        \item Imagine you want to clarify something about \marker{node1}{$x$} \bigskip\medskip
+       \item The theme allows to add arrows and handwritten notes using \texttt{\textbackslash hand} command and Tikz \medskip
         \begin{itemize}
             \item Arrows can start from different cardinal points... \medskip
             \item ...have different colors and opacity... \medskip
@@ -221,17 +269,17 @@
     \begin{itemize}
         \item \stabilo{Highlight text} with the \texttt{\textbackslash stabilo\{\textit{text}\}} command  \medskip
         \begin{itemize}
-            \item Can also highlight with a \stabilo[Blue_Light]{custom color} too using \texttt{\textbackslash stabilo[\textit{color}]\{\textit{text}\}}\bigskip\bigskip
+            \item Can also highlight with a \stabilo[Blue_Light]{custom color} too using \texttt{\textbackslash stabilo[\textit{mycolor}]\{\textit{text}\}}\bigskip\bigskip
         \end{itemize}
-        \item Or \lapis{highlight text} using the pencil-like \texttt{\textbackslash lapis\{\textit{text}\}} command \medskip
+        \item Or \lapis{underline text} using the pencil-like \texttt{\textbackslash lapis\{\textit{text}\}} command \medskip
         \begin{itemize}
-            \item Can also highlight with a \lapis[Blue_Light]{custom color} \ too using \texttt{\textbackslash stabilo[\textit{color}]\{\textit{text}\}}\bigskip\bigskip
+            \item Can also highlight with a \lapis[Blue_Light]{custom color} \ too using \texttt{\textbackslash stabilo[\textit{mycolor}]\{\textit{text}\}}\bigskip\bigskip
         \end{itemize}
         \item You have more control using Tikz directly, for example \medskip
         \begin{itemize}
-            \item \tikz[tstyle]{\node[nstyle](node2){Highlight text with a thinner pencil}}
+            \item \tikz[tstyle]{\node[nstyle](node2){Highlight text with a thinner pencil}} (see TEX file for code)
             \begin{tikzpicture}[tpstyle]
-                \draw[pencil] ([yshift=-2pt]node2.south west) to ([yshift=-2pt]node2.south east);			
+                \draw[pencil,line width=0.02cm] ([yshift=-2pt]node2.south west) to ([yshift=-2pt]node2.south east);			
             \end{tikzpicture}  \bigskip
         \end{itemize}
     \end{itemize}
@@ -245,21 +293,16 @@
 \begin{frame}
     {Boxing text or variables in equations}
     \begin{itemize}
-        \item Highlight text with a \tikz[tstyle]{\node[nstyle](node0){pencil box}} effect using Tikz \bigskip\bigskip
-        \begin{tikzpicture}[tpstyle]
-            \node[pencil,draw, minimum height=0.7cm, minimum width=1.7cm] (box0) at (node0) {};
-        \end{tikzpicture}\pause
-        \item Or highlight  objects in equations with a thicker box \medskip
+        \item Highlight text with a \lapisbox{pencil-like box effect} using the \texttt{\textbackslash lapisbox\{\textit{text}\}} command  \bigskip\bigskip
+        \pause
+        \item Can also highlight objects in equations, as well as set colors and labels with \texttt{\textbackslash lapisbox[color=\textit{mycolor},label=\textit{mylabel}]\{\textit{text}\}} \medskip
         \begin{equation*}
-            y_{t} = \alpha + \tikz[tstyle]{\node[nstyle](node1){$\beta x_t$}} + u_{t}
+            y_{t} = \alpha + \lapisbox[color=tomato,label=box1]{$\beta x_t$} + u_{t} 
         \end{equation*}
-        \smallskip
+        \smallskip\pause
+        \item Labels allow to add arrows and comments as before
         \begin{tikzpicture}[tpstyle]
-            \node[pencil,very thick,draw, minimum height=0.8cm, minimum width=0.8cm] (box1) at (node1) {};
-        \end{tikzpicture}\pause
-        \item Add arrows and comments as before 
-        \begin{tikzpicture}[tpstyle]
-            \draw[arrow,->] ([yshift=2pt]box1.north east) to[bend left] +(+0.7,0.5) node[anchor=west,opacity=1] {\hand A comment from north east};
+            \draw[arrow,->,tomato!80] ([yshift=-2pt]box1.south east) to[bend right] +(+0.7,-0.5) node[anchor=west,opacity=1,tomato] {\hand A comment from north east};
         \end{tikzpicture}
     \end{itemize}
 \end{frame}
@@ -271,6 +314,9 @@
 %=============================================================
 \begin{frame}
     {Boxing numbers in a table}
+    \begin{itemize}
+        \item \texttt{lapisbox} can be used to highlight numbers in tables, too \bigskip
+    \end{itemize}
     \begin{table}[th]
         \centering%
         \begin{minipage}[b]{.6\textwidth}
@@ -281,7 +327,7 @@
                 \midrule
                 & {Baseline Specification} \\
                 \midrule
-                \rowcolor{gray!10} Coeff. ($\beta_1$) 		&  {\tikz[tstyle]{\node[nstyle](node1){21.15***}}} \\
+                \rowcolor{gray!10} Coeff. ($\beta_1$) 		&  \lapisbox[color=tomato,label=box1]{21.15***} \\
                 &   (7.35) \\
                 \midrule
                 \rowcolor{gray!10} Double clustering 		& Yes \\
@@ -294,8 +340,7 @@
         \end{minipage}
     \end{table}
     \begin{tikzpicture}[tpstyle]
-        \node[pencil,draw, minimum height=0.4cm, minimum width=1.1cm] (box1) at (node1) {};
-        \draw[arrow,->] ([xshift=2pt]box1.east) to[bend left] +(+0.7,0) node[anchor=west,opacity=1] {\hand This is a large number};
+        \draw[arrow,->,tomato] ([xshift=2pt]box1.east) to[bend left] +(+0.7,0) node[anchor=west,opacity=1,tomato] {\hand \small This is a large estimate!};
     \end{tikzpicture}
 \end{frame}
 %.......................................................
