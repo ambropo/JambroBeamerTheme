@@ -61,6 +61,7 @@
 \RequirePackage{comment}                           % Block comments
 \RequirePackage{xkeyval}                           % Key-value option handling
 \RequirePackage{hyperref}                          % Hyperlinks
+\hypersetup{colorlinks,citecolor=main,linkcolor=white,urlcolor=main}
 \RequirePackage{subdepth}                          % Sub/superscript alignment
 
 %% === Bibliography ===
@@ -386,6 +387,17 @@
 }
 \makeatother
 
+%% === References ===
+
+% Make sure references' parenthesis have right color
+\makeatletter
+\renewcommand{\NAT@open}{\textcolor{main}{(}}  % opening parenthesis
+\renewcommand{\NAT@close}{\textcolor{main}{)}} % closing parenthesis
+\makeatother
+
+% Custom commanf for [Romer and Romer (2004)] in color main
+\newcommand{\citej}[1]{\textcolor{main}{[\cite{#1}]}}
+
 
 
 %=============================================================
@@ -566,3 +578,5 @@
 \makeatletter
 \newcommand*\tablesize{\@setfontsize\tablesize{7.25}{8.0}}
 \makeatother
+
+
