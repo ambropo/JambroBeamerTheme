@@ -88,6 +88,8 @@
 \definecolor{BoEpurple}{RGB}{159,112,225}
 \definecolor{BoEgold}{RGB}{213,175,54}
 \definecolor{BoEgray}{RGB}{197,201,207}
+\definecolor{BoEblue}{RGB}{18, 38, 62}          
+\definecolor{BoEred}{RGB}{254, 1, 91} 
 
 %% === Additional Named Colors ===
 \definecolor{tomato}{RGB}{217,83,79}
@@ -148,7 +150,7 @@
 % === Declare all options ===
 \DeclareOption{3to2}{\@OptionFourThreetrue}
 \DeclareOption{shownotes}{\@OptionShowNotestrue}
-\DeclareOption{handout}{\@OptionTwopagetrue}
+\DeclareOption{handout2x1}{\@OptionTwopagetrue}
 \DeclareOption{light}{\@OptionFiratrue}
 \DeclareOption{cabin}{\@OptionCabintrue}
 \DeclareOption{roboto}{\@OptionRobototrue}
@@ -479,14 +481,14 @@
     \begin{tikzpicture}[tpstyle]
         \draw[pencil,very thick] ([yshift=-2pt]node1.south west) to ([yshift=-2pt]node1.south east);
     \end{tikzpicture}%
-    \hspace{-0.05cm}%
+    \hspace{-0.025cm}%
     \else
     % With optional style/color (e.g., [red], [snake])
     \tikz[tstyle]{\node[nstyle](node1){#2}}%
     \begin{tikzpicture}[tpstyle]
         \draw[pencil,very thick,#1] ([yshift=-2pt]node1.south west) to ([yshift=-2pt]node1.south east);
     \end{tikzpicture}%
-    \hspace{-0.05cm}%
+    \hspace{-0.025cm}%
     \fi
 }
 
