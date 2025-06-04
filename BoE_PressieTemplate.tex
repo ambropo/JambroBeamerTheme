@@ -1,0 +1,115 @@
+%------------------------------------------------------
+% TEMPLATE FOR PRESSIES
+% Ambro, May 2025
+%------------------------------------------------------
+\documentclass[cabin]{beamer}
+\usetheme{jambro}
+\graphicspath{{./graphics/}}
+\begin{document}
+
+%=============================================================
+\begin{frame}[plain]
+\begin{tikzpicture}[remember picture, overlay]
+% Official
+\node at (current page.center) {\includegraphics[width=\paperwidth, height=\paperheight]{BoE_open}};
+\node[align=left,text width=3cm] at (7.5,-5.1) {%
+\usebeamerfont{title}{\color{gray} \scriptsize Official - Green}};
+% Title
+\node[align=left,text width=9.5cm] at (5,-1) {\usebeamerfont{title}{\color{white} \baselineskip=20pt%
+\Huge Title 
+}};
+\node[align=left,text width=9.5cm] at (5,-3) {\usebeamerfont{title}{\color{white} \baselineskip=20pt%
+\normalsize Author(s) \\\par
+Date
+}};
+\end{tikzpicture}
+\end{frame}
+%.......................................................
+\begin{flushleft}
+    \underline{\textbf{Notes}}\setlength{\parskip}{.15cm}\notesize\newline\par
+    These are some speaking notes on the title slide \par
+    And some more 
+\end{flushleft}
+
+%=============================================================
+\section{Menu} 
+\begin{frame}{Menu du jour}\label{menu}
+\begin{itemize}
+\item \hyperlink{section}{\lapis[BoEacqua]{\textbf{\color{black}Section title}}}\\\smallskip
+			 {\small Section subtitle}\medskip
+			 
+\item \hyperlink{appendix}{\lapis[BoEacqua]{\textbf{\color{black}Appendix}}}\\\smallskip
+\end{itemize}
+\end{frame}
+%.......................................................
+\begin{flushleft}
+    \underline{\textbf{Notes}}\setlength{\parskip}{.15cm}\notesize\newline\par
+    These are some speaking notes on the title slide \par
+    And some more 
+\end{flushleft}
+
+%=============================================================
+\section{Section 1}
+\begin{frame}[plain]\label{section}
+\begin{tikzpicture}[remember picture, overlay]
+\node at (current page.center) {\includegraphics[width=\paperwidth, height=\paperheight]{BoE_open}};
+\node[align=left,text width=9.5cm] at (5,-1) {\usebeamerfont{title}{\color{white} \baselineskip=20pt%
+Title \\\medskip
+Subtitle
+}};
+\end{tikzpicture}
+\end{frame}
+%.......................................................
+\begin{flushleft}
+    \underline{\textbf{Notes}}\setlength{\parskip}{.15cm}\notesize\newline\par
+    These are some speaking notes on the title slide \par
+    And some more 
+\end{flushleft}
+
+%=============================================================
+\section{Menu} 
+\begin{frame}{A slide}
+    \begin{itemize}
+        \item Some text         
+    \end{itemize}
+\end{frame}
+%.......................................................
+\begin{flushleft}
+    \underline{\textbf{Notes}}\setlength{\parskip}{.15cm}\notesize\newline\par
+    These are some speaking notes on the title slide \par
+    And some more 
+\end{flushleft}
+
+%=============================================================
+\begin{frame}[plain]
+    \begin{tikzpicture}[remember picture, overlay]
+        \node at (current page.center) {\includegraphics[width=\paperwidth, height=\paperheight]{BoE_close}};
+    \end{tikzpicture}
+\end{frame}
+%.......................................................
+\begin{flushleft}
+    \underline{\textbf{Notes}}\setlength{\parskip}{.15cm}\notesize\newline\par
+    These are some speaking notes on the title slide \par
+    And some more 
+\end{flushleft}
+
+%=============================================================
+\section{Appendix}
+\begin{frame}[plain]\label{appendix}
+    \begin{tikzpicture}[remember picture, overlay]
+        \node at (current page.center) {\includegraphics[width=\paperwidth, height=\paperheight]{BoE_open}};
+        \node[align=left,text width=9.5cm] at (5,-1) {\usebeamerfont{title}{\color{white} \baselineskip=20pt%
+                Appendix
+        }};
+    \end{tikzpicture}
+\end{frame}
+%.......................................................
+\begin{flushleft}
+    \underline{\textbf{Notes}}\setlength{\parskip}{.15cm}\notesize\newline\par
+    These are some speaking notes on the title slide \par
+    And some more 
+\end{flushleft}
+
+
+\end{document}
+
