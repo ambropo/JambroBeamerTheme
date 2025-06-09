@@ -2,23 +2,6 @@
 \usetheme{jambro}
 \graphicspath{{./graphics/}}
 
-\usepackage{listings}
-\usepackage{xcolor}
-
-\lstdefinestyle{beamer-code}{
-    basicstyle=\ttfamily\footnotesize,   % Courier font
-    backgroundcolor=\color{gray!10},  % Light gray background
-    frame=single,                                    % Box around the code
-    breaklines=true,                                % Line breaking
-    columns=fullflexible,
-    keepspaces=true,
-    showstringspaces=false
-}
-
-\newenvironment{codeblock}
-{\lstset{style=beamer-code}}{}
-
-
 % Authors/institutes/date/etc
 %--------------------------------
 \title[]{Jambro Beamer Template}
@@ -42,6 +25,18 @@
 	\underline{\textbf{Notes}}\setlength{\parskip}{.15cm}\notesize\newline\par
 	These are some speaking notes on the title slide \par
 	And some more 
+\end{flushleft}
+
+%=============================================================
+\begin{frame}
+    \frametitle{Table of Contents}
+    \tableofcontents
+\end{frame}
+%.......................................................
+\begin{flushleft}
+    \underline{\textbf{Notes}}\setlength{\parskip}{.15cm}\notesize\newline\par
+    These are some speaking notes on the title slide \par
+    And some more 
 \end{flushleft}
 
 %=============================================================
@@ -143,8 +138,8 @@
             \item Arrows can start from different cardinal points... \medskip
             \item ...have different colors and opacity... \medskip
             \begin{tikzpicture}[tpstyle]
-                \draw[arrow,->,brick,opacity=0.5] ([yshift=2pt]node1.north east) to[bend left] +(0.7,+0.3) node[brick,anchor=west,opacity=0.5] {\small{\hand A comment from the north}};
-                \draw[arrow,->,brick] ([yshift=-2pt]node1.south) to[bend right] +(1.6,-0.2) node[brick,anchor=west] {\small{\hand A comment from the south}};
+                \draw[arrow,->,brick,opacity=0.5] ([yshift=2pt]node1.north east) to[bend left] +(0.7,+0.3) node[brick,anchor=west,opacity=0.5] {\hand A comment from the north};
+                \draw[arrow,->,brick] ([yshift=-2pt]node1.south) to[bend right] +(1.6,-0.2) node[brick,anchor=west] {\hand A comment from the south};
             \end{tikzpicture}	
         \end{itemize}
     \end{itemize}
@@ -190,8 +185,8 @@
             \item ...have wiggles... \medskip
             \item ...be bidirectional or adirectional
             \begin{tikzpicture}[tpstyle]
-                \draw[arrow,brick,opacity=0.5] ([yshift=2pt]node1.north east) to[bend left] +(0.7,+0.3) node[brick,anchor=west,opacity=0.5] {\small{\hand A comment from the north}};
-                \draw[snake,<->,brick] ([yshift=-2pt]node1.south) to[bend right] +(1.6,-0.2) node[brick,anchor=west] {\small{\hand A comment from the south}};
+                \draw[arrow,brick,opacity=0.5] ([yshift=2pt]node1.north east) to[bend left] +(0.7,+0.3) node[brick,anchor=west,opacity=0.5] {\hand A comment from the north};
+                \draw[snake,<->,brick] ([yshift=-2pt]node1.south) to[bend right] +(1.6,-0.2) node[brick,anchor=west] {\hand A comment from the south};
             \end{tikzpicture}	
         \end{itemize}
     \end{itemize}
@@ -298,7 +293,7 @@
         \smallskip\pause
         \item Labels allow to add arrows and comments as before
         \begin{tikzpicture}[tpstyle]
-            \draw[arrow,->,tomato!80] ([yshift=-2pt]box1.south east) to[bend right] +(+0.7,-0.5) node[anchor=west,opacity=1,tomato] {\hand A comment from north east};
+            \draw[arrow,->,tomato!80] ([yshift=-2pt]box1.south east) to[bend right] +(+0.7,-0.5) node[anchor=west,opacity=1,tomato] {\hand A comment from south east};
         \end{tikzpicture}
     \end{itemize}
 \end{frame}
@@ -485,7 +480,7 @@
 \begin{frame}
     {Theme's options}
     \begin{itemize}
-        \item Set \texttt{shownotes} to show notes and \texttt{handout} produce 2x1 handouts
+        \item Set \texttt{shownotes} to show notes and \texttt{handout2x1} produce 2x1 handouts
     \end{itemize}
     \begin{center}
         \begin{minipage}[b]{.3\textwidth}

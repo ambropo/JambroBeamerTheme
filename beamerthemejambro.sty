@@ -61,7 +61,7 @@
 \RequirePackage{comment}                           % Block comments
 \RequirePackage{xkeyval}                           % Key-value option handling
 \RequirePackage{hyperref}                          % Hyperlinks
-\hypersetup{colorlinks,citecolor=main,linkcolor=white,urlcolor=main}
+\hypersetup{colorlinks,citecolor=main,urlcolor=main,linkcolor=main}
 \RequirePackage{subdepth}                          % Sub/superscript alignment
 
 %% === Bibliography ===
@@ -230,6 +230,7 @@
 % Show only current section and frame number
 \defbeamertemplate*{footline}{shadow theme}{%
     \leavevmode\hbox{%
+        \hypersetup{linkcolor=white,urlcolor=white,citecolor=white}
         \begin{beamercolorbox}[wd=1.01\paperwidth, ht=2.5ex, dp=1.125ex, leftskip=.3cm plus1fil, rightskip=0.3cm]{author in head/foot}%
             \insertshorttitle \insertsection \hfill \insertframenumber%
         \end{beamercolorbox}%
@@ -239,17 +240,15 @@
 % Show all sections and frame number
 \defbeamertemplate*{footline}{shadow theme}{%
     \leavevmode\hbox{%
+        \hypersetup{linkcolor=white,urlcolor=white,citecolor=white}
         \begin{beamercolorbox}[wd=1.02\paperwidth, ht=2.5ex, dp=1.125ex, leftskip=.3cm plus1fil, rightskip=0.3cm]{author in head/foot}%
-            \insertsectionnavigationhorizontal{.90\textwidth}{}{} \hspace{.3cm} \hfill \# \insertframenumber%
+           \insertsectionnavigationhorizontal{.90\textwidth}{}{} \hspace{.3cm} \hfill \# \insertframenumber%
         \end{beamercolorbox}%
     }%
 }
 \fi
 % Activate custom footline
 \setbeamertemplate{footline}[shadow theme]
-
-
-
 
 
 %=============================================================
@@ -311,8 +310,6 @@
 \setbeamercolor{enumerate subitem}{fg=main}
 
 
-
-
 %=============================================================
 %  MISCELLANEOUS
 %=============================================================
@@ -370,27 +367,6 @@
 %% === Table Symbol Macro (e.g., for Stata output) ===
 \newcommand{\sym}[1]{{#1}}
 
-%% === Table of contents ===
-\makeatletter
-% Section entries: number right-aligned, text in small caps
-\setbeamertemplate{section in toc}{
-    \leavevmode\leftskip=2ex%
-    \usebeamerfont*{section in toc}%
-    \begin{tabular}{@{}p{2em}l}
-        \raggedleft\textcolor{main}{\large \hand*} & \textcolor{black}{{\inserttocsection}}
-    \end{tabular}
-}
-
-% Subsection entries: number right-aligned, text in small caps
-\setbeamertemplate{subsection in toc}{
-    \leavevmode\leftskip=4ex%
-    \usebeamerfont*{subsection in toc}%
-    \begin{tabular}{@{}p{3em}l}
-        \raggedleft\textcolor{main}{[\inserttocsectionnumber.\inserttocsubsectionnumber]} & \textcolor{black}{\textsc{\inserttocsubsection}}
-    \end{tabular}\par
-}
-\makeatother
-
 %% === References ===
 
 % Make sure references' parenthesis have right color
@@ -399,8 +375,33 @@
 \renewcommand{\NAT@close}{\textcolor{main}{)}} % closing parenthesis
 \makeatother
 
-% Custom commanf for [Romer and Romer (2004)] in color main
+% Custom command for [Romer and Romer (2004)] in color main
 \newcommand{\citej}[1]{\textcolor{main}{[\cite{#1}]}}
+
+%% === TOC ===
+
+% Bold numbered sections in TOC with color and 1in indent
+\setbeamertemplate{section in toc}{
+    \leavevmode%
+    \hypersetup{linkcolor=title,urlcolor=title,citecolor=title}%
+    \parbox[t]{\textwidth}{%
+        \hspace{.25cm}%
+        \textbf{\textcolor{title}{\inserttocsectionnumber)}~~~\lapis[BoEacqua]{\inserttocsection}}%
+        \par
+    }
+}
+
+% Bold numbered subsections in TOC with color and 1in indent
+\setbeamertemplate{subsection in toc}{
+    \leavevmode%
+    \hypersetup{linkcolor=title,urlcolor=title,citecolor=title}%
+    \parbox[t]{\textwidth}{%
+        \hspace{.25cm}%
+        \textbf{\textcolor{title}{\inserttocsectionnumber.\inserttocsubsectionnumber)}~~\inserttocsubsection}%
+        \par
+    }
+}
+
 
 
 
@@ -537,7 +538,7 @@
             baseline
         }
     }%
-    \hspace{-0.1cm}%
+    \hspace{0cm}%
     \raisebox{0pt}[0pt][0pt]{%
             \ifx\lapisbox@label\@empty
             \tikz[baseline=(X.base), remember picture]{%
