@@ -1,5 +1,5 @@
 # Jambro Beamer theme
-Ambrogio Cesa-Bianchi's theme for Beamer. This version: 1.1
+Ambrogio Cesa-Bianchi's theme for Beamer. This version: 1.2
 
 ## Features
 
