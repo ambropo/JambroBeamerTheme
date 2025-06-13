@@ -1,134 +1,15 @@
 %% jambrostyle.sty
 %% ---------------------------------------------------------------------------
 %% Custom Beamer style by Ambrogio Cesa-Bianchi
-%% Version 1.1 — 2025 
+%% Version 1.2 — June 2025 
 %% ---------------------------------------------------------------------------
 
 
 %=============================================================
-%  PACKAGES
+%  THEME OPTIONS AND SETUP
 %=============================================================
 
-%% === Encoding and Fonts ===
-\RequirePackage[utf8]{inputenc}                    % UTF-8 input
-\RequirePackage[T1]{fontenc}                       % T1 font encoding
-\RequirePackage{arevmath}                          % Arev-style math fonts
-\RequirePackage{upgreek}                           % Upright Greek letters
-\RequirePackage{courier}                           % Courier typewriter font
-
-%% === Mathematics ===
-\RequirePackage{amsmath}                           % Math typesetting
-\RequirePackage{amssymb}                           % Extra math symbols
-\RequirePackage{amsfonts}                          % Math fonts
-\RequirePackage{mathtools}                         % Math enhancements
-\RequirePackage{braket}                            % Bra-ket notation
-
-%% === Graphics and Figures ===
-\RequirePackage{graphicx}                          % Include graphics
-\RequirePackage{caption}                           % Custom caption setup
-\RequirePackage{booktabs}                          % Professional-quality tables
-\RequirePackage{colortbl,xcolor}                   % Table/text color
-\RequirePackage{tikz}                              % Drawing with TikZ
-\RequirePackage{pgfpages}                          % Handout layout
-\RequirePackage[absolute,overlay]{textpos}         % Absolute positioning
-\RequirePackage{animate}                           % Animated figures
-
-%% === Tables and Layout ===
-\RequirePackage{tabularx}                          % Flexible-width tables
-\RequirePackage{changepage}                        % Margin adjustments
-\RequirePackage{moresize}                          % Additional font sizes
-\RequirePackage{setspace}                          % Line spacing
-\RequirePackage{eurosym}                           % Euro symbol
-
-%% === Lists, Symbols, and Bullets ===
-\RequirePackage{pifont}                            % Ding symbols
-\RequirePackage{bbding}                            % Additional symbols
-
-%% === Text Highlighting and Notes ===
-\RequirePackage{soul}                              % Text highlighting
-\RequirePackage[bordercolor=white,backgroundcolor=script,linecolor=black]{todonotes} % To-do notes
-\setlength{\marginparwidth}{2cm}                   % Required for todonotes
-
-%% === Verbatim and Code Listings ===
-\RequirePackage{verbatim}                          % Verbatim environment
-\RequirePackage{fancyvrb}                          % Fancy verbatim
-\RequirePackage{newverbs}                          % More verbatim control
-\RequirePackage{listings}                          % Code listing
-\RequirePackage{mdframed}                          % Framed environments
-\RequirePackage{framed}                            % Framed boxes
-
-%% === Document Control and Utilities ===
-\RequirePackage{comment}                           % Block comments
-\RequirePackage{xkeyval}                           % Key-value option handling
-\RequirePackage{hyperref}                          % Hyperlinks
-\hypersetup{colorlinks,citecolor=main,urlcolor=main,linkcolor=main}
-\RequirePackage{subdepth}                          % Sub/superscript alignment
-
-%% === Bibliography ===
-\RequirePackage{natbib}                            % Bibliography support
-
-
-
-%=============================================================
-%  COLORS
-%=============================================================
-
-%% === Base Color Palette ===
-\definecolor{title}{RGB}{7,40,91}              % Darker blue for titles
-\definecolor{main}{RGB}{57,83,124}             % Dark blue for items and math
-\definecolor{text}{RGB}{0,0,0}                 % Main text color
-\definecolor{light}{RGB}{255,255,255}          % Background white
-\definecolor{bubble}{RGB}{230,233,239}         % Light blue bubble
-\definecolor{hlight}{RGB}{235,203,139}         % Gold highlight (Stabilo)
-\definecolor{carandache}{RGB}{218,165,32}      % Underlining gold
-
-%% === Bank of England Colors ===
-\definecolor{BoEacqua}{RGB}{61,215,217}
-\definecolor{BoEorange}{RGB}{255,114,0}
-\definecolor{BoEpurple}{RGB}{159,112,225}
-\definecolor{BoEgold}{RGB}{213,175,54}
-\definecolor{BoEgray}{RGB}{197,201,207}
-\definecolor{BoEblue}{RGB}{18, 38, 62}          
-\definecolor{BoEred}{RGB}{254, 1, 91} 
-
-%% === Additional Named Colors ===
-\definecolor{tomato}{RGB}{217,83,79}
-\definecolor{cobalt}{RGB}{0,124,146}
-\definecolor{Cobalt_Light}{RGB}{0,154,180}
-\definecolor{Blue_Light}{RGB}{150,180,225}
-\definecolor{note}{RGB}{49,79,179}
-\definecolor{red}{RGB}{153,0,0}
-\definecolor{blue}{RGB}{7,40,91}
-\definecolor{gold}{RGB}{218,165,32}
-\definecolor{green}{RGB}{0,179,0}
-\definecolor{purple}{RGB}{150,40,160}
-\definecolor{brick}{RGB}{203,92,65}
-\definecolor{maroon}{RGB}{128,0,0}
-\definecolor{tomatobalt}{RGB}{155,95,98}% color for the inner circles filling
-\definecolor{tomatodache}{RGB}{218,130,52}% color for the inner circles filling
-
-%% === Background and Utility Colors ===
-\definecolor{script}{RGB}{255,248,225}             % Background for code/todos
-\definecolor{shadecolor}{rgb}{1,0.973,0.882}   % Same as script (for listings)
-\definecolor{cmd}{gray}{0.99}                            % Very light gray (verbatim bg)
-
-%% === MATLAB-Themed Colors ===
-\definecolor{matlabgreen}{RGB}{0,153,0}
-\definecolor{matlabpurple}{RGB}{127,0,255}
-\definecolor{matlabblue}{RGB}{0,42,252}
-
-%% === Highlight Variants ===
-\definecolor{hlightPurple}{RGB}{126,100,121}
-\definecolor{hlightYellow}{RGB}{235,203,139}   % Duplicate of hlight for clarity
-
-
-
-%=============================================================
-%  THEME OPTIONS
-%=============================================================
-
-% === Aspect ratio, notes, font and theme options ===
-%-----------------------------------------------------
+% --- Boolean switches for custom presentation options ---
 \newif\if@OptionFourThree
 \newif\if@OptionShowNotes
 \newif\if@OptionTwopage
@@ -139,6 +20,7 @@
 \newif\if@OptionNight
 \newif\if@Optiononesec
 
+% --- Set all options to false by default ---
 \@OptionFourThreefalse
 \@OptionShowNotesfalse
 \@OptionTwopagefalse
@@ -149,7 +31,7 @@
 \@OptionNightfalse
 \@Optiononesecfalse
 
-% === Declare all options ===
+% --- Declare options ---
 \DeclareOption{3to2}{\@OptionFourThreetrue}
 \DeclareOption{shownotes}{\@OptionShowNotestrue}
 \DeclareOption{handout2x1}{\@OptionTwopagetrue}
@@ -160,24 +42,24 @@
 \DeclareOption{night}{\@OptionNighttrue}
 \DeclareOption{onesec}{\@Optiononesectrue}
 
-% === Process all at once ===
+% --- Process all options at once ---
 \ProcessOptions\relax
 
-% === Apply aspect ratio ===
+% --- Slide size depending on aspect ratio option ---
 \if@OptionFourThree
 \geometry{paperheight=10cm, paperwidth=15cm}
 \else
 \geometry{paperheight=9cm, paperwidth=16cm}
 \fi
 
-% === Show speaker notes ===
+% --- Whether to show speaker notes ---
 \if@OptionShowNotes
 \beamer@ignorenonframefalse
 \else
 \beamer@ignorenonframetrue
 \fi
 
-% === Print handout 2x1 layout ===
+% --- Layout for 2 slides per page handout ---
 \if@OptionTwopage
 \pgfpagesuselayout{2 on 1}[a4paper, border shrink=1mm]
 \pgfpageslogicalpageoptions{1}{border code=\pgfsetlinewidth{2.5pt}\pgfusepath{stroke}}
@@ -186,7 +68,18 @@
 \pgfpageslogicalpageoptions{4}{border code=\pgfsetlinewidth{2.5pt}\pgfusepath{stroke}}
 \fi
 
-% === Apply fonts ===
+%=============================================================
+%  PACKAGES
+%=============================================================
+
+% --- Encoding and Fonts ---
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[T1]{fontenc}
+\RequirePackage{arevmath}
+\RequirePackage{upgreek}
+\RequirePackage{courier}
+
+% --- Fonts (options applied below) ---
 \if@OptionFira
 \RequirePackage[sfdefault,book,light]{FiraSans}
 \renewcommand*\oldstylenums[1]{{\firaoldstyle #1}}
@@ -203,79 +96,151 @@
 \RequirePackage[sfdefault,light]{roboto}
 \fi
 
-% === Apply red color scheme ===
+% --- Math Packages ---
+\RequirePackage{amsmath,amssymb,amsfonts,mathtools,braket}
+
+% --- Graphics and Layout ---
+\RequirePackage{graphicx}
+\RequirePackage{caption}
+\RequirePackage{booktabs}
+\RequirePackage{colortbl,xcolor}
+\RequirePackage{pgfpages}
+\RequirePackage[absolute,overlay]{textpos}
+\RequirePackage{animate}
+\RequirePackage{tikz}
+\RequirePackage{tabularx}
+\RequirePackage{changepage}
+\RequirePackage{moresize}
+\RequirePackage{setspace}
+\RequirePackage{eurosym}
+
+% --- Lists and Symbols ---
+\RequirePackage{pifont,bbding}
+
+% --- Highlighting and Notes ---
+\RequirePackage{soul}
+\RequirePackage[bordercolor=white,backgroundcolor=script,linecolor=black]{todonotes}
+\setlength{\marginparwidth}{2cm}
+
+% --- Code and Verbatim Environments ---
+\RequirePackage{verbatim,fancyvrb,newverbs,listings,mdframed,framed,etoolbox,tcolorbox}
+
+% --- Document Control and Hyperlinks ---
+\RequirePackage{comment,xkeyval,hyperref,subdepth}
+\hypersetup{colorlinks,citecolor=main,urlcolor=main,linkcolor=main}
+
+% --- Bibliography ---
+\RequirePackage{natbib}
+
+%=============================================================
+%  COLORS
+%=============================================================
+
+% --- Base palette ---
+\definecolor{title}{RGB}{7,40,91}
+\definecolor{main}{RGB}{57,83,124}
+\definecolor{text}{RGB}{0,0,0}
+\definecolor{light}{RGB}{255,255,255}
+\definecolor{bubble}{RGB}{230,233,239}
+\definecolor{hlight}{RGB}{235,203,139}
+\definecolor{carandache}{RGB}{218,165,32}
+
+% --- Bank of England palette ---
+\definecolor{BoEacqua}{RGB}{61,215,217}
+\definecolor{BoEorange}{RGB}{255,114,0}
+\definecolor{BoEpurple}{RGB}{159,112,225}
+\definecolor{BoEgold}{RGB}{213,175,54}
+\definecolor{BoEgray}{RGB}{197,201,207}
+\definecolor{BoEblue}{RGB}{18,38,62}
+\definecolor{BoEred}{RGB}{254,1,91}
+
+% --- Extended colors ---
+\definecolor{tomato}{RGB}{217,83,79}
+\definecolor{cobalt}{RGB}{0,124,146}
+\definecolor{cobalt_light}{RGB}{0,154,180}
+\definecolor{blue_light}{RGB}{150,180,225}
+\definecolor{note}{RGB}{49,79,179}
+\definecolor{red}{RGB}{153,0,0}
+\definecolor{blue}{RGB}{7,40,91}
+\definecolor{gold}{RGB}{218,165,32}
+\definecolor{green}{RGB}{0,179,0}
+\definecolor{purple}{RGB}{150,40,160}
+\definecolor{brick}{RGB}{203,92,65}
+\definecolor{maroon}{RGB}{128,0,0}
+\definecolor{tomatobalt}{RGB}{155,95,98}
+\definecolor{tomatodache}{RGB}{218,130,52}
+
+% --- Utility colors ---
+\definecolor{script}{RGB}{255,248,225}
+\definecolor{shadecolor}{rgb}{1,0.973,0.882}
+\definecolor{cmd}{gray}{0.99}
+
+% --- MATLAB color mimicry ---
+\definecolor{matlabgreen}{RGB}{0,153,0}
+\definecolor{matlabpurple}{RGB}{127,0,255}
+\definecolor{matlabblue}{RGB}{0,42,252}
+
+% --- Highlight variants ---
+\definecolor{hlightPurple}{RGB}{126,100,121}
+\definecolor{hlightYellow}{RGB}{235,203,139} % for clarity even though same as hlight
+
+
+%=============================================================
+%  CONDITIONAL COLOR SCHEMES
+%=============================================================
+
+% --- Red theme override ---
 \if@OptionRed
 \definecolor{title}{RGB}{153,0,0}
 \definecolor{main}{RGB}{173,51,51}
 \definecolor{text}{RGB}{0,0,0}
 \definecolor{light}{RGB}{255, 255, 255}
-\definecolor{bubble}{RGB}{245,230,230} 
+\definecolor{bubble}{RGB}{245,230,230}
 \definecolor{hlight}{RGB}{235, 203, 139}
 \definecolor{carandache}{RGB}{153,0,0}
 \fi
 
-% === Apply night color scheme (overrides red) ===
+% --- Night mode override (takes precedence over red) ---
 \if@OptionNight
 \definecolor{title}{RGB}{129, 161, 193}
 \definecolor{main}{RGB}{154, 180, 205}
-\definecolor{text}{RGB}{216, 222, 233} 
-\definecolor{light}{RGB}{46, 52, 64} 
-\definecolor{bubble}{RGB}{67,76,94} 
+\definecolor{text}{RGB}{216, 222, 233}
+\definecolor{light}{RGB}{46, 52, 64}
+\definecolor{bubble}{RGB}{67,76,94}
 \definecolor{hlight}{RGB}{126,100,121}
 \definecolor{carandache}{RGB}{148,111,169}
 \fi
 
-% === Footline Template Selection ===
-\if@Optiononesec
-% Show only current section and frame number
-\defbeamertemplate*{footline}{shadow theme}{%
-    \leavevmode\hbox{%
-        \hypersetup{linkcolor=white,urlcolor=white,citecolor=white}
-        \begin{beamercolorbox}[wd=1.01\paperwidth, ht=2.5ex, dp=1.125ex, leftskip=.3cm plus1fil, rightskip=0.3cm]{author in head/foot}%
-            \insertshorttitle \insertsection \hfill \insertframenumber%
-        \end{beamercolorbox}%
-    }%
-}
-\else
-% Show all sections and frame number
-\defbeamertemplate*{footline}{shadow theme}{%
-    \leavevmode\hbox{%
-        \hypersetup{linkcolor=white,urlcolor=white,citecolor=white}
-        \begin{beamercolorbox}[wd=1.02\paperwidth, ht=2.5ex, dp=1.125ex, leftskip=.3cm plus1fil, rightskip=0.3cm]{author in head/foot}%
-           \insertsectionnavigationhorizontal{.90\textwidth}{}{} \hspace{.3cm} \hfill \# \insertframenumber%
-        \end{beamercolorbox}%
-    }%
-}
-\fi
-% Activate custom footline
-\setbeamertemplate{footline}[shadow theme]
-
 
 %=============================================================
-%  BEAMER CUSTOM
+%  BEAMER CONFIGURATION
 %=============================================================
 
-%% === Beamer Theme Features ===
-\useinnertheme{rounded}                        % Rounded boxes inside slides
-\setbeamertemplate{navigation symbols}{}       % Hide navigation symbols
-\defbeamertemplate*{headline}{shadow theme}{\leavevmode\hbox{}} % Empty headline
+% --- Use inner theme with rounded boxes ---
+\useinnertheme{rounded}
 
-%% === Slide Margins ===
+% --- Hide navigation symbols ---
+\setbeamertemplate{navigation symbols}{}
+
+% --- Remove header line completely ---
+\defbeamertemplate*{headline}{shadow theme}{\leavevmode\hbox{}}
+
+% --- Set slide margins ---
 \setbeamersize{text margin left=0.3cm, text margin right=0.1cm}
 
-%% === Title and Frame Fonts ===
+% --- Title and frame fonts ---
 \setbeamerfont{title}{series=\bfseries, size={\fontsize{18}{19}}}
 \setbeamerfont{frametitle}{series=\bfseries, size={\fontsize{14}{15}}}
 
-%% === Beamer Color Settings ===
+% --- Section bar in footline: faded background for inactive sections ---
 \setbeamertemplate{section in head/foot shaded}[default][30]
 
-% General
+% --- General text and math colors ---
 \setbeamercolor{normal text}{fg=text}
 \setbeamercolor{background canvas}{bg=light}
 \setbeamercolor{math text}{fg=title!95}
 
-% Structural elements
+% --- Structural elements ---
 \setbeamercolor{titlelike}{fg=title, bg=light}
 \setbeamercolor{frametitle}{fg=title, bg=light}
 \setbeamercolor{section in head/foot}{fg=light, bg=title}
@@ -283,26 +248,31 @@
 \setbeamercolor{title in head/foot}{fg=light, bg=title}
 \setbeamercolor{button}{fg=light, bg=main}
 
-% Font styles
+% --- Fonts for structural elements ---
 \setbeamerfont{section in head/foot}{series=\bfseries}
 \setbeamerfont{frametitle}{series=\bfseries}
 
-%% === Itemize and Enumerate Templates ===
-% Main bullet style
+
+%=============================================================
+%  LISTS AND ENUMERATION
+%=============================================================
+
+% --- Itemize: first-level bullet ---
 \defbeamertemplate{itemize item}{first}{\hand*}
 \setbeamertemplate{itemize items}[triangle]
 
-% Sub-item bullets
+% --- Itemize: second-level bullet ---
 \defbeamertemplate{itemize subitem}{second}{\ssmall\raisebox{.03cm}{\ding{81}}}
 \setbeamertemplate{itemize subitem}[second]
 
+% --- Itemize: third-level bullet ---
 \defbeamertemplate{itemize subsubitem}{third}{\ssmall\raisebox{.03cm}{\ding{59}}}
 \setbeamertemplate{itemize subsubitem}[third]
 
-% Enumerated lists
+% --- Enumerate list style ---
 \setbeamertemplate{enumerate items}[default]
 
-% Colors for all list levels
+% --- List colors ---
 \setbeamercolor{itemize item}{fg=main}
 \setbeamercolor{itemize subitem}{fg=main}
 \setbeamercolor{itemize subsubitem}{fg=main}
@@ -311,77 +281,11 @@
 
 
 %=============================================================
-%  MISCELLANEOUS
+%  TABLE OF CONTENTS
 %=============================================================
 
-%% === Notes and Table Formatting ===
-% Define a custom size for figure/table notes
-\let\notesize\footnotesize
-% Increase vertical spacing in tables
-\renewcommand{\arraystretch}{1.15}
-% New centered column types for tabularx
-\newcolumntype{Y}{>{\centering\arraybackslash\leavevmode}X}                             % Regular centered
-\newcolumntype{S}{>{\centering\arraybackslash\leavevmode\color{gray!25}}X}    % Shaded background (light gray)
-
-%% === Margin Environment for Notes or Quotes ===
-% Usage: \begin{changemargin}{left}{right} ... \end{changemargin}
-\newenvironment{changemargin}[2]{%
-    \begin{list}{}{%
-            \setlength{\topsep}{0pt}%
-            \setlength{\leftmargin}{#1}%
-            \setlength{\rightmargin}{#2}%
-            \setlength{\listparindent}{\parindent}%
-            \setlength{\itemindent}{\parindent}%
-            \setlength{\parsep}{\parskip}}%
-        \item[]
-    }{\end{list}}
-
-%% === Common Math and Symbol Shortcuts ===
-\def\EE{\mathbb{E}}                           % Expectation operator
-\def\newblock{\hskip .11em plus .33em minus .07em} % Fixes natbib spacing
-\newcommand{\cmark}{\ding{51}}               % Check mark
-\newcommand{\xmark}{\ding{55}}               % Cross mark
-
-%% === Verbatim Frames and Code Setup ===
-% Custom frame for verbatim (fragile) content
-\newenvironment{xframe}[1][]%
-{\begin{frame}[fragile,environment=xframe,#1]}%
-    {\end{frame}}
-% Style for listings (e.g., \begin{lstlisting})
-\lstset{basicstyle=\ttfamily\color{black!85}}
-% Shortcut for inline code
-\let\code\lstinline
-% Default to inline mode for todonotes
-\presetkeys{todonotes}{inline}{}
-
-%% === Suppress Overfull/Underfull Warnings ===
-\vfuzz2pt
-\hfuzz2pt
-
-%% === Handwriting Font ===
-\DeclareRobustCommand{\hand}{%
-    \fontfamily{augie}\fontseries{b}\fontshape{n}\selectfont
-}
-\DeclareTextFontCommand{\textaugie}{\hand}
-
-%% === Table Symbol Macro (e.g., for Stata output) ===
-\newcommand{\sym}[1]{{#1}}
-
-%% === References ===
-
-% Make sure references' parenthesis have right color
-\makeatletter
-\renewcommand{\NAT@open}{\textcolor{main}{(}}  % opening parenthesis
-\renewcommand{\NAT@close}{\textcolor{main}{)}} % closing parenthesis
-\makeatother
-
-% Custom command for [Romer and Romer (2004)] in color main
-\newcommand{\citej}[1]{\textcolor{main}{[\cite{#1}]}}
-
-%% === TOC ===
-
-% Bold numbered sections in TOC with color and 1in indent
-\setbeamertemplate{section in toc}{
+% --- Section entries ---
+\setbeamertemplate{section in toc}{%
     \leavevmode%
     \hypersetup{linkcolor=title,urlcolor=title,citecolor=title}%
     \parbox[t]{\textwidth}{%
@@ -391,8 +295,8 @@
     }
 }
 
-% Bold numbered subsections in TOC with color and 1in indent
-\setbeamertemplate{subsection in toc}{
+% --- Subsection entries ---
+\setbeamertemplate{subsection in toc}{%
     \leavevmode%
     \hypersetup{linkcolor=title,urlcolor=title,citecolor=title}%
     \parbox[t]{\textwidth}{%
@@ -403,13 +307,42 @@
 }
 
 
+%=============================================================
+%  FOOTLINE TEMPLATE
+%=============================================================
+
+% --- Footline depends on onesec option: show only current section or full bar ---
+\if@Optiononesec
+% Minimalist footline: only section name and frame number
+\defbeamertemplate*{footline}{shadow theme}{%
+    \leavevmode\hbox{%
+        \hypersetup{linkcolor=white,urlcolor=white,citecolor=white}
+        \begin{beamercolorbox}[wd=1.01\paperwidth, ht=2.5ex, dp=1.125ex, leftskip=.3cm plus1fil, rightskip=0.3cm]{author in head/foot}%
+            \insertshorttitle \insertsection \hfill \insertframenumber%
+        \end{beamercolorbox}%
+    }%
+}
+\else
+% Standard footline: section bar and frame number
+\defbeamertemplate*{footline}{shadow theme}{%
+    \leavevmode\hbox{%
+        \hypersetup{linkcolor=white,urlcolor=white,citecolor=white}
+        \begin{beamercolorbox}[wd=1.02\paperwidth, ht=2.5ex, dp=1.125ex, leftskip=.3cm plus1fil, rightskip=0.3cm]{author in head/foot}%
+            \insertsectionnavigationhorizontal{.90\textwidth}{}{} \hspace{.3cm} \hfill \# \insertframenumber%
+        \end{beamercolorbox}%
+    }%
+}
+\fi
+
+% --- Activate the custom footline ---
+\setbeamertemplate{footline}[shadow theme]
 
 
 %=============================================================
-%  TIKZ
+%  TIKZ SETUP
 %=============================================================
 
-%% === TikZ Libraries and Decorations ===
+% --- Load TikZ libraries and PGF legacy shapes ---
 \usetikzlibrary{
     calc,
     positioning,
@@ -422,9 +355,9 @@
     decorations.pathreplacing,
     fit
 }
-\usepgflibrary{shapes.geometric} % legacy shapes lib
+\usepgflibrary{shapes.geometric} % legacy shapes lib for compatibility
 
-%% === Custom TikZ Decoration: Hand-drawn Sketch Line ===
+% --- Custom TikZ decoration: hand-drawn sketch line ---
 \makeatletter
 \pgfset{
     /pgf/decoration/randomness/.initial=2,
@@ -454,7 +387,7 @@
 }
 \makeatother
 
-%% === Custom TikZ Styles ===
+% --- TikZ styles used in commands like \lapis and \lapisbox ---
 \tikzset{
     pencil/.style={carandache, line width=0.04cm, decorate,
         decoration={sketch, segment length=1.5pt, amplitude=0.5pt}},
@@ -464,29 +397,25 @@
     arrow/.style={pencil, carandache, line width=0.04cm},
     snake/.style={decorate, carandache, line width=0.04cm,
         decoration={snake, post length=1.5mm, pre length=1.5mm}},
-    pencilboxstyle/.style={pencil,draw,line width=0.04cm,inner xsep=0.5pt,inner ysep=0.5pt,baseline}    
+    pencilboxstyle/.style={pencil,draw,line width=0.04cm,inner xsep=0.5pt,inner ysep=0.5pt,baseline}
 }
-
 
 
 %=============================================================
 %  CUSTOM COMMANDS
 %=============================================================
 
-% === Underlining: \lapis command ===
+% --- Hand-drawn underline command ---
 % Usage: \lapis{word} or \lapis[red]{word}
-% Draws a hand-drawn underline using TikZ (default: pencil style)
 \newcommand{\lapis}[2][]{%
     \def\FirstArg{#1}%
     \ifx\FirstArg\empty
-    % No optional color/style
     \tikz[tstyle]{\node[nstyle](node1){#2}}%
     \begin{tikzpicture}[tpstyle]
         \draw[pencil,very thick] ([yshift=-2pt]node1.south west) to ([yshift=-2pt]node1.south east);
     \end{tikzpicture}%
     \hspace{-0.025cm}%
     \else
-    % With optional style/color (e.g., [red], [snake])
     \tikz[tstyle]{\node[nstyle](node1){#2}}%
     \begin{tikzpicture}[tpstyle]
         \draw[pencil,very thick,#1] ([yshift=-2pt]node1.south west) to ([yshift=-2pt]node1.south east);
@@ -495,9 +424,8 @@
     \fi
 }
 
-% === Highlighting: \stabilo command ===
+% --- Highlight command (uses soul) ---
 % Usage: \stabilo{word} or \stabilo[yellow]{word}
-% Applies color highlight using soul and hlight (default: hlight)
 \makeatletter
 \let\HL\hl
 \renewcommand\hl{%
@@ -510,21 +438,17 @@
     {\sethlcolor{#1}\hl{#2}}%
 }
 
-% === Framing: \lapisbox command ===
+% --- Hand-drawn box around text ---
 % Usage: \lapisbox{word} or \lapisbox[label=foo,color=red]{word}
-% Draws a hand-drawn box around text using TikZ (default: pencil style)
 \makeatletter
-% Define keys for pencilbox options
 \pgfkeys{
     /pencilbox/.is family, /pencilbox,
     label/.estore in=\lapisbox@label,
     color/.estore in=\lapisbox@color,
 }
-% Default values
 \def\lapisbox@label{}
 \def\lapisbox@color{gold}
 \newcommand{\lapisbox}[2][]{%
-    % Parse key-value options
     \pgfkeys{/pencilbox, #1}%
     \tikzset{
         pencilboxstyle/.style={
@@ -540,48 +464,432 @@
     }%
     \hspace{0cm}%
     \raisebox{0pt}[0pt][0pt]{%
-            \ifx\lapisbox@label\@empty
-            \tikz[baseline=(X.base), remember picture]{%
-                \node[pencilboxstyle, text=.] (X) {\strut #2};
-            }
-            \else
-            \tikz[baseline=(\lapisbox@label.base), remember picture]{%
-                \node[pencilboxstyle, text=.=] (\lapisbox@label) {\strut #2};
-            }
-            \fi
-        }%
+        \ifx\lapisbox@label\@empty
+        \tikz[baseline=(X.base), remember picture]{%
+            \node[pencilboxstyle, text=.] (X) {\strut #2};
+        }
+        \else
+        \tikz[baseline=(\lapisbox@label.base), remember picture]{%
+            \node[pencilboxstyle, text=.=] (\lapisbox@label) {\strut #2};
+        }
+        \fi
+    }%
     \hspace{-0.1cm}%
 }
 \makeatother
 
-% === TikZ anchor node ===
+% --- Marker node for aligning text in TikZ overlays ---
 % Usage: \marker{name}{content}
-% Creates a styled TikZ node with name `name` and content `content`
 \newcommand{\marker}[2]{%
     \tikz[remember picture, baseline=(#1.base)]{%
         \node[nstyle, name=#1] (#1) {\strut #2};%
     }%
 }
 
-% === Inline Bubble Notes ===
-% Usage: \NB{your comment}
-% Creates an inline to-do bubble using defined bubble and text colors
+% --- Inline to-do note (bubble style) ---
+% Usage: \NB{note}
 \newcommand{\NB}[1]{%
     \todo[textcolor=text, color=bubble, inline, caption={}]{#1}%
 }
 
-% === Font Size: Minuscule ===
-% Usage: {\miniscule Your tiny text}
-% Defines a font size smaller than \tiny
+% --- Very small font (smaller than \tiny) ---
 \makeatletter
-\newcommand{\miniscule}{\@setfontsize\miniscule{4}{6}} % \tiny is 5pt/6pt
+\newcommand{\miniscule}{\@setfontsize\miniscule{4}{6}}
 \makeatother
 
-% === Font Size: Tables ===
-% Usage: {\tablesize Table content}
-% Defines a smaller font size for dense table content
+% --- Font size for dense tables ---
 \makeatletter
 \newcommand*\tablesize{\@setfontsize\tablesize{7.25}{8.0}}
 \makeatother
 
+% --- Vertical spacing shortcut ---
+% Usage: \vs{3} = \vspace{0.3cm}
+\newcommand{\vs}[1]{\vspace{0.#1cm}}
 
+% --- Simple verbatim display for inline code ---
+\newcommand{\jverb}[1]{\texttt{\detokenize{#1}}}
+
+% --- Verbatim environment with small font ---
+\newenvironment{jVerb}
+{\par\vspace{1ex}\small\VerbatimEnvironment\begin{Verbatim}}
+    {\end{Verbatim}\vspace{1ex}\par}
+
+% --- Inline code with yellow box ---
+\newtcbox{\jcode}{on line,
+    colback=script!80, colframe=script!80, boxrule=0pt, boxsep=1pt,
+    left=2pt, right=2pt, top=1pt, bottom=1pt,
+    nobeforeafter, tcbox raise base,
+    fontupper=\ttfamily
+}
+
+% --- Framed code block in yellow bubble ---
+% Usage: \jCode{...}
+\newcommand{\jCode}[1]{%
+    \begin{minipage}[b]{.9\textwidth}%
+        \smallskip
+        \todo[color=script!80,inline,caption={short for LoTds}]{\footnotesize\ttfamily #1}%
+    \end{minipage}%
+}
+
+
+%=============================================================
+%  MISCELLANEOUS
+%=============================================================
+
+% --- Footnote-like size for table/figure notes ---
+\let\notesize\footnotesize
+
+% --- Slightly increased line spacing in tables ---
+\renewcommand{\arraystretch}{1.15}
+
+% --- Tabularx: centered column types ---
+\newcolumntype{Y}{>{\centering\arraybackslash\leavevmode}X}
+\newcolumntype{S}{>{\centering\arraybackslash\leavevmode\color{gray!25}}X}
+
+% --- Quote or indented margin environment ---
+% Usage: \begin{changemargin}{left}{right} ... \end{changemargin}
+\newenvironment{changemargin}[2]{%
+    \begin{list}{\null}{%
+            \setlength{\topsep}{0pt}%
+            \setlength{\leftmargin}{#1}%
+            \setlength{\rightmargin}{#2}%
+            \setlength{\listparindent}{\parindent}%
+            \setlength{\itemindent}{\parindent}%
+            \setlength{\parsep}{\parskip}%
+        }%
+        \item[]%
+    }{\end{list}}
+
+% --- Math and symbol shortcuts ---
+\def\EE{\mathbb{E}} % Expectation
+\def\newblock{\hskip .11em plus .33em minus .07em}
+\newcommand{\cmark}{\color{tomato}\ding{51}} % ✓
+\newcommand{\xmark}{\color{cobalt}\ding{55}} % ✗
+
+% --- Verbose output warnings suppression ---
+\vfuzz2pt
+\hfuzz2pt
+
+% --- Handwriting font ---
+\DeclareRobustCommand{\hand}{%
+    \fontfamily{augie}\fontseries{b}\fontshape{n}\selectfont
+}
+\DeclareTextFontCommand{\textaugie}{\hand}
+
+% --- Stata-style significance stars ---
+\newcommand{\sym}[1]{{#1}}
+
+% --- natbib parentheses coloring fix ---
+\makeatletter
+\renewcommand{\NAT@open}{\textcolor{main}{(}}
+\renewcommand{\NAT@close}{\textcolor{main}{)}}
+\makeatother
+
+% --- Custom cite command in main color ---
+\newcommand{\citej}[1]{\textcolor{main}{[\cite{#1}]}}
+
+
+%=============================================================
+%   PASCAL MICHAILLAT’S LATEX COMMANDS TO WRITE MATH 
+%   From: https://github.com/pmichaillat/latex-math)
+%=============================================================
+
+% Define custom commands with complex argument specifications
+\RequirePackage{xparse}
+
+% ---- Commands for brackets ----
+
+% Curly brackets
+\newcommand{\bc}[1]{\left\lbrace #1 \right\rbrace} 
+
+% Parentheses
+\newcommand{\bp}[1]{\left( #1 \right)} 
+
+% Parentheses for function argument
+\newcommand{\of}[1]{{\left( #1 \right)}}
+
+% Square brackets
+\newcommand{\bs}[1]{\left[ #1 \right]} 
+
+% Angle brackets
+\newcommand{\ba}[1]{\left< #1 \right>} 
+
+% Absolute valuec in display
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+
+% Absolute value in text
+\newcommand{\absx}[1]{\lvert #1 \rvert}
+
+% Norm in display
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+
+% Norm in text
+\newcommand{\normx}[1]{\lVert #1 \rVert}
+
+% Floor in display
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+
+% Floor in text
+\newcommand{\floorx}[1]{\lfloor #1 \rfloor}
+
+% Ceiling  in display
+\newcommand{\ceil}[1]{\left\lceil #1 \right\rceil}
+
+% Ceiling in text
+\newcommand{\ceilx}[1]{\lceil #1 \rceil}
+
+% ---- Commands for functions and operators ----
+
+% Logarithm
+\let\oldln\ln
+\RenewDocumentCommand{\ln}{g}{%
+    \IfNoValueTF{#1}{\oldln}%
+    {\,{\oldln}\of{#1}}}
+
+% Exponential
+\let\oldexp\exp
+\RenewDocumentCommand{\exp}{g}{%
+    \IfNoValueTF{#1}{\oldexp}%
+    {\,{\oldexp}\of{#1}}}
+
+% Indicator
+\NewDocumentCommand{\ind}{g}{%
+    \IfNoValueTF{#1}{\operatorname{\mathbb{1}}}%
+    {\,\mathbb{1}\of{#1}}}
+
+% Trace
+\NewDocumentCommand{\tr}{g}{%
+    \IfNoValueTF{#1}{\operatorname{tr}}%
+    {\,{\operatorname{tr}}\of{#1}}}
+
+% Variance
+\NewDocumentCommand{\var}{o g}{%
+    \IfNoValueTF{#2}{\operatorname{var}\IfValueT{#1}{_{#1}}}%
+    {\,{\operatorname{var}\IfValueT{#1}{_{#1}}}\of{#2}}}
+
+% Covariance
+\NewDocumentCommand{\cov}{o g}{%
+    \IfNoValueTF{#2}{\operatorname{cov}\IfValueT{#1}{_{#1}}}%
+    {\,{\operatorname{cov}\IfValueT{#1}{_{#1}}}\of{#2}}}
+
+% Correlation
+\NewDocumentCommand{\corr}{o g}{%
+    \IfNoValueTF{#2}{\operatorname{corr}\IfValueT{#1}{_{#1}}}%
+    {\,{\operatorname{corr}\IfValueT{#1}{_{#1}}}\of{#2}}}
+
+% Standard deviation
+\NewDocumentCommand{\sd}{o g}{%
+    \IfNoValueTF{#2}{\operatorname{sd}\IfValueT{#1}{_{#1}}}%
+    {\,{\operatorname{sd}\IfValueT{#1}{_{#1}}}\of{#2}}}
+
+% Standard error
+\NewDocumentCommand{\se}{o g}{%
+    \IfNoValueTF{#2}{\operatorname{se}\IfValueT{#1}{_{#1}}}%
+    {\,{\operatorname{se}\IfValueT{#1}{_{#1}}}\of{#2}}}
+
+% Maximum
+\let\oldmax\max
+\RenewDocumentCommand{\max}{o g}{%
+    \IfNoValueTF{#2}{\oldmax\IfValueT{#1}{_{#1}}}%
+    {\,{\oldmax\IfValueT{#1}{_{#1}}}\of{#2}}}
+
+% Supremum
+\let\oldsup\sup
+\RenewDocumentCommand{\sup}{o g}{%
+    \IfNoValueTF{#2}{\oldsup\IfValueT{#1}{_{#1}}}%
+    {\,{\oldsup\IfValueT{#1}{_{#1}}}\of{#2}}}
+
+% Minimum
+\let\oldmin\min
+\RenewDocumentCommand{\min}{o g}{%
+    \IfNoValueTF{#2}{\oldmin\IfValueT{#1}{_{#1}}}%
+    {\,{\oldmin\IfValueT{#1}{_{#1}}}\of{#2}}}
+
+% Infimum
+\let\oldinf\inf
+\RenewDocumentCommand{\inf}{o g}{%
+    \IfNoValueTF{#2}{\oldinf\IfValueT{#1}{_{#1}}}%
+    {\,{\oldinf\IfValueT{#1}{_{#1}}}\of{#2}}}
+
+% Arg functions
+\DeclareMathOperator*{\argmax}{argmax}
+\DeclareMathOperator*{\argmin}{argmin}
+
+% Expectation
+\NewDocumentCommand{\E}{o g}{%
+    \IfNoValueTF{#2}{\operatorname{\mathbb{E}}\IfValueT{#1}{_{#1}}}%
+    {\,{\operatorname{\mathbb{E}}\IfValueT{#1}{_{#1}}}\of{#2}}}
+
+% Probability
+\RenewDocumentCommand{\P}{o g}{%
+    \IfNoValueTF{#2}{\operatorname{\mathbb{P}}\IfValueT{#1}{_{#1}}}%
+    {\,{\operatorname{\mathbb{P}}\IfValueT{#1}{_{#1}}}\of{#2}}}
+
+% ---- Commands for derivatives ----
+
+% Ordinary derivative in display
+\NewDocumentCommand{\od}{o g g}{%
+    \frac{d\IfValueT{#1}{^{#1}} #2}{d #3\IfValueT{#1}{^{#1}}}}
+
+% Ordinary derivative in text
+\NewDocumentCommand{\odx}{o g g}{%
+    d\IfValueT{#1}{^{#1}} #2/d #3\IfValueT{#1}{^{#1}}}
+
+% Partial derivative in display
+\NewDocumentCommand{\pd}{o g g g}{%
+    \IfNoValueTF{#4}{\frac{\partial\IfValueT{#1}{^{#1}} #2}{\partial #3\IfValueT{#1}{^{#1}}}}%
+    {\left.\frac{\partial\IfValueT{#1}{^{#1}} #2}{\partial #3\IfValueT{#1}{^{#1}}}\right\vert_{#4}}}
+
+% Partial derivative in text
+\NewDocumentCommand{\pdx}{o g g g}{%
+    \IfNoValueTF{#4}{\partial\IfValueT{#1}{^{#1}} #2/\partial #3\IfValueT{#1}{^{#1}}}%
+    {\left.\partial\IfValueT{#1}{^{#1}} #2/\partial #3\IfValueT{#1}{^{#1}}\right\vert_{#4}}}
+
+% Ordinary elasticity in display
+\renewcommand{\oe}[2]{\frac{d\ln{#1}}{d\ln{#2}}}
+
+% Ordinary elasticity in text
+\newcommand{\oex}[2]{d\ln(#1)/d\ln(#2)}
+
+% Partial elasticity in display
+\NewDocumentCommand{\pe}{g g g}{%
+    \IfNoValueTF{#3}{\frac{\partial\ln{#1}}{\partial\ln{#2}}}%
+    {\left.\frac{\partial\ln{#1}}{\partial\ln{#2}}\right\vert_{#3}}}
+
+% Partial elasticity in text
+\NewDocumentCommand{\pex}{g g g}{%
+    \IfNoValueTF{#3}{\partial\ln(#1)/\partial\ln(#2)}%
+    {\left.\partial\ln(#1)/\partial\ln(#2)\right\vert_{#3}}}
+
+% ---- Commands for logical relations ----
+
+% Equivalence
+\renewcommand{\iff}{\Leftrightarrow}
+
+% Implication
+\renewcommand{\implies}{\Rightarrow}
+
+% ---- Commands for statistical relations ----
+
+% Independent and identically distributed variables
+\newcommand{\iid}{\overset{iid}{\sim}}
+
+% Almost sure convergence
+\newcommand{\asto}{\overset{as}{\to}}
+
+% Convergence in probability
+\newcommand{\pto}{\overset{p}{\to}}
+
+% Convergence in distribution
+\newcommand{\dto}{\overset{d}{\to}}
+
+% Essential (to be used with \inf and \sup)
+\DeclareMathOperator*{\ess}{ess}
+
+% ---- Commands for accents ----
+
+% Create custom accents for symbols in math mode
+\usepackage{accents}
+
+% Underbar
+\newcommand{\ubar}[1]{\underaccent{\bar}{#1}}
+
+% Underline
+%\newcommand{\ul}[1]{\underline{#1}}
+
+% Arrow
+\newcommand{\oa}[1]{\overrightarrow{#1}}
+
+% Overline
+\newcommand{\ol}[1]{\overline{#1}}
+
+% Wide hat
+\newcommand{\wh}[1]{\widehat{#1}}
+
+% Wide tilde
+\newcommand{\wt}[1]{\widetilde{#1}}
+
+% ---- Commands for complex numbers ----
+
+% Real part
+\renewcommand{\Re}{\operatorname{Re}}
+
+% Imaginary part
+\renewcommand{\Im}{\operatorname{Im}}
+
+
+% ---- Commands for blackboard letters ----
+
+\def\R{\mathbb{R}}
+\def\N{\mathbb{N}}
+\def\Z{\mathbb{Z}}
+\def\Q{\mathbb{Q}}
+\def\C{\mathbb{C}}
+
+
+% ---- Commands for Greek letters ----
+
+\def\a{\alpha}
+\def\b{\beta}
+\def\c{\chi}
+\def\d{\delta}
+\def\D{\Delta}
+\def\uD{\upDelta}
+\def\e{\epsilon}
+\def\ve{\varepsilon}
+\def\f{\phi}
+\def\vf{\varphi}
+\def\F{\Phi}
+\def\g{\gamma}
+\def\G{\Gamma}
+\def\h{\eta}
+\def\i{\iota}
+\def\k{\kappa}
+\def\l{\lambda}
+\def\L{\Lambda}
+\def\m{\mu}
+\def\n{\nu}
+\def\o{\omega}
+\def\O{\Omega}
+\def\vp{\varpi}
+\def\p{\psi}
+\def\r{\rho}
+\def\s{\sigma}
+\def\S{\Sigma}
+\def\t{\theta}
+\def\vt{\vartheta}
+\def\T{\Theta}
+\def\u{\upsilon}
+\def\U{\Upsilon}
+\def\x{\xi}
+\def\X{\Xi}
+\def\z{\zeta}
+
+% ---- Commands for caligraphic letters ----
+
+\newcommand{\Ac}{\mathcal{A}}
+\newcommand{\Bc}{\mathcal{B}}
+\newcommand{\Cc}{\mathcal{C}}
+\newcommand{\Dc}{\mathcal{D}}
+\newcommand{\Ec}{\mathcal{E}}
+\newcommand{\Fc}{\mathcal{F}}
+\newcommand{\Gc}{\mathcal{G}}
+\newcommand{\Hc}{\mathcal{H}}
+\newcommand{\Ic}{\mathcal{I}}
+\newcommand{\Jc}{\mathcal{J}}
+\newcommand{\Kc}{\mathcal{K}}
+\newcommand{\Lc}{\mathcal{L}}
+\newcommand{\Mc}{\mathcal{M}}
+\newcommand{\Nc}{\mathcal{N}}
+\newcommand{\Oc}{\mathcal{O}}
+\newcommand{\Pc}{\mathcal{P}}
+\newcommand{\Qc}{\mathcal{Q}}
+\newcommand{\Rc}{\mathcal{R}}
+\newcommand{\Sc}{\mathcal{S}}
+\newcommand{\Tc}{\mathcal{T}}
+\newcommand{\Uc}{\mathcal{U}}
+\newcommand{\Vc}{\mathcal{V}}
+\newcommand{\Wc}{\mathcal{W}}
+\newcommand{\Xc}{\mathcal{X}}
+\newcommand{\Yc}{\mathcal{Y}}
+\newcommand{\Zc}{\mathcal{Z}}
