@@ -281,6 +281,40 @@
 
 
 %=============================================================
+%  SPACING FOR ITEMIZE ENVIRONMENT
+%=============================================================
+\RequirePackage{xparse}
+\makeatletter
+\let\olditemize\itemize
+\let\endolditemize\enditemize
+
+\RenewDocumentEnvironment{itemize}{ O{\relax} }{%
+  % --- Add vertical space before starting a level-2 list ---
+  \ifnum\@listdepth=1
+    \vspace{3pt}%
+  \fi
+  % --- Then proceed normally ---
+  \olditemize
+  \ifx#1\relax
+    % No explicit argument → per-level defaults
+    \ifnum\@listdepth=1
+      \setlength{\itemsep}{14pt}%
+      \setlength{\topsep}{14pt}%
+    \else\ifnum\@listdepth=2
+      \setlength{\itemsep}{5pt}%
+      \setlength{\topsep}{5pt}%
+    \fi\fi
+  \else
+    % Explicit override, e.g. [8pt]
+    \setlength{\itemsep}{#1}%
+    \setlength{\topsep}{#1}%
+  \fi
+}{%
+  \endolditemize
+}
+\makeatother
+
+%=============================================================
 %  TABLE OF CONTENTS
 %=============================================================
 
