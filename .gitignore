@@ -6,6 +6,8 @@
 *.snm
 *.gz
 *.toc
+*.fls
+*latexmk
 *.vrb
 *.aux
 *.log

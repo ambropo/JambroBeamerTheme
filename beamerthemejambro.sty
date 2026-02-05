@@ -2,7 +2,7 @@
 %% ===========================================================================
 %% Custom Beamer Theme: Jambro
 %% Author: Ambrogio Cesa-Bianchi
-%% Version: 1.2 — June 2025
+%% Version: 1.2 — Feb 2026
 %% ===========================================================================
 %%
 %% DESCRIPTION:
@@ -25,6 +25,7 @@
 %% - red          : Use red color scheme instead of blue
 %% - night        : Dark mode color scheme (overrides red)
 %% - onesec       : Show only current section in footline
+%% - itemsep      : Use generous itemize spacing (default: standard Beamer spacing)
 %% ===========================================================================
 
 
@@ -44,6 +45,7 @@
 \newif\if@OptionRed            % Red color scheme
 \newif\if@OptionNight          % Dark mode colors
 \newif\if@Optiononesec         % Minimalist footline
+\newif\if@OptionItemsep        % Custom itemize spacing
 
 % --- Initialize all options to false ---
 \@OptionFourThreefalse
@@ -55,6 +57,7 @@
 \@OptionRedfalse
 \@OptionNightfalse
 \@Optiononesecfalse
+\@OptionItemsepfalse
 
 % --- Declare document class options ---
 \DeclareOption{3to2}{\@OptionFourThreetrue}
@@ -66,11 +69,14 @@
 \DeclareOption{red}{\@OptionRedtrue}
 \DeclareOption{night}{\@OptionNighttrue}
 \DeclareOption{onesec}{\@Optiononesectrue}
+\DeclareOption{itemsep}{\@OptionItemseptrue}
 
 % --- Process all declared options ---
 \ProcessOptions\relax
 
 % --- Configure slide dimensions based on aspect ratio ---
+% Note: sizes are custom and not tied to standard 4:3/16:9 beamer defaults.
+% Adjust if you need strict 128mm x 96mm or 160mm x 90mm sizes.
 \if@OptionFourThree
     \geometry{paperheight=10cm, paperwidth=15cm}  % 3:2 format
 \else
@@ -118,11 +124,13 @@
 \fi
 
 % Override with Cabin if requested
+% Note: if multiple font options are set, the later ones win.
 \if@OptionCabin
     \RequirePackage[sfdefault]{cabin}
 \fi
 
 % Override with Roboto if requested
+% Note: if multiple font options are set, the later ones win.
 \if@OptionRoboto
     \RequirePackage[sfdefault,light]{roboto}
 \fi
@@ -157,6 +165,7 @@
 
 % --- Document control and navigation ---
 \RequirePackage{comment,xkeyval,hyperref,subdepth}
+% Note: hyperref colors reference `main`, which is defined later below.
 \hypersetup{
     colorlinks,                          % Colored links (not boxed)
     citecolor=main,                      % Citation link color
@@ -278,6 +287,7 @@
 \defbeamertemplate*{headline}{shadow theme}{\leavevmode\hbox{}}
 
 % --- Set slide margins ---
+% Tight margins for a compact look; adjust if you need more whitespace.
 \setbeamersize{text margin left=0.3cm, text margin right=0.1cm}
 
 % --- Font sizes for titles ---
@@ -312,6 +322,7 @@
 % --- First-level itemize bullet ---
 \defbeamertemplate{itemize item}{first}{\hand*}
 \setbeamertemplate{itemize items}[triangle]
+% To use the hand-drawn bullet, switch to: \setbeamertemplate{itemize items}[first]
 
 % --- Second-level itemize bullet ---
 \defbeamertemplate{itemize subitem}{second}{\ssmall\raisebox{.03cm}{\ding{81}}}
@@ -333,13 +344,15 @@
 
 
 %=============================================================================
-%  ITEMIZE SPACING CUSTOMIZATION
+%  ITEMIZE SPACING CUSTOMIZATION (optional, enabled with 'itemsep' option)
 %=============================================================================
-% Provides flexible control over vertical spacing in itemize environments.
+% When enabled, provides generous vertical spacing in itemize environments.
 % Usage: \begin{itemize}[<spacing>] or just \begin{itemize} for defaults
 % Example: \begin{itemize}[8pt] for custom 8pt spacing
+% Without 'itemsep' option: standard Beamer spacing is used.
 %=============================================================================
 
+\if@OptionItemsep
 \RequirePackage{xparse}
 \makeatletter
 \let\olditemize\itemize
@@ -373,9 +386,10 @@
 
 
 %=============================================================================
-%  EQUATION SPACING ADJUSTMENT
+%  EQUATION SPACING ADJUSTMENT (only when itemsep option is enabled)
 %=============================================================================
-% Reduces spacing below equations when inside itemize environments
+% Reduces spacing below equations when inside itemize environments.
+% Warning: this is global for itemize and uses negative skips.
 %=============================================================================
 
 \makeatletter
@@ -384,6 +398,7 @@
     \setlength{\belowdisplayshortskip}{-8pt}%
 }
 \makeatother
+\fi
 
 
 %=============================================================================
@@ -422,6 +437,7 @@
     \defbeamertemplate*{footline}{shadow theme}{%
         \leavevmode\hbox{%
             \hypersetup{linkcolor=white,urlcolor=white,citecolor=white}
+            % Slightly wider than \paperwidth to avoid visible gaps at edges.
             \begin{beamercolorbox}[wd=1.01\paperwidth, ht=2.5ex, dp=1.125ex, 
                                    leftskip=.3cm plus1fil, rightskip=0.3cm]{author in head/foot}%
                 \insertshorttitle \insertsection \hfill \insertframenumber%
@@ -433,6 +449,7 @@
     \defbeamertemplate*{footline}{shadow theme}{%
         \leavevmode\hbox{%
             \hypersetup{linkcolor=white,urlcolor=white,citecolor=white}
+            % Slightly wider than \paperwidth to avoid visible gaps at edges.
             \begin{beamercolorbox}[wd=1.02\paperwidth, ht=2.5ex, dp=1.125ex, 
                                    leftskip=.3cm plus1fil, rightskip=0.3cm]{author in head/foot}%
                 \insertsectionnavigationhorizontal{.90\textwidth}{}{} 
@@ -467,7 +484,8 @@
 
 
 % --- Custom decoration: hand-drawn line effect ---
-% Creates a wobbly, hand-drawn appearance for lines
+% Creates a wobbly, hand-drawn appearance for lines.
+% Note: uses rand, so output is intentionally non-deterministic.
 \makeatletter
 \pgfset{
     /pgf/decoration/randomness/.initial=2,    % Wobble amplitude
@@ -853,6 +871,7 @@
             \fi
         \fi\fi\fi\fi\fi
     }%
+    % Pull back vertical space after overlay to avoid extra gap.
     \vspace{-.4cm}  % Vertical adjustment
 }
 \makeatother
@@ -939,6 +958,7 @@
 \newcommand{\jCode}[1]{%
     \begin{minipage}[b]{.9\textwidth}%
         \smallskip
+        % Uses todonotes for an inline shaded code bubble.
         \todo[color=script!80,inline,caption={short for LoTds}]{%
             \footnotesize\ttfamily #1%
         }%
@@ -965,10 +985,11 @@
 %=============================================================================
 
 % --- Note size alias (for figure/table notes) ---
+% Keeps note text aligned with footnote sizing.
 \let\notesize\footnotesize
 
 % --- Vertical spacing shortcut ---
-% Usage: \vs{3} → \vspace{0.3cm}
+% Usage: \vs{3} → \vspace{0.3cm} (tenths of a cm; 0-9 recommended)
 \newcommand{\vs}[1]{\vspace{0.#1cm}}
 
 % --- Adjustable margin environment ---
@@ -993,6 +1014,7 @@
 \newcommand{\xmark}{\color{cobalt}\ding{55}}  % ✗
 
 % --- Suppress overfull/underfull box warnings below threshold ---
+% Note: reduces noise but can hide real layout issues if set too high.
 \vfuzz2pt
 \hfuzz2pt
 
@@ -1009,6 +1031,7 @@
 \newcommand{\citej}[1]{\textcolor{main}{[\cite{#1}]}}
 
 % --- Bibliography block definition ---
+% Used by natbib to format blocks inside bibliography entries.
 \def\newblock{\hskip .11em plus .33em minus .07em}
 
 % --- Fix natbib citation parenthesis colors ---
