@@ -2,6 +2,7 @@
 \usetheme{jambro}
 \graphicspath{{./graphics/}}
 
+
 % Authors/institutes/date/etc
 %--------------------------------
 \title[]{Jambro Beamer Template}
@@ -188,6 +189,30 @@
                 \draw[arrow,brick,opacity=0.5] ([yshift=2pt]node1.north east) to[bend left] +(0.7,+0.3) node[brick,anchor=west,opacity=0.5] {\hand A comment from the north};
                 \draw[snake,<->,brick] ([yshift=-2pt]node1.south) to[bend right] +(1.6,-0.2) node[brick,anchor=west] {\hand A comment from the south};
             \end{tikzpicture}	
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+%.......................................................
+\begin{flushleft}
+    \underline{\textbf{Notes}}\setlength{\parskip}{.15cm}\notesize\newline\par
+\end{flushleft}
+
+%=============================================================
+\begin{frame}{Arrows and handwritten notes: Shortcuts}{The \texttt{\textbackslash lapisnote} command}
+    \begin{itemize}
+        \item Add arrows and annotations using the \texttt{\textbackslash lapisnote[\textit{options}]\{\textit{node}\}\{\textit{text}\}} command
+        \item Options:
+        \begin{itemize}
+            \item \marker{A}{Automatic settings}%
+            \lapisnote{A}{A comment}%
+            \item \marker{B}{Control \texttt{x} and \texttt{y} position of annotation}%
+            \lapisnote[xshift=1.3cm,yshift=0.7cm,color=BoEred]{B}{Another comment}%
+            \item Control \texttt{from} positions of arrow (automatic \texttt{to} \marker{C}{position)}%
+            \lapisnote[xshift=4.5cm,yshift=0.6cm,color=BoEacqua,from=north]{C}{Another comment}%
+            \item Control \texttt{to}  position of arrow and its \marker{D}{bend}%
+            \lapisnote[xshift=3cm,yshift=-0.7cm,color=BoEorange,to=north,bend=20]{D}{Another comment}%
+            \item Control \texttt{width} of box for \marker{E}{annotation}%
+            \lapisnote[width=2cm,yshift=-1cm,color=note]{E}{Another comment}%
         \end{itemize}
     \end{itemize}
 \end{frame}
@@ -764,7 +789,7 @@
     \begin{center}
         \begin{minipage}{.8\textwidth}
             \NB{This is a larger bubble with bullets:
-                \begin{itemize}[1pt]
+                \begin{itemize}
                     \item Uno
                     \item Dos
                     \item Tres 
