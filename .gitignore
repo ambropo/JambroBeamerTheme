@@ -16,6 +16,8 @@
 _AUX_/*
 ZtempZ_*
 .Rhistory
+.gitattributes
+.claude
 BoE*
 temp*
 AGENTS*
