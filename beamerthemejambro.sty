@@ -32,6 +32,8 @@
 
 %=============================================================================
 %  THEME OPTIONS AND SETUP
+%-----------------------------------------------------------------------------
+% Defines theme options, flags, and base layout toggles.
 %=============================================================================
 
 % --- Boolean switches for theme customization ---
@@ -104,6 +106,8 @@
 
 %=============================================================================
 %  PACKAGE DEPENDENCIES
+%-----------------------------------------------------------------------------
+% Loads all packages required by the theme features below.
 %=============================================================================
 
 % --- Text encoding and font support ---
@@ -179,18 +183,22 @@
 
 %=============================================================================
 %  HANDWRITING FONT SETUP
-%=============================================================================
+%-----------------------------------------------------------------------------
+% Registers the handwriting font used for the hand-drawn styles.
 % Defined early since \hand is used in list item templates below
+%=============================================================================
 
 % --- Handwriting font declaration (Augie) ---
 \DeclareRobustCommand{\hand}{%
-    \fontfamily{augie}\fontseries{b}\fontshape{n}\selectfont
+    \fontfamily{augie}\fontshape{n}\selectfont
 }
 \DeclareTextFontCommand{\textaugie}{\hand}
 
 
 %=============================================================================
 %  COLOR DEFINITIONS
+%-----------------------------------------------------------------------------
+% Declares the base palette and extended accent colors.
 %=============================================================================
 
 % --- Base color palette (default blue scheme) ---
@@ -246,6 +254,8 @@
 
 %=============================================================================
 %  CONDITIONAL COLOR SCHEMES
+%-----------------------------------------------------------------------------
+% Overrides the base palette for red and night variants.
 %=============================================================================
 
 % --- Red theme override ---
@@ -275,6 +285,8 @@
 
 %=============================================================================
 %  BEAMER THEME CONFIGURATION
+%-----------------------------------------------------------------------------
+% Sets core Beamer templates, colors, and typography.
 %=============================================================================
 
 % --- Use rounded inner theme ---
@@ -317,6 +329,8 @@
 
 %=============================================================================
 %  LIST CUSTOMIZATION (ITEMIZE/ENUMERATE)
+%-----------------------------------------------------------------------------
+% Defines bullets, numbering styles, and list colors.
 %=============================================================================
 
 % --- First-level itemize bullet ---
@@ -345,7 +359,7 @@
 
 %=============================================================================
 %  ITEMIZE SPACING CUSTOMIZATION (optional, enabled with 'itemsep' option)
-%=============================================================================
+%-----------------------------------------------------------------------------
 % When enabled, provides generous vertical spacing in itemize environments.
 % Usage: \begin{itemize}[<spacing>] or just \begin{itemize} for defaults
 % Example: \begin{itemize}[8pt] for custom 8pt spacing
@@ -387,7 +401,7 @@
 
 %=============================================================================
 %  EQUATION SPACING ADJUSTMENT (only when itemsep option is enabled)
-%=============================================================================
+%-----------------------------------------------------------------------------
 % Reduces spacing below equations when inside itemize environments.
 % Warning: this is global for itemize and uses negative skips.
 %=============================================================================
@@ -403,6 +417,8 @@
 
 %=============================================================================
 %  TABLE OF CONTENTS STYLING
+%-----------------------------------------------------------------------------
+% Customizes section and subsection entries in the ToC.
 %=============================================================================
 
 % --- Section entries with numbering and underline ---
@@ -430,6 +446,8 @@
 
 %=============================================================================
 %  FOOTLINE TEMPLATE
+%-----------------------------------------------------------------------------
+% Defines the footer bar and section navigation.
 %=============================================================================
 
 \if@Optiononesec
@@ -465,6 +483,8 @@
 
 %=============================================================================
 %  TIKZ SETUP AND DECORATION
+%-----------------------------------------------------------------------------
+% Loads TikZ libraries and defines hand-drawn decorations.
 %=============================================================================
 
 % --- Load required TikZ libraries ---
@@ -538,7 +558,7 @@
             sketch,
             segment length=1pt,
             amplitude=1pt
-        },
+        }
     },
     % Node styles for overlays
     nstyle/.style={inner sep=0pt, anchor=base},
@@ -567,7 +587,7 @@
 
 %=============================================================================
 %  PENCIL-STYLE COMMANDS
-%=============================================================================
+%-----------------------------------------------------------------------------
 % Simple commands for creating hand-drawn arrows between marked nodes
 %=============================================================================
 
@@ -655,12 +675,13 @@
 
 %=============================================================================
 %  ADVANCED ARROW & ANNOTATION COMMAND: \lapisnote
-%=============================================================================
+%-----------------------------------------------------------------------------
 % Flexible command for adding hand-drawn annotations with arrows to content.
 % Automatically determines arrow direction and note placement based on anchor.
 %
 % USAGE:
-%   Basic:       \lapisnote[options]{node}{text}
+%   Basic: \lapisnote[options]{node}{text}
+%
 % OPTIONS:
 %   from    : Arrow start position (east/west/north/south/north east/etc.)
 %   to      : Note anchor override (auto/north/south/east/west/etc.)
@@ -879,6 +900,8 @@
 
 %=============================================================================
 %  TEXT HIGHLIGHTING
+%-----------------------------------------------------------------------------
+% Highlighter-style background for emphasized text.
 %=============================================================================
 
 % --- Highlighter-style text background ---
@@ -899,6 +922,8 @@
 
 %=============================================================================
 %  BUBBLES
+%-----------------------------------------------------------------------------
+% Inline callout notes using todonotes styling.
 %=============================================================================
 
 % --- Inline bubble note (colored box with rounded corners) ---
@@ -910,6 +935,8 @@
 
 %=============================================================================
 %  CUSTOM FONT SIZE COMMANDS
+%-----------------------------------------------------------------------------
+% Extra-small sizes for dense content and tables.
 %=============================================================================
 
 % --- Very small font size (smaller than \tiny) ---
@@ -925,6 +952,8 @@
 
 %=============================================================================
 %  CODE AND VERBATIM ENVIRONMENTS
+%-----------------------------------------------------------------------------
+% Inline code, verbatim blocks, and highlighted code boxes.
 %=============================================================================
 
 % --- Inline verbatim text (detokenized) ---
@@ -968,6 +997,8 @@
 
 %=============================================================================
 %  TABLE FORMATTING
+%-----------------------------------------------------------------------------
+% Table spacing and column helpers for clean layouts.
 %=============================================================================
 
 % --- Slightly larger line spacing for table readability ---
@@ -982,6 +1013,8 @@
 
 %=============================================================================
 %  MISCELLANEOUS UTILITIES
+%-----------------------------------------------------------------------------
+% Small helpers, symbols, and global tweaks.
 %=============================================================================
 
 % --- Note size alias (for figure/table notes) ---
@@ -1024,6 +1057,8 @@
 
 %=============================================================================
 %   Bibliography and citations 
+%-----------------------------------------------------------------------------
+% Citation helpers and natbib color fixes.
 %=============================================================================
 
 % --- Colored citation command ---
