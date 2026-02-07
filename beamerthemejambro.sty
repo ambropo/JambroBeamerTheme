@@ -414,6 +414,10 @@
 \makeatother
 \fi
 
+% --- Fix uneven itemize spacing caused by superscripts/subscripts ---
+% Prevents TeX from adding extra inter-line glue for tall math expressions
+\AtBeginEnvironment{itemize}{\setlength{\lineskiplimit}{-\maxdimen}}
+
 
 %=============================================================================
 %  TABLE OF CONTENTS STYLING
