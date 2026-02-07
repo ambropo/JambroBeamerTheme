@@ -168,7 +168,7 @@
 \RequirePackage{verbatim,fancyvrb,newverbs,listings,mdframed,framed,etoolbox,tcolorbox}
 
 % --- Document control and navigation ---
-\RequirePackage{comment,xkeyval,hyperref,subdepth}
+\RequirePackage{comment,xkeyval,hyperref,subdepth,xspace}
 % Note: hyperref colors reference `main`, which is defined later below.
 \hypersetup{
     colorlinks,                          % Colored links (not boxed)
@@ -672,6 +672,67 @@
     \hspace{-0.1cm}%
 }
 \makeatother
+
+
+% --- Inline pencil arrows (one command per direction) ---
+% Each draws a baseline-aligned arrow with pencil effect.
+% Usage: \jarrowu                          -> up arrow
+% Usage: \jarrowd[color=tomato]            -> red down arrow
+% Usage: \jarrowr[len=1cm,lw=0.15cm]       -> custom right arrow
+% Usage: \jarrowu[pad=0.15em]              -> tighter spacing around arrow
+% Usage: \jarrowl                          -> left arrow
+\pgfkeys{
+    /jarrow/.is family, /jarrow,
+    color/.estore in=\jarrowColor,
+    len/.estore in=\jarrowLen,
+    lw/.estore in=\jarrowLineWidth,
+    pad/.estore in=\jarrowPad,
+}
+\def\jarrowColor{carandache}
+\def\jarrowLen{0.35cm}
+\def\jarrowLineWidth{0.05cm}
+\def\jarrowPad{0.25em}
+
+\makeatletter
+% Internal helper: \jarrow@draw{startCoord}{endCoord}
+% Arrow is drawn centered at origin; baseline=-0.5ex aligns center with math axis.
+\newcommand{\jarrow@draw}[2]{%
+    \pgfmathsetlengthmacro{\jarrow@half}{\jarrowLen/2}%
+    \pgfmathsetlengthmacro{\jarrow@pad}{\jarrow@half+\jarrowPad}%
+    % Shift bbox right by half an interword space to compensate for
+    % the trailing source space eaten by optional-argument scanning.
+    \newdimen\jarrow@iws\jarrow@iws=\fontdimen2\font
+    \pgfmathsetlengthmacro{\jarrow@shift}{0.5*\the\jarrow@iws}%
+    \tikz[baseline=-0.5ex]{%
+        \useasboundingbox ({-\jarrow@pad+\jarrow@shift},-\jarrow@pad)
+            rectangle ({\jarrow@pad+\jarrow@shift},\jarrow@pad);
+        \draw[pencil, \jarrowColor, line width=\jarrowLineWidth, ->]
+            #1 -- #2;
+    }%
+}
+
+\newcommand{\jarrowup}[1][]{%
+    \def\jarrowColor{carandache}\def\jarrowLen{0.35cm}\def\jarrowLineWidth{0.05cm}\def\jarrowPad{0.25em}%
+    \pgfkeys{/jarrow, #1}%
+    \jarrow@draw{(0,-\jarrow@half)}{(0,\jarrow@half)}%
+}
+\newcommand{\jarrowdown}[1][]{%
+    \def\jarrowColor{carandache}\def\jarrowLen{0.35cm}\def\jarrowLineWidth{0.05cm}\def\jarrowPad{0.25em}%
+    \pgfkeys{/jarrow, #1}%
+    \jarrow@draw{(0,\jarrow@half)}{(0,-\jarrow@half)}%
+}
+\newcommand{\jarrowright}[1][]{%
+    \def\jarrowColor{carandache}\def\jarrowLen{0.35cm}\def\jarrowLineWidth{0.05cm}\def\jarrowPad{0.25em}%
+    \pgfkeys{/jarrow, #1}%
+    \jarrow@draw{(-\jarrow@half,0)}{(\jarrow@half,0)}%
+}
+\newcommand{\jarrowleft}[1][]{%
+    \def\jarrowColor{carandache}\def\jarrowLen{0.35cm}\def\jarrowLineWidth{0.05cm}\def\jarrowPad{0.25em}%
+    \pgfkeys{/jarrow, #1}%
+    \jarrow@draw{(\jarrow@half,0)}{(-\jarrow@half,0)}%
+}
+\makeatother
+
 
 %=============================================================================
 %  ADVANCED ARROW & ANNOTATION COMMAND: \lapisnote
