@@ -49,6 +49,16 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## Version 1.2.1 — *2026-02*
+
+### Added
+- `tcolorbox` libraries `breakable` and `skins` to support code block styling.
+
+### Changed
+- `\jCode{...}` now uses a `tcolorbox` block instead of `todonotes` to avoid list/item overlap in Beamer.
+
+---
+
 ## Version 1.1 — *2022-04-30*
 
 ### Added
@@ -69,4 +79,3 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 - Initial release of the Jambro Beamer Theme.
-

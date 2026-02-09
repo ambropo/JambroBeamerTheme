@@ -166,6 +166,7 @@
 
 % --- Code and verbatim environments ---
 \RequirePackage{verbatim,fancyvrb,newverbs,listings,mdframed,framed,etoolbox,tcolorbox}
+\tcbuselibrary{breakable,skins}
 
 % --- Document control and navigation ---
 \RequirePackage{comment,xkeyval,hyperref,subdepth,xspace}
@@ -1049,14 +1050,23 @@
 
 % --- Code block in yellow bubble (for longer snippets) ---
 % Usage: \jCode{multiple\\lines\\of code}
+\newtcolorbox{jCodeBox}{
+    colback=script!80,
+    colframe=script!80,
+    boxrule=0pt,
+    left=2pt,
+    right=2pt,
+    top=2pt,
+    bottom=2pt,
+    arc=0.6mm,
+    enhanced,
+    breakable,
+    width=0.9\textwidth
+}
 \newcommand{\jCode}[1]{%
-    \begin{minipage}[b]{.9\textwidth}%
-        \smallskip
-        % Uses todonotes for an inline shaded code bubble.
-        \todo[color=script!80,inline,caption={short for LoTds}]{%
-            \footnotesize\ttfamily #1%
-        }%
-    \end{minipage}%
+    \begin{jCodeBox}
+        \footnotesize\ttfamily #1%
+    \end{jCodeBox}%
 }
 
 
