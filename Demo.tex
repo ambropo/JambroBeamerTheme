@@ -777,25 +777,19 @@
         \item The theme allows to create bubbles with the \texttt{\textbackslash NB} command in combination with the \texttt{minipage} environment \bigskip
     \end{itemize}
     \begin{center}
-        \begin{minipage}{.4\textwidth}
-            \NB{This is a small bubble}
-        \end{minipage}
+        \NB[.4\textwidth]{This is a small bubble}
     \end{center}
     \begin{center}
-        \begin{minipage}{.6\textwidth}
-            \NB{This is a large bubble.\\ With two lines}
-        \end{minipage}
+        \NB[.6\textwidth]{This is a large bubble.\\ With two lines}
     \end{center}
     \begin{center}
-        \begin{minipage}{.8\textwidth}
-            \NB{This is a larger bubble with bullets:
-                \begin{itemize}
-                    \item Uno
-                    \item Dos
-                    \item Tres 
-            \end{itemize}}
-        \end{minipage}
-    \end{center}
+        \NB[.8\textwidth]{This is a larger bubble with bullets:
+        \begin{itemize}
+            \item Uno
+            \item Dos
+            \item Tres 
+        \end{itemize}}                
+\end{center}
 \end{frame}
 %.......................................................
 \begin{flushleft}

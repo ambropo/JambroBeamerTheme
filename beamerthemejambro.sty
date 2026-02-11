@@ -993,9 +993,12 @@
 %=============================================================================
 
 % --- Inline bubble note (colored box with rounded corners) ---
-% Usage: \NB{note text}
-\newcommand{\NB}[1]{%
-    \todo[textcolor=text, color=bubble, inline, caption={}]{#1}%
+% Usage: \NB{note text}                    → full width (default)
+% Usage: \NB[0.6\textwidth]{note text}     → 60% width
+\newcommand{\NB}[2][\textwidth]{%
+    \begin{minipage}{#1}%
+        \todo[textcolor=text, color=bubble, inline, caption={}]{#2}%
+    \end{minipage}%
 }
 
 
