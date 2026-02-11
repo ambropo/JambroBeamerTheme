@@ -49,6 +49,20 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## Version 1.2.2 — *2026-02-11*
+
+### Added
+- `handout2x1` now explicitly activates Beamer `handout` mode.
+- Shorthand arrow aliases: `\jarrowu`, `\jarrowd`, `\jarrowr`, `\jarrowl`.
+- Demo slide: “Model Details — Firms” frame in `Demo.tex`.
+
+### Changed
+- Itemize equation spacing: zero `\belowdisplayskip` / `\belowdisplayshortskip` when `itemsep` is enabled.
+- Itemize line-skip behavior now uses `\lineskiplimit=-5pt` to avoid excessive glue while keeping tall math legible.
+- `\lapis` underline now anchors to the text baseline (`base west/east`) for more consistent placement.
+
+---
+
 ## Version 1.2.1 — *2026-02*
 
 ### Added

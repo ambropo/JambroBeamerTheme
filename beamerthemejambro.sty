@@ -92,6 +92,11 @@
     \beamer@ignorenonframetrue   % Hide notes (default)
 \fi
 
+% --- Activate Beamer handout mode when handout2x1 is selected ---
+\if@OptionTwopage
+    \gdef\beamer@currentmode{handout}%
+\fi
+
 % --- Configure handout layout ---
 \RequirePackage{pgfpages}
 \if@OptionTwopage
@@ -389,6 +394,9 @@
             \setlength{\itemsep}{5pt}%       % Level 2: tighter spacing
             \setlength{\topsep}{5pt}%
         \fi\fi
+        % Zero out extra equation spacing; let itemsep control vertical rhythm
+        \setlength{\belowdisplayskip}{0pt}%
+        \setlength{\belowdisplayshortskip}{0pt}%
     \else
         % Explicit override provided (e.g., [8pt])
         \setlength{\itemsep}{#1}%
@@ -398,26 +406,13 @@
     \endolditemize
 }
 \makeatother
-
-
-%=============================================================================
-%  EQUATION SPACING ADJUSTMENT (only when itemsep option is enabled)
-%-----------------------------------------------------------------------------
-% Reduces spacing below equations when inside itemize environments.
-% Warning: this is global for itemize and uses negative skips.
-%=============================================================================
-
-\makeatletter
-\g@addto@macro\itemize{%
-    \setlength{\belowdisplayskip}{-8pt}%
-    \setlength{\belowdisplayshortskip}{-8pt}%
-}
-\makeatother
 \fi
 
 % --- Fix uneven itemize spacing caused by superscripts/subscripts ---
-% Prevents TeX from adding extra inter-line glue for tall math expressions
-\AtBeginEnvironment{itemize}{\setlength{\lineskiplimit}{-\maxdimen}}
+% A moderate negative value suppresses extra glue from small height
+% differences (superscripts/subscripts) while still allowing TeX to
+% properly space tall structures like fractions in display math.
+\AtBeginEnvironment{itemize}{\setlength{\lineskiplimit}{-5pt}}
 
 
 %=============================================================================
@@ -614,16 +609,16 @@
         % No color specified: use default
         \tikz[tstyle]{\node[nstyle](node1){#2}}%
         \begin{tikzpicture}[tpstyle]
-            \draw[pencil,very thick] ([yshift=-2pt]node1.south west) 
-                                      to ([yshift=-2pt]node1.south east);
+            \draw[pencil,very thick] ([yshift=-0.5ex]node1.base west)
+                                      to ([yshift=-0.5ex]node1.base east);
         \end{tikzpicture}%
         \hspace{-0.025cm}%
     \else
         % Custom color specified
         \tikz[tstyle]{\node[nstyle](node1){#2}}%
         \begin{tikzpicture}[tpstyle]
-            \draw[pencil,very thick,#1] ([yshift=-2pt]node1.south west) 
-                                         to ([yshift=-2pt]node1.south east);
+            \draw[pencil,very thick,#1] ([yshift=-0.5ex]node1.base west)
+                                         to ([yshift=-0.5ex]node1.base east);
         \end{tikzpicture}%
         \hspace{-0.025cm}%
     \fi
@@ -736,6 +731,11 @@
     \pgfkeys{/jarrow, #1}%
     \jarrow@draw{(\jarrow@half,0)}{(-\jarrow@half,0)}%
 }
+% Shorthand aliases
+\let\jarrowu\jarrowup
+\let\jarrowd\jarrowdown
+\let\jarrowr\jarrowright
+\let\jarrowl\jarrowleft
 \makeatother
 
 

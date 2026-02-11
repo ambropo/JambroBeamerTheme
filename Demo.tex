@@ -826,7 +826,7 @@
             \hspace{1mm}\textcolor{matlabgreen}{\% Compute HD}\\
             \hspace{1mm}[HD, VAR] = VARhd(VAR,VARopt); \\
         }
-        \item All commands in this page require \jverb{\begin{frame}[fragile]}
+        \item All commands in this page require \jverb{\begin{frame}[fragile]} 
     \end{itemize}
 \end{frame}
 %.......................................................
@@ -851,6 +851,32 @@
 %.......................................................
 \begin{flushleft}
     \underline{\textbf{Notes}}\setlength{\parskip}{.15cm}\notesize\newline\par
+\end{flushleft}
+
+%=============================================================
+\begin{frame}[label=GMequations]
+{Model Details -- Firms}
+\begin{itemize}\setlength\itemsep{0cm}
+\item Heterogeneous in terms of productivity
+\item Sunk entry cost: $w_{t}f_{E,t}/Z_{t}$
+%\item Decision to enter: compare expected discounted future value of profits with the cost of entry
+\item There is also a lower bound for productivity: $z_{min}$
+\item After entry: a death shock common to all firms with probability $\delta$
+\item Every period, firms decide whether and how much to export
+\item Profit maximisation
+\begin{eqnarray*}
+\Pi_t^{D}(\omega) = \left(\frac{p_{D,t}(\omega)}{P_t}\right)^{1-\theta} C_{t} - w_t l_D(\omega) \\
+\Pi_t^{X}(\omega)
+= \frac{1-n}{n} Q_t 
+\left( \frac{ p_{X,t}(\omega)}{P_t^\ast}\right)^{1-\theta} C_t^\ast
+- \tau_t \, w_t \, l_X(\omega)
+- \frac{w_t f_{X,t}}{Z_t}
+\end{eqnarray*}
+\end{itemize}
+\end{frame}
+%.......................................................
+\begin{flushleft}
+\underline{\textbf{Notes}}\setlength{\parskip}{.15cm}\notesize\newline\par
 \end{flushleft}
     
     
