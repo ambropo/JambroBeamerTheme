@@ -108,6 +108,26 @@
     \pgfpageslogicalpageoptions{4}{border code=\pgfsetlinewidth{2.5pt}\pgfusepath{stroke}}
 \fi
 
+% --- Speaker notes blocks (for shownotes handouts) ---
+% Use \shownotesblock{...} for regular notes, and \shownotesblockzero{...}
+% for the title slide to show note page number 0 without shifting later slides.
+\newcount\jambro@savedframenumber
+\newcommand{\shownotesblock}[1]{%
+    \begin{flushleft}
+        \underline{\textbf{Notes}}\setlength{\parskip}{.15cm}\notesize\newline\par
+        #1
+    \end{flushleft}%
+}
+\newcommand{\shownotesblockzero}[1]{%
+    \jambro@savedframenumber=\value{framenumber}\relax
+    \setcounter{framenumber}{0}%
+    \begin{flushleft}
+        \underline{\textbf{Notes}}\setlength{\parskip}{.15cm}\notesize\newline\par
+        #1
+    \end{flushleft}%
+    \setcounter{framenumber}{\the\jambro@savedframenumber}%
+}
+
 
 %=============================================================================
 %  PACKAGE DEPENDENCIES
