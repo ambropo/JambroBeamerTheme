@@ -2,7 +2,7 @@
 %% ===========================================================================
 %% Custom Beamer Theme: Jambro
 %% Author: Ambrogio Cesa-Bianchi
-%% Version: 1.2 — Feb 2026
+%% Version: 1.3 — Mar 2026
 %% ===========================================================================
 %%
 %% DESCRIPTION:
@@ -26,6 +26,8 @@
 %% - night        : Dark mode color scheme (overrides red)
 %% - onesec       : Show only current section in footline
 %% - itemsep      : Use generous itemize spacing (default: standard Beamer spacing)
+%% - wiggle=<n>   : Amplitude of pencil/sketch effect (default: 0.4, larger=more expressive)
+%% - hideACB      : Suppress all \ACB{} notes (for clean/final output)
 %% ===========================================================================
 
 
@@ -48,6 +50,7 @@
 \newif\if@OptionNight          % Dark mode colors
 \newif\if@Optiononesec         % Minimalist footline
 \newif\if@OptionItemsep        % Custom itemize spacing
+\newif\if@OptionHideACB        % Hide \ACB margin notes
 
 % --- Initialize all options to false ---
 \@OptionFourThreefalse
@@ -60,6 +63,7 @@
 \@OptionNightfalse
 \@Optiononesecfalse
 \@OptionItemsepfalse
+\@OptionHideACBfalse
 
 % --- Declare document class options ---
 \DeclareOption{3to2}{\@OptionFourThreetrue}
@@ -72,9 +76,29 @@
 \DeclareOption{night}{\@OptionNighttrue}
 \DeclareOption{onesec}{\@Optiononesectrue}
 \DeclareOption{itemsep}{\@OptionItemseptrue}
+\DeclareOption{hideACB}{\@OptionHideACBtrue}
+
+% --- Wiggle/amplitude option (key=value) ---
+% Controls the amplitude of the pencil/sketch decoration. Larger = more expressive.
+% Public name (no @) required: PGF math re-tokenises macros in doc context,
+% so an @ in the name causes "Undefined control sequence \jambro" + PGF crash.
+\newcommand{\jambrowiggleamp}{0.4pt}
+\DeclareOption*{%
+    % Parse unknown options of the form key=value
+    \expandafter\@jambro@parseoption\CurrentOption=\@nil
+}
+\def\@jambro@parseoption#1=#2\@nil{%
+    \def\@jambro@optkey{#1}%
+    \def\@jambro@wigglekey{wiggle}%
+    \ifx\@jambro@optkey\@jambro@wigglekey
+        \global\def\jambrowiggleamp{#2pt}%
+    \fi
+}
 
 % --- Process all declared options ---
-\ProcessOptions\relax
+% \ProcessOptions* (starred) also scans global \documentclass options, so
+% wiggle=<n> works in both \documentclass[wiggle=<n>]{beamer} and \usetheme[wiggle=<n>]{jambro}
+\ProcessOptions*\relax
 
 % --- Configure slide dimensions based on aspect ratio ---
 % Note: sizes are custom and not tied to standard 4:3/16:9 beamer defaults.
@@ -219,6 +243,14 @@
     \fontfamily{augie}\fontshape{n}\selectfont
 }
 \DeclareTextFontCommand{\textaugie}{\hand}
+
+% --- Bold handwriting command ---
+% Usage: \handbold{text}          → default stroke weight (0.6)
+% Usage: \handbold[0.9]{text}     → heavier stroke
+% Usage: \handbold[0.3]{text}     → lighter stroke
+\newcommand{\handbold}[2][0.6]{%
+    {\hand\pdfliteral direct{#1 w 2 Tr}#2\pdfliteral direct{0 w 0 Tr}}%
+}
 
 
 %=============================================================================
@@ -560,13 +592,13 @@
 \tikzset{
     % Pencil style - hand-drawn appearance
     pencil/.style={
-        carandache, 
+        carandache,
         line width=0.05cm,
         decorate,
         decoration={
-            sketch, 
-            segment length=1.2pt,    % Shorter = more wobbly
-            amplitude=0.8pt          % More = more variation
+            sketch,
+            segment length=1.2pt,              % Fixed segment length
+            amplitude=\jambrowiggleamp         % Controlled by wiggle= option (default 0.4pt)
         }
     },
     % Extra chalky version with more hand-drawn variation
@@ -690,6 +722,45 @@
         \fi
     }%
     \hspace{-0.1cm}%
+}
+
+% --- Display-safe pencil box for equations ---
+% Usage: \lapisboxeq{a=b}
+% Usage: \lapisboxeq[color=tomato]{a=b}
+% Usage: \lapisboxeq[color=tomato,label=mynode]{a=b}  → node named mynode for arrow targeting
+% Note: color is \edef-expanded to a plain string before \tikz sees it, to avoid
+% catcode issues with \lapisbox@color (which contains @) inside TikZ key evaluation.
+\newcommand{\lapisboxeq}[2][]{%
+    \def\lapisbox@label{}%                              % reset label from any prior call
+    \pgfkeys{/pencilbox, #1}%
+    \edef\lapisboxeqcolor{\lapisbox@color}%             % expand → plain string e.g. "gold"
+    \ifx\lapisbox@label\@empty
+        % No label: anonymous node
+        \tikz[baseline=(X.base), remember picture]{%
+            \node[
+                pencil,
+                draw=\lapisboxeqcolor!80,
+                fill=yellow!0,
+                line width=0.04cm,
+                inner xsep=4pt,
+                inner ysep=5pt,
+                text=black
+            ] (X) {$\displaystyle #2$};
+        }%
+    \else
+        % Named node: registered for cross-picture arrow targeting
+        \tikz[baseline=(\lapisbox@label.base), remember picture]{%
+            \node[
+                pencil,
+                draw=\lapisboxeqcolor!80,
+                fill=yellow!0,
+                line width=0.04cm,
+                inner xsep=4pt,
+                inner ysep=5pt,
+                text=black
+            ] (\lapisbox@label) {$\displaystyle #2$};
+        }%
+    \fi
 }
 \makeatother
 
@@ -1119,6 +1190,17 @@
 % Keeps note text aligned with footnote sizing.
 \let\notesize\footnotesize
 
+% --- ACB margin/inline note ---
+% Usage: \ACB{my note text}
+% Suppressed entirely when the hideACB option is passed to the theme.
+\if@OptionHideACB
+    \newcommand{\ACB}[1]{}
+\else
+    \newcommand{\ACB}[1]{%
+        \noindent\textcolor{BoEred}{{\notesize\handbold{ACB}\hand: #1}}%
+    }
+\fi
+
 % --- Vertical spacing shortcut ---
 % Usage: \vs{3} → \vspace{0.3cm} (tenths of a cm; 0-9 recommended)
 \newcommand{\vs}[1]{\vspace{0.#1cm}}
@@ -1141,8 +1223,8 @@
 \def\EE{\mathbb{E}}
 
 % --- Check mark and X mark symbols ---
-\newcommand{\cmark}{\color{tomato}\ding{51}}  % ✓
-\newcommand{\xmark}{\color{cobalt}\ding{55}}  % ✗
+\newcommand{\cmark}{{\color{tomato}\ding{51}}}  % ✓
+\newcommand{\xmark}{{\color{cobalt}\ding{55}}}  % ✗
 
 % --- Suppress overfull/underfull box warnings below threshold ---
 % Note: reduces noise but can hide real layout issues if set too high.

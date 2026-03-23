@@ -1,4 +1,4 @@
-\documentclass[10pt,itemsep,handout2x1,shownotes]{beamer}
+\documentclass[10pt,itemsep]{beamer}
 \usetheme{jambro}
 \graphicspath{{./graphics/}}
 
@@ -57,21 +57,17 @@
     \end{itemize}
 \end{frame}
 %.......................................................
-\shownotesblock{
-
-}
+\shownotesblock{}
 
 %=============================================================
 \section{Arrows \& Handwriting}
 \begin{frame}
     \begin{eqnarray*}
-        &\text{{\huge \textbf{Arrows \& Handwriting}}}\\
+        &\text{{\huge \textbf{Handwriting \& Arrows}}}\\
     \end{eqnarray*}
 \end{frame}
 %.......................................................
-\shownotesblock{ 
-
-}
+\shownotesblock{}
 
 %=============================================================
 \begin{frame}[t,fragile]
@@ -100,9 +96,7 @@
     \end{itemize}
 \end{frame}
 %.......................................................
-\shownotesblock{
-
-}
+\shownotesblock{}
 
 %=============================================================
 \begin{frame}[t]
@@ -121,9 +115,7 @@
     \end{itemize}
 \end{frame}
 %.......................................................
-\shownotesblock{
-
-}
+\shownotesblock{}
 
 %=============================================================
 \begin{frame}[t]
@@ -143,9 +135,7 @@
     \end{itemize}
 \end{frame}
 %.......................................................
-\shownotesblock{
-
-}
+\shownotesblock{}
 
 %=============================================================
 \begin{frame}[t]
@@ -166,9 +156,7 @@
     \end{itemize}
 \end{frame}
 %.......................................................
-\shownotesblock{
-
-}
+\shownotesblock{}
 
 %=============================================================
 \begin{frame}[t]
@@ -190,9 +178,7 @@
     \end{itemize}
 \end{frame}
 %.......................................................
-\shownotesblock{
-
-}
+\shownotesblock{}
 
 %=============================================================
 \begin{frame}{Arrows and handwritten notes: Shortcuts}{The \texttt{\textbackslash lapisnote} command}
@@ -214,9 +200,7 @@
     \end{itemize}
 \end{frame}
 %.......................................................
-\shownotesblock{
-
-}
+\shownotesblock{}
 
 %=============================================================
 \begin{frame}[t]
@@ -236,9 +220,7 @@
     \end{center}
 \end{frame}	
 %.......................................................
-\shownotesblock{
-
-}
+\shownotesblock{}
 
 %=============================================================
 \begin{frame}[t]
@@ -259,9 +241,7 @@
     \end{center}
 \end{frame}	
 %.......................................................
-\shownotesblock{
-
-}
+\shownotesblock{}
 
 %=============================================================
 \section{Highlighting, Underlying \& Boxing}
@@ -272,9 +252,7 @@
     \end{eqnarray*}
 \end{frame}
 %.......................................................
-\shownotesblock{
-
-}
+\shownotesblock{}
 
 %=============================================================
 \begin{frame}
@@ -298,9 +276,7 @@
     \end{itemize}
 \end{frame}
 %.......................................................
-\shownotesblock{
-
-}
+\shownotesblock{}
 
 %=============================================================
 \begin{frame}
@@ -308,9 +284,9 @@
     \begin{itemize}
         \item Highlight text with a \lapisbox{pencil-like box effect} using the \texttt{\textbackslash lapisbox\{\textit{text}\}} command\bigskip\medskip
         \pause
-        \item Can also highlight objects in equations, as well as set colors and labels with \texttt{\textbackslash lapisbox[color=\textit{mycolor},label=\textit{mylabel}]\{\textit{text}\}}
+        \item \texttt{\textbackslash lapisboxeq\{\textit{symbol}\}} can highlight objects in equations, as well as set colors and labels with option \texttt{[color=\textit{mycolor},label=\textit{mylabel}]\{\textit{text}\}}
         \begin{equation*}
-            y_{t} = \alpha + \lapisbox[color=tomato,label=box1]{$\beta x_t$} + u_{t} \vspace{-.3cm}
+            y_{t} = \alpha + \lapisboxeq[color=tomato,label=box1]{\beta x_t} + u_{t} \vspace{-.3cm}
         \end{equation*}
         \pause
         \item Labels allow to add arrows and comments as before
@@ -318,11 +294,9 @@
             \draw[arrow,->,tomato!80] ([yshift=-2pt]box1.south east) to[bend right] +(+0.7,-0.5) node[anchor=west,opacity=1,tomato] {\hand A comment from south east};
         \end{tikzpicture}
     \end{itemize}
-\end{frame}
+\end{frame} 
 %.......................................................
-\shownotesblock{
-
-}
+\shownotesblock{}
 
 %=============================================================
 \begin{frame}
@@ -357,9 +331,7 @@
     \end{tikzpicture}
 \end{frame}
 %.......................................................
-\shownotesblock{
-
-}
+\shownotesblock{}
 
 %=============================================================
 \section[Options]{Theme's Options}
@@ -369,9 +341,7 @@
     \end{eqnarray*}
 \end{frame}
 %.......................................................
-\shownotesblock{
-
-}
+\shownotesblock{}
 
 %=============================================================
 \begin{frame}
@@ -393,9 +363,7 @@
     \end{itemize}
 \end{frame}
 %.......................................................
-\shownotesblock{
-
-}
+\shownotesblock{}
 
 %=============================================================
 \begin{frame}
@@ -410,9 +378,7 @@
     \end{center}
 \end{frame}
 %.......................................................
-\shownotesblock{
-
-}
+\shownotesblock{}
 
 %=============================================================
 \begin{frame}
@@ -427,9 +393,7 @@
     \end{center}
 \end{frame}
 %.......................................................
-\shownotesblock{
-
-}
+\shownotesblock{}
 
 %=============================================================
 \begin{frame}
@@ -444,9 +408,7 @@
     \end{center}
 \end{frame}
 %.......................................................
-\shownotesblock{
-
-}
+\shownotesblock{}
 
 %=============================================================
 \begin{frame}
@@ -461,9 +423,7 @@
     \end{center}
 \end{frame}
 %.......................................................
-\shownotesblock{
-
-}
+\shownotesblock{}
 
 %=============================================================
 \begin{frame}
@@ -478,9 +438,7 @@
     \end{center}
 \end{frame}
 %.......................................................
-\shownotesblock{
-
-}
+\shownotesblock{}
 
 %=============================================================
 \begin{frame}
@@ -495,9 +453,7 @@
     \end{center}
 \end{frame}
 %.......................................................
-\shownotesblock{
-
-}
+\shownotesblock{}
 
 %=============================================================
 \begin{frame}
@@ -512,9 +468,7 @@
     \end{center}
 \end{frame}
 %.......................................................
-\shownotesblock{
-
-}
+\shownotesblock{}
 
 %=============================================================
 \begin{frame}
@@ -529,9 +483,7 @@
     \end{center}
 \end{frame}
 %.......................................................
-\shownotesblock{
-
-}
+\shownotesblock{}
 
 %=============================================================
 \section{Tables \& Figures}
@@ -541,9 +493,7 @@
     \end{eqnarray*}
 \end{frame}
 %.......................................................
-\shownotesblock{
-
-}
+\shownotesblock{}
 
 %=============================================================
 \begin{frame}
@@ -575,9 +525,7 @@
     \end{table}
 \end{frame}
 %.......................................................
-\shownotesblock{
-
-}
+\shownotesblock{}
 
 %=============================================================
 \begin{frame}
@@ -609,9 +557,7 @@
     \end{table}
 \end{frame}
 %.......................................................
-\shownotesblock{
-
-}
+\shownotesblock{}
 
 %=============================================================
 \begin{frame}
@@ -644,9 +590,7 @@
     \end{table}
 \end{frame}
 %.......................................................
-\shownotesblock{
-
-}
+\shownotesblock{}
 
 %=============================================================
 \begin{frame}
@@ -662,9 +606,7 @@
     \end{center}
 \end{frame}
 %.......................................................
-\shownotesblock{
-
-}
+\shownotesblock{}
 
 
 %=============================================================
@@ -675,9 +617,7 @@
     \end{eqnarray*}
 \end{frame}
 %.......................................................
-\shownotesblock{
-
-}
+\shownotesblock{}
 
 %=============================================================
 \begin{frame}{Sketch of a model}
@@ -725,9 +665,7 @@
     \end{center}
 \end{frame}
 %.......................................................
-\shownotesblock{
-
-}
+\shownotesblock{}
 
 %=============================================================
 \begin{frame}{Sketch of demand and supply}
@@ -764,9 +702,7 @@
     \end{center}
 \end{frame}
 %.......................................................
-\shownotesblock{
-
-}
+\shownotesblock{}
 
 %=============================================================
 \begin{frame}
@@ -790,9 +726,7 @@
 \end{center}
 \end{frame}
 %.......................................................
-\shownotesblock{
-
-}
+\shownotesblock{}
 
 
 %=============================================================
@@ -803,9 +737,7 @@
     \end{eqnarray*}
 \end{frame}
 %.......................................................
-\shownotesblock{
-
-}
+\shownotesblock{}
 
 %=============================================================
 \begin{frame}[fragile]
@@ -828,9 +760,7 @@
     \end{itemize}
 \end{frame}
 %.......................................................
-\shownotesblock{
-
-}
+\shownotesblock{}
 
 %=============================================================
 \begin{frame}
@@ -847,9 +777,90 @@
     \end{itemize}
 \end{frame}
 %.......................................................
-\shownotesblock{
+\shownotesblock{}
 
-}
-    
-    
+%=============================================================
+\begin{frame}
+    {Handwriting and personal notes}
+    \begin{itemize}
+        \item {\hand Handwriting font} is available with the \texttt{\textbackslash hand} command
+        \item Bold handwriting: \handbold{bold handwritten text} with \texttt{\textbackslash handbold\{...\}}
+        \begin{itemize}
+            \item Stroke weight is adjustable: \handbold[0.3]{light (0.3)} \quad \handbold[0.6]{medium (0.6)} \quad \handbold[1.0]{heavy (1.0)}
+            \item Pass weight as optional argument \texttt{\textbackslash handbold[\textit{weight}]\{...\}} (default: 0.6)
+        \end{itemize}
+        \item Comment text using \texttt{\textbackslash ACB\{...\}} $\rightarrow$ \ACB{This is an ACB note}
+        \begin{itemize}
+            \item Suppressed entirely with \texttt{hideACB} in \texttt{\textbackslash documentclass[hideACB]\{beamer\}}
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+%.......................................................
+\shownotesblock{}
+
+%=============================================================
+\begin{frame}
+    {Symbols and utilities}
+    \begin{itemize}
+        \item Check and cross marks with \texttt{\textbackslash cmark} and \texttt{\textbackslash xmark}: \quad \cmark\ correct \quad \xmark\ incorrect\bigskip
+        \item Math shorthand \texttt{\textbackslash EE} for $\mathbb{E}$: write $\EE[x_t \mid \mathcal{F}_{t-1}]$ instead of \texttt{\$\textbackslash mathbb\{E\}\$}\bigskip
+        \item Significance stars in tables with \texttt{\textbackslash sym\{***\}}: renders as \sym{***} but marks stars as machine-readable\bigskip
+        \item Font sizes for dense layouts:
+        \begin{itemize}
+            \item \texttt{\textbackslash tablesize} --- {\tablesize used for table content (7.25pt)}
+            \item \texttt{\textbackslash miniscule} --- {\miniscule used for very small labels (4pt)}
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+%.......................................................
+\shownotesblock{}
+
+%=============================================================
+\begin{frame}
+    {Pencil wiggle amplitude}
+    \begin{itemize}
+        \item The \texttt{wiggle=} option sets the amplitude of the pencil sketch effect
+        \begin{itemize}
+            \item Set once in \texttt{\textbackslash documentclass[wiggle=\textit{n}]\{beamer\}} (default: 0.8)
+            \item Larger values $\rightarrow$ more expressive; smaller $\rightarrow$ more subtle
+        \end{itemize}\bigskip
+        \item The effect on underlines, boxes, and arrows:
+    \end{itemize}
+    \begin{center}
+        \renewcommand{\jambrowiggleamp}{0.2pt}%
+        \lapis{straight (0)} \quad \lapisbox{box (0)} \quad
+    \end{center}
+    \begin{center}
+        \renewcommand{\jambrowiggleamp}{0.8pt}%
+        \lapis{default (0.4)} \quad \lapisbox{box (0.4)} \quad
+    \end{center}
+    \begin{center}
+        \renewcommand{\jambrowiggleamp}{2.5pt}%
+        \lapis{expressive (2)} \quad \lapisbox{box (2)} \quad
+    \end{center}
+\end{frame}
+%.......................................................
+\shownotesblock{}
+
+%=============================================================
+\begin{frame}
+    {Inline pencil arrows}
+    \begin{itemize}
+        \item Four inline arrows with \texttt{\textbackslash jarrowu}, \texttt{\textbackslash jarrowd}, \texttt{\textbackslash jarrowr}, \texttt{\textbackslash jarrowl}:
+        \begin{itemize}
+            \item GDP growth \jarrowu\ rose; unemployment \jarrowd\ fell; exports \jarrowr\ shifted right
+        \end{itemize}\bigskip
+        \item Options \texttt{[color=, len=, lw=, pad=]}:
+        \begin{itemize}
+            \item Default: \jarrowu\ \jarrowd\ \jarrowr\ \jarrowl
+            \item Custom color: \jarrowu[color=tomato]\ \jarrowd[color=cobalt]\ \jarrowr[color=mint]
+            \item Longer / heavier: \jarrowr[len=1.2cm]\ \jarrowr[len=0.6cm,lw=0.12cm]
+        \end{itemize}\bigskip
+        \item Full names also work: \texttt{\textbackslash jarrowup}, \texttt{\textbackslash jarrowdown}, \texttt{\textbackslash jarrowright}, \texttt{\textbackslash jarrowleft}
+    \end{itemize}
+\end{frame}
+%.......................................................
+\shownotesblock{}
+
+
 \end{document}

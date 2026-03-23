@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file.
 
+## Version 1.3 — *2026-03-23*
+
+### Added
+- **`\lapisboxeq[color=...,label=...]{equation}`**: New command — pencil-style box for use directly in math mode (no `$...$` needed). Wraps content in `$\displaystyle...$` internally. Supports the same `color` and `label` options as `\lapisbox` (named nodes registered with `remember picture` for cross-frame arrow targeting).
+- **`\handbold[weight]{text}`**: Bold handwriting using Augie font with PDF stroke-width literal. Optional weight argument (default `0.6`); higher values give heavier strokes.
+- **`\ACB{text}`**: Inline author note in BoEred, Augie font, footnotesize with underlined prefix. Intended for draft annotations.
+- **`hideACB` option**: When passed to `\documentclass` or `\usetheme`, `\ACB{}` expands to nothing, suppressing all author notes for clean output.
+- **`wiggle=<n>` option**: Sets the amplitude of the pencil/sketch decoration globally (default `0.8`). Accepted in both `\documentclass[wiggle=n]{beamer}` and `\usetheme[wiggle=n]{jambro}`.
+- **Demo slides**: Added "Handwriting and personal notes", "Symbols and utilities", "Pencil wiggle amplitude", and "Inline pencil arrows" slides in `Demo.tex`.
+
+### Changed
+- **`wiggle=` now controls amplitude** (was: segment length). Segment length remains fixed at `1.2pt`. Amplitude default is `0.8pt`. **BREAKING** if existing slides relied on `wiggle=` tuning segment length — recheck and rescale values.
+- **Internal macro renamed**: `\jambrowiggleseg` → `\jambrowiggleamp` to reflect the new semantics. Any direct use of `\jambrowiggleseg` in user documents will break.
+- **`\ProcessOptions` → `\ProcessOptions*`**: Theme now picks up global document class options (e.g. `wiggle=`, `hideACB`, `itemsep`) without needing them in `\usetheme[...]`.
+- **`Demo.tex` note blocks**: All empty `\shownotesblock{\n\n}` collapsed to `\shownotesblock{}`.
+
+### Fixed
+- **`\lapisboxeq` catcode crash**: Previous implementation stored `\lapisbox@color` (contains `@`) inside a `\tikzset` style, which caused PGF math to retokenise it in document context → "Undefined control sequence `\jambro`" + memory overflow. Fixed by `\edef`-expanding the color to a plain string before `\tikz` is entered.
+- **`wiggle=` option had no effect**: `\ProcessOptions` (no star) does not forward undeclared global class options to `\DeclareOption*`. Fixed by switching to `\ProcessOptions*`.
+- **`\lapisboxeq` ignored `label=` option**: Node was always named `X` with no `remember picture`, so labeled nodes were never registered for cross-frame arrow targeting. Now mirrors `\lapisbox` label handling exactly.
+
 ## Version 1.2 — *2025-06*
 
 ### Added
