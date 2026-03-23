@@ -2,7 +2,7 @@
 %% ===========================================================================
 %% Custom Beamer Theme: Jambro
 %% Author: Ambrogio Cesa-Bianchi
-%% Version: 1.3 — Mar 2026
+%% Version: 1.3-dev — Mar 2026
 %% ===========================================================================
 %%
 %% DESCRIPTION:
@@ -19,7 +19,7 @@
 %% - 3to2         : Use 3:2 aspect ratio instead of default 16:9
 %% - shownotes    : Display speaker notes alongside slides
 %% - handout2x1   : Create 2×1 handout layout for printing
-%% - light        : Light font variant (only for FiraSans and Roboto)
+%% - light        : Use Fira Sans Light instead of the default Fira Sans Book
 %% - cabin        : Switch to Cabin font family
 %% - roboto       : Switch to Roboto font family
 %% - red          : Use red color scheme instead of blue
@@ -27,15 +27,18 @@
 %% - onesec       : Show only current section in footline
 %% - itemsep      : Use generous itemize spacing (default: standard Beamer spacing)
 %% - wiggle=<n>   : Amplitude of pencil/sketch effect (default: 0.4, larger=more expressive)
-%% - hideACB      : Suppress all \ACB{} notes (for clean/final output)
+%% - hidememo     : Suppress all \memo{} output (for clean/final output)
 %% ===========================================================================
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerthemejambro}[2026/03/23 v1.3-dev Jambro Beamer theme]
 
 
 
 %=============================================================================
-%  THEME OPTIONS AND SETUP
+%  THEME OPTIONS
 %-----------------------------------------------------------------------------
-% Defines theme options, flags, and base layout toggles.
+% Declares theme options and parses early key=value settings.
 %=============================================================================
 
 % --- Boolean switches for theme customization ---
@@ -50,7 +53,7 @@
 \newif\if@OptionNight          % Dark mode colors
 \newif\if@Optiononesec         % Minimalist footline
 \newif\if@OptionItemsep        % Custom itemize spacing
-\newif\if@OptionHideACB        % Hide \ACB margin notes
+\newif\if@OptionHideMemo       % Hide \memo annotations
 
 % --- Initialize all options to false ---
 \@OptionFourThreefalse
@@ -63,7 +66,7 @@
 \@OptionNightfalse
 \@Optiononesecfalse
 \@OptionItemsepfalse
-\@OptionHideACBfalse
+\@OptionHideMemofalse
 
 % --- Declare document class options ---
 \DeclareOption{3to2}{\@OptionFourThreetrue}
@@ -76,7 +79,7 @@
 \DeclareOption{night}{\@OptionNighttrue}
 \DeclareOption{onesec}{\@Optiononesectrue}
 \DeclareOption{itemsep}{\@OptionItemseptrue}
-\DeclareOption{hideACB}{\@OptionHideACBtrue}
+\DeclareOption{hidememo}{\@OptionHideMemotrue}
 
 % --- Wiggle/amplitude option (key=value) ---
 % Controls the amplitude of the pencil/sketch decoration. Larger = more expressive.
@@ -100,6 +103,12 @@
 % wiggle=<n> works in both \documentclass[wiggle=<n>]{beamer} and \usetheme[wiggle=<n>]{jambro}
 \ProcessOptions*\relax
 
+%=============================================================================
+%  EARLY LAYOUT TOGGLES
+%-----------------------------------------------------------------------------
+% Applies document-level switches that must run as soon as options are known.
+%=============================================================================
+
 % --- Configure slide dimensions based on aspect ratio ---
 % Note: sizes are custom and not tied to standard 4:3/16:9 beamer defaults.
 % Adjust if you need strict 128mm x 96mm or 160mm x 90mm sizes.
@@ -117,6 +126,10 @@
 \fi
 
 % --- Activate Beamer handout mode when handout2x1 is selected ---
+% Beamer decides several note/handout code paths from its internal mode flag
+% before slide content is processed. Setting the mode here keeps the theme
+% option aligned with class-level handout behaviour, but it relies on Beamer
+% internals and may need revisiting if Beamer changes its mode setup.
 \if@OptionTwopage
     \gdef\beamer@currentmode{handout}%
 \fi
@@ -132,13 +145,20 @@
     \pgfpageslogicalpageoptions{4}{border code=\pgfsetlinewidth{2.5pt}\pgfusepath{stroke}}
 \fi
 
+%=============================================================================
+%  PUBLIC NOTE HELPERS
+%-----------------------------------------------------------------------------
+% Simple helpers used by demo decks that print speaker notes beside slides.
+%=============================================================================
+
 % --- Speaker notes blocks (for shownotes handouts) ---
-% Use \shownotesblock{...} for regular notes, and \shownotesblockzero{...}
-% for the title slide to show note page number 0 without shifting later slides.
+% Use \shownotesblock{...} for regular notes and \shownotesblockzero{...}
+% on the title slide, where Beamer would otherwise advance the displayed note
+% page number before the first numbered frame.
 \newcount\jambro@savedframenumber
 \newcommand{\shownotesblock}[1]{%
     \begin{flushleft}
-        \underline{\textbf{Notes}}\setlength{\parskip}{.15cm}\notesize\newline\par
+        \underline{\textbf{Notes}}\setlength{\parskip}{.15cm}\footnotesize\newline\par
         #1
     \end{flushleft}%
 }
@@ -146,7 +166,7 @@
     \jambro@savedframenumber=\value{framenumber}\relax
     \setcounter{framenumber}{0}%
     \begin{flushleft}
-        \underline{\textbf{Notes}}\setlength{\parskip}{.15cm}\notesize\newline\par
+        \underline{\textbf{Notes}}\setlength{\parskip}{.15cm}\footnotesize\newline\par
         #1
     \end{flushleft}%
     \setcounter{framenumber}{\the\jambro@savedframenumber}%
@@ -156,15 +176,16 @@
 %=============================================================================
 %  PACKAGE DEPENDENCIES
 %-----------------------------------------------------------------------------
-% Loads all packages required by the theme features below.
+% Loads the external packages that the public theme features rely on.
 %=============================================================================
 
-% --- Text encoding and font support ---
-\RequirePackage[utf8]{inputenc}         % UTF-8 input encoding
-\RequirePackage[T1]{fontenc}            % T1 font encoding for better output
-\RequirePackage{arevmath}               % Arev math fonts
-\RequirePackage{upgreek}                % Upright Greek letters
-\RequirePackage{courier}                % Courier monospace font
+% --- Core font and math stack ---
+% These packages define the default text/math look expected by existing decks.
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[T1]{fontenc}
+\RequirePackage{arevmath}
+\RequirePackage{upgreek}
+\RequirePackage{courier}
 
 % --- Font family selection (mutually exclusive) ---
 % Default: Fira Sans (book weight or light if option set)
@@ -188,36 +209,37 @@
     \RequirePackage[sfdefault,light]{roboto}
 \fi
 
-% --- Mathematics support ---
+% --- Additional math helpers used by public commands and demos ---
 \RequirePackage{amsmath,amssymb,amsfonts,mathtools,braket}
 
-% --- Graphics and visual layout ---
-\RequirePackage{graphicx}               % Include external graphics
-\RequirePackage{caption}                % Customize captions
-\RequirePackage{booktabs}               % Professional table rules
-\RequirePackage{colortbl,xcolor}        % Color support for tables and text
-\RequirePackage[absolute,overlay]{textpos}  % Absolute positioning
-\RequirePackage{animate}                % Animated graphics
-\RequirePackage{tikz}                   % Vector graphics and overlays
-\RequirePackage{tabularx}               % Auto-width table columns
-\RequirePackage{changepage}             % Adjust page margins
-\RequirePackage{moresize}               % Additional font sizes
-\RequirePackage{setspace}               % Line spacing control
-\RequirePackage{eurosym}                % Euro currency symbol
+% --- Graphics, layout, and overlay support ---
+% This is the stack behind hand-drawn annotations, callouts, and dense tables.
+\RequirePackage{graphicx}
+\RequirePackage{caption}
+\RequirePackage{booktabs}
+\RequirePackage{colortbl,xcolor}
+\RequirePackage[absolute,overlay]{textpos}
+\RequirePackage{animate}
+\RequirePackage{tikz}
+\RequirePackage{tabularx}
+\RequirePackage{changepage}
+\RequirePackage{moresize}
+\RequirePackage{setspace}
+\RequirePackage{eurosym}
 
-% --- Lists and special symbols ---
-\RequirePackage{pifont,bbding}          % Dingbat symbols for bullets
+% --- Symbols and list markers used by the custom bullets and helpers ---
+\RequirePackage{pifont,bbding}
 
-% --- Text highlighting and annotations ---
-\RequirePackage{soul}                   % Text highlighting (for \stabilo)
+% --- Annotation and highlighting helpers ---
 \RequirePackage[bordercolor=white,backgroundcolor=script,linecolor=black]{todonotes}
-\setlength{\marginparwidth}{2cm}        % Margin width for todo notes
+\RequirePackage{soul}
+\setlength{\marginparwidth}{2cm}        % Keep inline bubble notes from overrunning margins.
 
-% --- Code and verbatim environments ---
+% --- Code and verbatim helpers used by the demo/public API ---
 \RequirePackage{verbatim,fancyvrb,newverbs,listings,mdframed,framed,etoolbox,tcolorbox}
 \tcbuselibrary{breakable,skins}
 
-% --- Document control and navigation ---
+% --- Document control, option parsing, and hyperlink styling ---
 \RequirePackage{comment,xkeyval,hyperref,subdepth,xspace}
 % Note: hyperref colors reference `main`, which is defined later below.
 \hypersetup{
@@ -227,7 +249,7 @@
     linkcolor=main                       % Internal link color
 }
 
-% --- Bibliography support ---
+% --- Bibliography helpers ---
 \RequirePackage{natbib}
 
 
@@ -507,8 +529,9 @@
     \defbeamertemplate*{footline}{shadow theme}{%
         \leavevmode\hbox{%
             \hypersetup{linkcolor=white,urlcolor=white,citecolor=white}
-            % Slightly wider than \paperwidth to avoid visible gaps at edges.
-            \begin{beamercolorbox}[wd=1.01\paperwidth, ht=2.5ex, dp=1.125ex, 
+            % Keep the footline flush with the slide width so it does not
+            % trigger overfull-box warnings on every frame.
+            \begin{beamercolorbox}[wd=\dimexpr\paperwidth-2pt\relax, ht=2.5ex, dp=1.125ex, 
                                    leftskip=.3cm plus1fil, rightskip=0.3cm]{author in head/foot}%
                 \insertshorttitle \insertsection \hfill \insertframenumber%
             \end{beamercolorbox}%
@@ -519,8 +542,9 @@
     \defbeamertemplate*{footline}{shadow theme}{%
         \leavevmode\hbox{%
             \hypersetup{linkcolor=white,urlcolor=white,citecolor=white}
-            % Slightly wider than \paperwidth to avoid visible gaps at edges.
-            \begin{beamercolorbox}[wd=1.02\paperwidth, ht=2.5ex, dp=1.125ex, 
+            % Keep the footline flush with the slide width so it does not
+            % trigger overfull-box warnings on every frame.
+            \begin{beamercolorbox}[wd=\dimexpr\paperwidth-2pt\relax, ht=2.5ex, dp=1.125ex, 
                                    leftskip=.3cm plus1fil, rightskip=0.3cm]{author in head/foot}%
                 \insertsectionnavigationhorizontal{.90\textwidth}{}{} 
                 \hspace{.3cm} \hfill \# \insertframenumber%
@@ -543,7 +567,6 @@
 \usetikzlibrary{
     calc,                    % Coordinate calculations
     positioning,             % Node positioning
-    tikzmark,               % Mark positions in text
     patterns,               % Fill patterns
     arrows,                 % Arrow tips
     decorations,            % General decorations
@@ -589,6 +612,8 @@
 
 
 % --- TikZ style definitions ---
+% Public styles used directly in slides: `pencil`, `arrow`, and `snake`.
+% The node/overlay styles are internal helpers for the commands below.
 \tikzset{
     % Pencil style - hand-drawn appearance
     pencil/.style={
@@ -601,50 +626,30 @@
             amplitude=\jambrowiggleamp         % Controlled by wiggle= option (default 0.4pt)
         }
     },
-    % Extra chalky version with more hand-drawn variation
-    chalky/.style={
-        carandache,
-        line width=0.05cm,
-        decorate,
-        decoration={
-            sketch,
-            segment length=1pt,
-            amplitude=1pt
-        }
-    },
     % Node styles for overlays
     nstyle/.style={inner sep=0pt, anchor=base},
     tstyle/.style={remember picture, baseline},
     tpstyle/.style={overlay, remember picture},
-    % Arrow with pencil effect
+    % Public arrow style for hand-drawn overlay annotations.
     arrow/.style={pencil, carandache, line width=0.05cm, ->},
-    % Snake/wavy line style
+    % Public wavy-line style for looser annotations and callouts.
     snake/.style={
         decorate, 
         carandache, 
         line width=0.05cm,
         decoration={snake, post length=1.5mm, pre length=1.5mm}
-    },
-    % Box style with pencil effect
-    pencilboxstyle/.style={
-        pencil,
-        draw,
-        line width=0.05cm,
-        inner xsep=0.5pt,
-        inner ysep=0.5pt,
-        baseline
     }
 }
 
 
 %=============================================================================
-%  PENCIL-STYLE COMMANDS
+%  PENCIL-STYLE MARKUP AND ARROWS
 %-----------------------------------------------------------------------------
-% Simple commands for creating hand-drawn arrows between marked nodes
+% Public commands for underlines, boxes, inline arrows, and overlay notes.
 %=============================================================================
 
 % --- Marker node for TikZ overlay positioning ---
-% Creates an invisible anchor point in text for arrow targeting
+% Wraps visible text in a named node so later TikZ overlays can target it.
 % Usage: \marker{nodename}{visible text}
 \newcommand{\marker}[2]{%
     \tikz[remember picture, baseline=(#1.base)]{%
@@ -694,9 +699,9 @@
 
 \newcommand{\lapisbox}[2][]{%
     \pgfkeys{/pencilbox, #1}%
-    % Define box style with current color
+    % Build a call-local style so repeated uses do not leak color state.
     \tikzset{
-        pencilboxstyle/.style={
+        jambro@pencilboxstyle/.style={
             pencil,
             draw,
             \lapisbox@color!80,
@@ -712,12 +717,12 @@
         \ifx\lapisbox@label\@empty
             % No label: just create box
             \tikz[baseline=(X.base), remember picture]{%
-                \node[pencilboxstyle, text=.] (X) {\strut #2};
+                \node[jambro@pencilboxstyle, text=.] (X) {\strut #2};
             }
         \else
             % With label: create named node for arrow targeting
             \tikz[baseline=(\lapisbox@label.base), remember picture]{%
-                \node[pencilboxstyle, text=.=] (\lapisbox@label) {\strut #2};
+                \node[jambro@pencilboxstyle, text=.=] (\lapisbox@label) {\strut #2};
             }
         \fi
     }%
@@ -865,7 +870,7 @@
 \def\pencilnote@from{east}
 \def\pencilnote@to{auto}
 \def\pencilnote@xshift{0.8cm}
-\def\pencilnote@yshift{0.3cm}
+\def\pencilnote@yshift{0.2cm}
 \def\pencilnote@color{carandache}
 \def\pencilnote@bend{default}
 \def\pencilnote@width{auto}
@@ -1049,8 +1054,11 @@
             \fi
         \fi\fi\fi\fi\fi
     }%
-    % Pull back vertical space after overlay to avoid extra gap.
-    \vspace{-.4cm}  % Vertical adjustment
+    % Overlay notes do not occupy vertical space, but the surrounding paragraph
+    % often leaves a visible gap after the command. Pull back by 0.4cm, which
+    % matches the current demo spacing; revisit this constant if note placement
+    % or default line spacing changes materially.
+    \vspace{-.4cm}%
 }
 \makeatother
 
@@ -1066,6 +1074,9 @@
 % Usage: \stabilo[blue_light]{text} → custom color highlight
 \makeatletter
 \let\HL\hl
+% soul's \hl temporarily bypasses Beamer's color stack, which can leave text
+% colors in the wrong state after a highlight. Rebind to Beamer's saved color
+% hooks before delegating back to soul. This patch depends on Beamer internals.
 \renewcommand\hl{%
     \let\set@color\beamerorig@set@color
     \let\reset@color\beamerorig@reset@color
@@ -1099,12 +1110,14 @@
 % Extra-small sizes for dense content and tables.
 %=============================================================================
 
-% --- Very small font size (smaller than \tiny) ---
+% --- Very small font size for labels and dense slide annotations ---
+% Usage: {\miniscule compact label}
 \makeatletter
 \newcommand{\miniscule}{\@setfontsize\miniscule{4}{6}}
 \makeatother
 
-% --- Font size optimized for dense tables ---
+% --- Font size optimized for dense tables and compact legends ---
+% Usage: {\tablesize compact table text}
 \makeatletter
 \newcommand*\tablesize{\@setfontsize\tablesize{7.25}{8.0}}
 \makeatother
@@ -1120,7 +1133,8 @@
 % Usage: \jverb{code text}
 \newcommand{\jverb}[1]{\texttt{\detokenize{#1}}}
 
-% --- Verbatim environment with reduced font size ---
+% --- Verbatim environment with reduced font size for slide-safe code blocks ---
+% Usage: \begin{jVerb} ... \end{jVerb}
 \newenvironment{jVerb}
     {\par\vspace{1ex}\small\VerbatimEnvironment\begin{Verbatim}}
     {\end{Verbatim}\vspace{1ex}\par}
@@ -1174,32 +1188,57 @@
 \renewcommand{\arraystretch}{1.15}
 
 % --- Custom tabularx column types ---
-% Y: Centered column with auto width
-% S: Centered column with gray text (for de-emphasized content)
+% Usage: \begin{tabularx}{\textwidth}{YYS} ... \end{tabularx}
+% Y: centered auto-width content column
+% S: centered auto-width column with de-emphasized gray text
 \newcolumntype{Y}{>{\centering\arraybackslash\leavevmode}X}
 \newcolumntype{S}{>{\centering\arraybackslash\leavevmode\color{gray!25}}X}
 
 
 %=============================================================================
-%  MISCELLANEOUS UTILITIES
+%  PUBLIC MACROS AND UTILITIES
 %-----------------------------------------------------------------------------
-% Small helpers, symbols, and global tweaks.
+% User-facing helpers that do not fit the larger layout/annotation sections.
 %=============================================================================
 
-% --- Note size alias (for figure/table notes) ---
-% Keeps note text aligned with footnote sizing.
-\let\notesize\footnotesize
+% --- Draft note API: \memo[user=u,color=c]{text} ---
+% Inline draft annotation in handwriting font with underlined username prefix.
+% Mirrors \memo in notesthemejambro.sty — same interface and defaults.
+%
+% Document-level defaults (set once in preamble):
+%   \renewcommand{\memouser}{ACB}      % your initials
+%   \renewcommand{\memocolor}{BoEred}  % any defined color
+%
+% Per-call overrides via optional key=value argument:
+%   user=<name>    overrides \memouser for this call only
+%   color=<name>   overrides \memocolor for this call only
+%
+% Suppressed entirely when hidememo option is passed.
+%
+% Usage:
+%   \memo{Check this slide.}
+%   \memo[user=JB,color=cobalt]{Check this slide.}
+\newcommand{\memouser}{Memo}      % document-level default username
+\newcommand{\memocolor}{BoEred}   % document-level default color
 
-% --- ACB margin/inline note ---
-% Usage: \ACB{my note text}
-% Suppressed entirely when the hideACB option is passed to the theme.
-\if@OptionHideACB
-    \newcommand{\ACB}[1]{}
+\makeatletter
+\pgfkeys{
+    /memo/.is family, /memo,
+    user/.estore  in=\memo@user,
+    color/.estore in=\memo@color,
+}
+
+\if@OptionHideMemo
+    \newcommand{\memo}[2][]{}
 \else
-    \newcommand{\ACB}[1]{%
-        \noindent\textcolor{BoEred}{{\notesize\handbold{ACB}\hand: #1}}%
+    \newcommand{\memo}[2][]{%
+        \def\memo@user{\memouser}%
+        \def\memo@color{\memocolor}%
+        \pgfkeys{/memo, #1}%
+        \noindent\textcolor{\memo@color}{{\hand\small\underline{\memo@user}: #2}}%
     }
 \fi
+\makeatother
 
 % --- Vertical spacing shortcut ---
 % Usage: \vs{3} → \vspace{0.3cm} (tenths of a cm; 0-9 recommended)
@@ -1220,16 +1259,12 @@
 }{\end{list}}
 
 % --- Mathematical expectation operator ---
+% Usage: $\EE[X \mid \mathcal{F}]$
 \def\EE{\mathbb{E}}
 
 % --- Check mark and X mark symbols ---
 \newcommand{\cmark}{{\color{tomato}\ding{51}}}  % ✓
 \newcommand{\xmark}{{\color{cobalt}\ding{55}}}  % ✗
-
-% --- Suppress overfull/underfull box warnings below threshold ---
-% Note: reduces noise but can hide real layout issues if set too high.
-\vfuzz2pt
-\hfuzz2pt
 
 % --- Stata-style significance stars in tables ---
 % Usage: \sym{***} in table cells
@@ -1250,6 +1285,10 @@
 \def\newblock{\hskip .11em plus .33em minus .07em}
 
 % --- Fix natbib citation parenthesis colors ---
+% natbib emits its own opening/closing tokens outside Beamer's color templates,
+% so citations could pick up the wrong parenthesis color. Override the natbib
+% internals once here to keep citation punctuation aligned with the theme color.
+% This patch depends on natbib's private macro names.
 \makeatletter
 \renewcommand{\NAT@open}{\textcolor{main}{(}}
 \renewcommand{\NAT@close}{\textcolor{main}{)}}

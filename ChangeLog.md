@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2026-03-23 — Drop `\ACB` in favor of `\memo`
+
+### Changed
+- `beamerthemejambro.sty`: Draft annotations now use `\memo[ user=..., color=... ]{...}` as the only public note command; the option list and inline documentation now describe `hidememo` only.
+- `Demo.tex`: Replaced the old `\ACB{...}` example with `\memo{...}`, added a document-level `\renewcommand{\memouser}{ACB}` preamble example, and kept the per-note `user=` / `color=` override example on the “Handwriting and personal notes” slide.
+- `beamerthemejambro.sty`: Added a proper package preamble with `\NeedsTeXFormat` / `\ProvidesPackage`, tightened comments around Beamer/soul/natbib internal patches, and rewrote several public-API comments so they explain intent and usage rather than restating the code.
+- `beamerthemejambro.sty`: Synced stale inline documentation with live behavior, including the `light` option description, `\marker` behaviour, `\lapisnote` default `yshift`, and the `\memo` documentation block.
+- `Demo.tex`: Synced the “Theme's options” slide with the live API by renaming `handout` to `handout2x1`, fixing the `red` / `night` relationship text, and listing `wiggle=<n>` plus `hidememo`.
+
+### Removed
+- `beamerthemejambro.sty`: Removed the deprecated `\ACB{text}` compatibility command.
+- `beamerthemejambro.sty`: Removed the deprecated `hideACB` option alias.
+- `beamerthemejambro.sty`: Removed unused or stale internals, including the unused `tikzmark` library, the dormant `chalky` style, the stale global `pencilboxstyle`, the global `\notesize` alias, and the `\vfuzz` / `\hfuzz` warning suppression.
+
+### Fixed
+- `beamerthemejambro.sty`: Footline boxes now use `\paperwidth` instead of slightly oversized widths, removing the repeated theme-caused overfull-box warnings that had previously been hidden by fuzz suppression.
+
+### BREAKING
+- Existing slides must rename `\ACB{...}` to `\memo{...}` and `hideACB` to `hidememo`.
+
 ## Version 1.3 — *2026-03-23*
 
 ### Added

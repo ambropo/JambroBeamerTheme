@@ -1,6 +1,7 @@
 \documentclass[10pt,itemsep]{beamer}
 \usetheme{jambro}
 \graphicspath{{./graphics/}}
+\renewcommand{\memouser}{ACB}   % set default annotation username (put your initials here)
 
 % Authors/institutes/date/etc
 %--------------------------------
@@ -23,7 +24,7 @@
 %.......................................................
 \shownotesblockzero{
     These are some speaking notes on the title slide \par
-    And some more
+    And some more 
 }
 
 %=============================================================
@@ -349,16 +350,18 @@
     \begin{itemize}
         \item The theme comes with a few options to be specified in the \texttt{\textbackslash documentclass[\textit{option}]\{beamer\}} command 
         \begin{itemize}
-            \item \texttt{light}: uses Fira light as a default font
+            \item \texttt{light}: uses Fira Sans Light instead of the default Fira Sans Book
             \item \texttt{roboto}: changes the default font to Roboto
             \item \texttt{cabin}: changes the default font to Cabin
             \item \texttt{night}: switches to night mode colors
-            \item \texttt{red}: switches the main color of the theme from blue to red (this option is overrun by 
+            \item \texttt{red}: switches the main color of the theme from blue to red (overridden by \texttt{night})
             \item \texttt{3to2}: switches the aspect ratio from 16:9 to 3:2
             \item \texttt{shownotes}: show notes to the slides
-            \item \texttt{handout}: make handouts with 2x1 slides (portrait). Useful in combination with \texttt{shownotes}
+            \item \texttt{handout2x1}: make 2x1 handouts (portrait). Useful in combination with \texttt{shownotes}
             \item \texttt{onesec}: visualize only one section at the time in footline (default is all of them)
             \item \texttt{itemsep}: use generous spacing between itemize items (default is standard Beamer spacing)
+            \item \texttt{wiggle=<n>}: set the amplitude of the pencil/sketch effect globally
+            \item \texttt{hidememo}: suppress all \texttt{\textbackslash memo\{...\}} annotations
         \end{itemize}
     \end{itemize}
 \end{frame}
@@ -789,9 +792,11 @@
             \item Stroke weight is adjustable: \handbold[0.3]{light (0.3)} \quad \handbold[0.6]{medium (0.6)} \quad \handbold[1.0]{heavy (1.0)}
             \item Pass weight as optional argument \texttt{\textbackslash handbold[\textit{weight}]\{...\}} (default: 0.6)
         \end{itemize}
-        \item Comment text using \texttt{\textbackslash ACB\{...\}} $\rightarrow$ \ACB{This is an ACB note}
+        \item Comment text using \texttt{\textbackslash memo\{...\}} $\rightarrow$ \memo{This is a memo note}
         \begin{itemize}
-            \item Suppressed entirely with \texttt{hideACB} in \texttt{\textbackslash documentclass[hideACB]\{beamer\}}
+            \item Set the default username once in the preamble: \texttt{\textbackslash renewcommand\{\textbackslash memouser\}\{ACB\}}
+            \item Suppressed entirely with \texttt{hidememo} in \texttt{\textbackslash documentclass[hidememo]\{beamer\}}
+            \item Per-note overrides: \texttt{\textbackslash memo[user=JB,color=cobalt]\{Check this slide.\}} $\rightarrow$ \memo[user=JB,color=cobalt]{Check this slide.}
         \end{itemize}
     \end{itemize}
 \end{frame}
