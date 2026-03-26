@@ -529,11 +529,16 @@
     \defbeamertemplate*{footline}{shadow theme}{%
         \leavevmode\hbox{%
             \hypersetup{linkcolor=white,urlcolor=white,citecolor=white}
-            % Keep the footline flush with the slide width so it does not
-            % trigger overfull-box warnings on every frame.
-            \begin{beamercolorbox}[wd=\dimexpr\paperwidth-2pt\relax, ht=2.5ex, dp=1.125ex, 
-                                   leftskip=.3cm plus1fil, rightskip=0.3cm]{author in head/foot}%
-                \insertshorttitle \insertsection \hfill \insertframenumber%
+            % Split the banner into adjoining boxes and trim Beamer's residual
+            % 1.35pt shipout overflow so the bar remains visually edge-to-edge
+            % without repeating the same overfull-box warning on every frame.
+            \begin{beamercolorbox}[wd=\dimexpr\paperwidth-1.8cm-1.35pt\relax, ht=2.5ex, dp=1.125ex,
+                                    leftskip=.3cm plus1fil, rightskip=0.3cm]{author in head/foot}%
+                \insertshorttitle \insertsection%
+            \end{beamercolorbox}%
+            \begin{beamercolorbox}[wd=1.8cm, ht=2.5ex, dp=1.125ex,
+                                   leftskip=0pt, rightskip=0.3cm]{author in head/foot}%
+                \hfill \insertframenumber%
             \end{beamercolorbox}%
         }%
     }
@@ -542,12 +547,16 @@
     \defbeamertemplate*{footline}{shadow theme}{%
         \leavevmode\hbox{%
             \hypersetup{linkcolor=white,urlcolor=white,citecolor=white}
-            % Keep the footline flush with the slide width so it does not
-            % trigger overfull-box warnings on every frame.
-            \begin{beamercolorbox}[wd=\dimexpr\paperwidth-2pt\relax, ht=2.5ex, dp=1.125ex, 
-                                   leftskip=.3cm plus1fil, rightskip=0.3cm]{author in head/foot}%
-                \insertsectionnavigationhorizontal{.90\textwidth}{}{} 
-                \hspace{.3cm} \hfill \# \insertframenumber%
+            % Split the banner into adjoining boxes and trim Beamer's residual
+            % 1.35pt shipout overflow so the bar remains visually edge-to-edge
+            % without repeating the same overfull-box warning on every frame.
+            \begin{beamercolorbox}[wd=\dimexpr\paperwidth-1.8cm-1.35pt\relax, ht=2.5ex, dp=1.125ex,
+                                    leftskip=.3cm plus1fil, rightskip=0.3cm]{author in head/foot}%
+                \insertsectionnavigationhorizontal{\dimexpr\paperwidth-2.4cm\relax}{}{}%
+            \end{beamercolorbox}%
+            \begin{beamercolorbox}[wd=1.8cm, ht=2.5ex, dp=1.125ex,
+                                   leftskip=0pt, rightskip=0.3cm]{author in head/foot}%
+                \hfill \# \insertframenumber%
             \end{beamercolorbox}%
         }%
     }

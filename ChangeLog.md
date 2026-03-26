@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2026-03-25 — Restore full-width footline banner
+
+### Fixed
+- `beamerthemejambro.sty`: Reworked both footline templates into two adjoining color boxes and trimmed Beamer's residual `1.35pt` shipout overflow, so the footer color bar now visually spans the full slide width instead of stopping short by `2pt` without reintroducing the repeated footline overfull-box warning.
+
+### Changed
+- `beamerthemejambro.sty`: Updated the footline comment to describe the actual intent of the width setting: edge-to-edge coverage across slide formats.
+
 ## 2026-03-23 — Drop `\ACB` in favor of `\memo`
 
 ### Changed
