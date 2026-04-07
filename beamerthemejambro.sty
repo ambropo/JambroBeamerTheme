@@ -2,7 +2,7 @@
 %% ===========================================================================
 %% Custom Beamer Theme: Jambro
 %% Author: Ambrogio Cesa-Bianchi
-%% Version: 1.3-dev — Mar 2026
+%% Version: 1.3-dev — 2026-03-26
 %% ===========================================================================
 %%
 %% DESCRIPTION:
@@ -31,7 +31,7 @@
 %% ===========================================================================
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{beamerthemejambro}[2026/03/23 v1.3-dev Jambro Beamer theme]
+\ProvidesPackage{beamerthemejambro}[2026/03/26 v1.3-dev Jambro Beamer theme]
 
 
 
@@ -527,36 +527,35 @@
 \if@Optiononesec
     % --- Minimalist footline: only section name and frame number ---
     \defbeamertemplate*{footline}{shadow theme}{%
+        \begin{tikzpicture}[remember picture,overlay]
+            % Paint the banner independently from the content box so the
+            % footer color reaches the physical page edges.
+            \fill[title] (current page.south west)
+                rectangle ([yshift=3.625ex]current page.south east);
+        \end{tikzpicture}%
         \leavevmode\hbox{%
             \hypersetup{linkcolor=white,urlcolor=white,citecolor=white}
-            % Split the banner into adjoining boxes and trim Beamer's residual
-            % 1.35pt shipout overflow so the bar remains visually edge-to-edge
-            % without repeating the same overfull-box warning on every frame.
-            \begin{beamercolorbox}[wd=\dimexpr\paperwidth-1.8cm-1.35pt\relax, ht=2.5ex, dp=1.125ex,
-                                    leftskip=.3cm plus1fil, rightskip=0.3cm]{author in head/foot}%
-                \insertshorttitle \insertsection%
-            \end{beamercolorbox}%
-            \begin{beamercolorbox}[wd=1.8cm, ht=2.5ex, dp=1.125ex,
-                                   leftskip=0pt, rightskip=0.3cm]{author in head/foot}%
-                \hfill \insertframenumber%
+            \begin{beamercolorbox}[wd=\dimexpr\paperwidth-2pt\relax, ht=2.5ex, dp=1.125ex,
+                                   leftskip=.3cm plus1fil, rightskip=0.3cm, ignorebg]{author in head/foot}%
+                \insertshorttitle \insertsection \hfill \insertframenumber%
             \end{beamercolorbox}%
         }%
     }
 \else
     % --- Standard footline: full section navigation bar ---
     \defbeamertemplate*{footline}{shadow theme}{%
+        \begin{tikzpicture}[remember picture,overlay]
+            % Paint the banner independently from the content box so the
+            % footer color reaches the physical page edges.
+            \fill[title] (current page.south west)
+                rectangle ([yshift=3.625ex]current page.south east);
+        \end{tikzpicture}%
         \leavevmode\hbox{%
             \hypersetup{linkcolor=white,urlcolor=white,citecolor=white}
-            % Split the banner into adjoining boxes and trim Beamer's residual
-            % 1.35pt shipout overflow so the bar remains visually edge-to-edge
-            % without repeating the same overfull-box warning on every frame.
-            \begin{beamercolorbox}[wd=\dimexpr\paperwidth-1.8cm-1.35pt\relax, ht=2.5ex, dp=1.125ex,
-                                    leftskip=.3cm plus1fil, rightskip=0.3cm]{author in head/foot}%
-                \insertsectionnavigationhorizontal{\dimexpr\paperwidth-2.4cm\relax}{}{}%
-            \end{beamercolorbox}%
-            \begin{beamercolorbox}[wd=1.8cm, ht=2.5ex, dp=1.125ex,
-                                   leftskip=0pt, rightskip=0.3cm]{author in head/foot}%
-                \hfill \# \insertframenumber%
+            \begin{beamercolorbox}[wd=\dimexpr\paperwidth-2pt\relax, ht=2.5ex, dp=1.125ex,
+                                   leftskip=.3cm plus1fil, rightskip=0.3cm, ignorebg]{author in head/foot}%
+                \insertsectionnavigationhorizontal{.90\textwidth}{}{}
+                \hspace{.3cm} \hfill \# \insertframenumber%
             \end{beamercolorbox}%
         }%
     }

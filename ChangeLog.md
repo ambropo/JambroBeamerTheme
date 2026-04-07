@@ -2,10 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
-## 2026-03-25 — Restore full-width footline banner
+## 2026-03-26 — Restore full-width footline banner
 
 ### Fixed
-- `beamerthemejambro.sty`: Reworked both footline templates into two adjoining color boxes and trimmed Beamer's residual `1.35pt` shipout overflow, so the footer color bar now visually spans the full slide width instead of stopping short by `2pt` without reintroducing the repeated footline overfull-box warning.
+- `beamerthemejambro.sty`: Added an overlay footer fill that paints the banner from `current page.south west` to `current page.south east`, so the footer color bar now reaches both slide edges even though the footline content box remains slightly inset.
 
 ### Changed
 - `beamerthemejambro.sty`: Updated the footline comment to describe the actual intent of the width setting: edge-to-edge coverage across slide formats.
