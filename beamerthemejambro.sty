@@ -54,6 +54,7 @@
 \newif\if@Optiononesec         % Minimalist footline
 \newif\if@OptionItemsep        % Custom itemize spacing
 \newif\if@OptionHideMemo       % Hide \memo annotations
+\newif\if@OptionCenterTitle    % Centered frame titles
 
 % --- Initialize all options to false ---
 \@OptionFourThreefalse
@@ -67,6 +68,7 @@
 \@Optiononesecfalse
 \@OptionItemsepfalse
 \@OptionHideMemofalse
+\@OptionCenterTitlefalse
 
 % --- Declare document class options ---
 \DeclareOption{3to2}{\@OptionFourThreetrue}
@@ -80,27 +82,44 @@
 \DeclareOption{onesec}{\@Optiononesectrue}
 \DeclareOption{itemsep}{\@OptionItemseptrue}
 \DeclareOption{hidememo}{\@OptionHideMemotrue}
+\DeclareOption{centertitle}{\@OptionCenterTitletrue}
 
-% --- Wiggle/amplitude option (key=value) ---
-% Controls the amplitude of the pencil/sketch decoration. Larger = more expressive.
-% Public name (no @) required: PGF math re-tokenises macros in doc context,
-% so an @ in the name causes "Undefined control sequence \jambro" + PGF crash.
-\newcommand{\jambrowiggleamp}{0.4pt}
-\DeclareOption*{%
-    % Parse unknown options of the form key=value
-    \expandafter\@jambro@parseoption\CurrentOption=\@nil
-}
-\def\@jambro@parseoption#1=#2\@nil{%
+% --- Wiggle: amplitude of the pencil/sketch decoration ---
+% Larger = more expressive, hand-drawn lines. Two equivalent ways to set it:
+%   1. Option  (document-wide, set once):
+%        \documentclass[wiggle=<n>]{beamer}   or   \usetheme[wiggle=<n>]{jambro}
+%        <n> is a bare number, interpreted as <n>pt (e.g. wiggle=20 -> 20pt).
+%   2. Command (\jambrowiggleamp{<dimen>}):
+%        \jambrowiggleamp{20pt}   in the preamble for a document-wide value, or
+%        inside a frame/group to override the wiggle for those slides only.
+%
+% The current value lives in \jambrowigglecurrent. That macro MUST stay @-free:
+% PGF math re-tokenises the amplitude token in document context, so an @ in the
+% name would split into \jambro + @... -> "Undefined control sequence" + crash.
+\def\jambrowigglecurrent{0.4pt}                                  % current amplitude (internal value, @-free)
+\newcommand{\jambrowiggleamp}[1]{\def\jambrowigglecurrent{#1}}   % public setter command
+
+% Shared key=value parser; acts only on `wiggle`, ignores every other key.
+% The doubled "==\@nil" terminator makes the split robust whether or not the
+% option carries a value and stops a stray "=" leaking into the stored value
+% (the old single-terminator parser produced "<n>=pt" and crashed PGF math).
+\def\@jambro@parsewiggle#1=#2=#3\@nil{%
     \def\@jambro@optkey{#1}%
     \def\@jambro@wigglekey{wiggle}%
     \ifx\@jambro@optkey\@jambro@wigglekey
-        \global\def\jambrowiggleamp{#2pt}%
+        \gdef\jambrowigglecurrent{#2pt}%
     \fi
+}
+% Channel A: local options, i.e. \usetheme[wiggle=<n>]{jambro}.
+\DeclareOption*{\expandafter\@jambro@parsewiggle\CurrentOption==\@nil}
+% Channel B: global options, i.e. \documentclass[wiggle=<n>]{beamer}.
+% LaTeX does NOT forward unknown key=value *global* options to \DeclareOption*,
+% so scan the class option list explicitly to catch wiggle passed there.
+\@for\@jambro@opt:=\@classoptionslist\do{%
+    \expandafter\@jambro@parsewiggle\@jambro@opt==\@nil
 }
 
 % --- Process all declared options ---
-% \ProcessOptions* (starred) also scans global \documentclass options, so
-% wiggle=<n> works in both \documentclass[wiggle=<n>]{beamer} and \usetheme[wiggle=<n>]{jambro}
 \ProcessOptions*\relax
 
 %=============================================================================
@@ -384,7 +403,7 @@
 
 % --- Font sizes for titles ---
 \setbeamerfont{title}{series=\bfseries, size={\fontsize{18}{19}}}
-\setbeamerfont{frametitle}{series=\bfseries, size={\fontsize{14}{15}}}
+\setbeamerfont{frametitle}{series=\bfseries, size={\fontsize{15}{16}}}
 
 % --- Faded appearance for inactive sections in footline ---
 \setbeamertemplate{section in head/foot shaded}[default][30]
@@ -405,6 +424,19 @@
 % --- Structural element fonts ---
 \setbeamerfont{section in head/foot}{series=\bfseries}
 \setbeamerfont{frametitle}{series=\bfseries}
+
+% --- Optional centered frame title (opt-in via [centertitle]) ---
+% Default frame titles are left-aligned (Beamer default). When [centertitle]
+% is passed, titles are centered across the full page width. Kept opt-in to
+% preserve the look of existing decks. A long title wraps within the box.
+\if@OptionCenterTitle
+  \setbeamertemplate{frametitle}{%
+    \nointerlineskip
+    \begin{beamercolorbox}[wd=\paperwidth,sep=0.3cm,center]{frametitle}%
+      \usebeamerfont{frametitle}\insertframetitle%
+    \end{beamercolorbox}%
+  }
+\fi
 
 
 %=============================================================================
@@ -631,7 +663,7 @@
         decoration={
             sketch,
             segment length=1.2pt,              % Fixed segment length
-            amplitude=\jambrowiggleamp         % Controlled by wiggle= option (default 0.4pt)
+            amplitude=\jambrowigglecurrent     % wiggle= option / \jambrowiggleamp{} (default 0.4pt)
         }
     },
     % Node styles for overlays

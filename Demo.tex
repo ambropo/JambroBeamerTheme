@@ -348,7 +348,7 @@
 \begin{frame}
     {Theme's options}
     \begin{itemize}
-        \item The theme comes with a few options to be specified in the \texttt{\textbackslash documentclass[\textit{option}]\{beamer\}} command 
+        \item The theme comes with a few options to be specified in the \texttt{\textbackslash documentclass[\textit{option}]\{beamer\}} command
         \begin{itemize}
             \item \texttt{light}: uses Fira Sans Light instead of the default Fira Sans Book
             \item \texttt{roboto}: changes the default font to Roboto
@@ -356,11 +356,24 @@
             \item \texttt{night}: switches to night mode colors
             \item \texttt{red}: switches the main color of the theme from blue to red (overridden by \texttt{night})
             \item \texttt{3to2}: switches the aspect ratio from 16:9 to 3:2
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+%.......................................................
+\shownotesblock{}
+
+%=============================================================
+\begin{frame}
+    {Theme's options (cont'd)}
+    \begin{itemize}
+        \item \dots\ and a few more that control layout and behaviour
+        \begin{itemize}
             \item \texttt{shownotes}: show notes to the slides
             \item \texttt{handout2x1}: make 2x1 handouts (portrait). Useful in combination with \texttt{shownotes}
             \item \texttt{onesec}: visualize only one section at the time in footline (default is all of them)
             \item \texttt{itemsep}: use generous spacing between itemize items (default is standard Beamer spacing)
-            \item \texttt{wiggle=<n>}: set the amplitude of the pencil/sketch effect globally
+            \item \texttt{centertitle}: center frame titles across the page (default is left-aligned)
+            \item \texttt{wiggle=<n>}: set the amplitude of the pencil/sketch effect globally (or ad-hoc with \texttt{\textbackslash jambrowiggleamp\{\textit{dimen}\}})
             \item \texttt{hidememo}: suppress all \texttt{\textbackslash memo\{...\}} annotations
         \end{itemize}
     \end{itemize}
@@ -465,7 +478,7 @@
         \item Set \texttt{shownotes} to show notes and \texttt{handout2x1} produce 2x1 handouts
     \end{itemize}
     \begin{center}
-        \begin{minipage}[b]{.3\textwidth}
+        \begin{minipage}[b]{.3\textwidth}   
             \includegraphics[width=\textwidth]{shownotes_handout}
         \end{minipage}
     \end{center}
@@ -482,6 +495,36 @@
     \begin{center}
         \begin{minipage}[b]{.6\textwidth}
             \includegraphics[width=\textwidth]{onesec}
+        \end{minipage}
+    \end{center}
+\end{frame}
+%.......................................................
+\shownotesblock{}
+
+%=============================================================
+\begin{frame}
+    {Theme's options}
+    \begin{itemize}
+        \item Set \texttt{centertitle} to center frame titles across the page (default is left-aligned)
+    \end{itemize}
+    \begin{center}
+        \begin{minipage}[b]{.6\textwidth}
+            \includegraphics[width=\textwidth]{centertitle}
+        \end{minipage}
+    \end{center}
+\end{frame}
+%.......................................................
+\shownotesblock{}
+
+%=============================================================
+\begin{frame}
+    {Theme's options}
+    \begin{itemize}
+        \item Set \texttt{wiggle=<n>} to control the amplitude of the pencil/sketch effect; larger is more expressive (here \texttt{wiggle=12} vs.\ default \texttt{0.4})
+    \end{itemize}
+    \begin{center}
+        \begin{minipage}[b]{.6\textwidth}
+            \includegraphics[width=\textwidth]{wiggle}
         \end{minipage}
     \end{center}
 \end{frame}
@@ -824,24 +867,24 @@
 \begin{frame}
     {Pencil wiggle amplitude}
     \begin{itemize}
-        \item The \texttt{wiggle=} option sets the amplitude of the pencil sketch effect
+        \item The amplitude of the pencil sketch effect can be set two ways
         \begin{itemize}
-            \item Set once in \texttt{\textbackslash documentclass[wiggle=\textit{n}]\{beamer\}} (default: 0.8)
-            \item Larger values $\rightarrow$ more expressive; smaller $\rightarrow$ more subtle
+            \item Document-wide via the option \texttt{\textbackslash documentclass[wiggle=\textit{n}]\{beamer\}} or \texttt{\textbackslash usetheme[wiggle=\textit{n}]\{jambro\}} (default: 0.4)
+            \item Ad-hoc via \texttt{\textbackslash jambrowiggleamp\{\textit{dimen}\}}, e.g.\ in the preamble, or inside a group to override locally (as below)
         \end{itemize}\bigskip
-        \item The effect on underlines, boxes, and arrows:
+        \item The effect on underlines and boxes:
     \end{itemize}
     \begin{center}
-        \renewcommand{\jambrowiggleamp}{0.2pt}%
-        \lapis{straight (0)} \quad \lapisbox{box (0)} \quad
+        \jambrowiggleamp{0.2pt}%
+        \lapis{subtle (0.2pt)} \quad \lapisbox{box (0.2pt)} \quad
     \end{center}
     \begin{center}
-        \renewcommand{\jambrowiggleamp}{0.8pt}%
-        \lapis{default (0.4)} \quad \lapisbox{box (0.4)} \quad
+        \jambrowiggleamp{0.4pt}%
+        \lapis{default (0.4pt)} \quad \lapisbox{box (0.4pt)} \quad
     \end{center}
     \begin{center}
-        \renewcommand{\jambrowiggleamp}{2.5pt}%
-        \lapis{expressive (2)} \quad \lapisbox{box (2)} \quad
+        \jambrowiggleamp{2.5pt}%
+        \lapis{expressive (2.5pt)} \quad \lapisbox{box (2.5pt)} \quad
     \end{center}
 \end{frame}
 %.......................................................

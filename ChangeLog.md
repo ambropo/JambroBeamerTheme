@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2026-06-24 — Larger frame titles and opt-in centered titles
+
+Both features ported from a downstream deck (`2026.06 AI and Rstar panel`).
+
+### Added
+- `beamerthemejambro.sty`: New `centertitle` option (`\documentclass[centertitle]{beamer}`). When set, frame titles are centered across the full page width via a custom `frametitle` template; default behavior remains left-aligned, so existing decks are unaffected. Long titles wrap within the box (verified, no overfull warnings).
+- `Demo.tex`: Listed `centertitle` on the "Theme's options" slide, and added two new "Theme's options" demo slides (after the `onesec` slide) illustrating `centertitle` and `wiggle=<n>` via screenshots, matching the style of the existing option slides.
+- `Demo.tex`: Split the crowded "Theme's options" overview slide (13 items) into two slides — appearance options (fonts, colors, aspect ratio) and a "Theme's options (cont'd)" slide for layout/behaviour options — to avoid overflow.
+- `graphics/centertitle.pdf`, `graphics/wiggle.pdf`: New screenshot assets, each a render of the "Highlighting" slide compiled with the respective option (`centertitle`, and `wiggle=12` vs. the default 0.4) for the two new demo slides.
+- `beamerthemejambro.sty`: New public command `\jambrowiggleamp{<dimen>}` to set the pencil/sketch amplitude ad-hoc — in the preamble for a document-wide value, or inside a frame/group to override the wiggle for those slides only (e.g. `\jambrowiggleamp{2.5pt}`).
+
+### Changed
+- `beamerthemejambro.sty`: Frame title font size bumped from `\fontsize{14}{15}` to `\fontsize{15}{16}` (slightly larger frame titles, applies to all decks).
+- `Demo.tex`: Reworked the "Pencil wiggle amplitude" slide to use the new `\jambrowiggleamp{...}` command (live local overrides at 0.2/0.4/2.5 pt), corrected the stated default from 0.8 to the actual 0.4, and aligned the row labels with their actual values.
+
+### Fixed
+- `beamerthemejambro.sty`: The `wiggle=<n>` option was non-functional and is now fixed. Two independent bugs: (1) passing it via `\documentclass[wiggle=<n>]{beamer}` did nothing, because LaTeX does not forward unknown key=value *global* options to a package's `\DeclareOption*` catch-all — the theme now scans `\@classoptionslist` explicitly to capture it; (2) passing it via `\usetheme[wiggle=<n>]{jambro}` crashed PGF math (`Unknown operator '=' in '<n>=pt'`) because the single-terminator parser left a stray `=` in the value — the parser now uses a doubled `==\@nil` terminator. `wiggle=<n>` now works through both channels. Symptom: the wiggle screenshot looked identical to the default because the option was silently ignored.
+
+### BREAKING
+- `beamerthemejambro.sty`: `\jambrowiggleamp` changed from an expandable *value* macro (which held the amplitude, e.g. `0.4pt`) to a one-argument *setter* command. The stored amplitude now lives in the internal, `@`-free macro `\jambrowigglecurrent` (kept `@`-free because PGF math re-tokenises the amplitude in document context). Migration: replace `\renewcommand{\jambrowiggleamp}{2.5pt}` with `\jambrowiggleamp{2.5pt}`. (The old form silently stopped affecting the amplitude rather than erroring, since the pencil style now reads `\jambrowigglecurrent`.)
+
 ## 2026-03-26 — Restore full-width footline banner
 
 ### Fixed
