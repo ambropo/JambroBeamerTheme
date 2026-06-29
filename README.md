@@ -11,17 +11,14 @@ A fully worked feature showcase is in **[`Demo.tex`](Demo.tex)** — see the ren
 
 ---
 
-## Features
-
-Jambro is a custom Beamer theme designed with a strong focus on clarity and readability. It features a clean, minimalist layout, a subtle and professional color palette, modern typography, and a spacious design that makes it especially well suited for academic and policy-oriented presentations.
-
-Its main features include annotation tools for text, figures, and tables using TikZ-based arrows and handwritten-style fonts (e.g., Augie), as well as highlighting, underlining, and boxing elements with pencil-like effects. The theme supports different colors (blue is default, red can be specified), a night mode, different fonts, and a handout mode with notes.
-
----
-
 ## Getting Started
 
-To use the theme, simply download `beamerthemejambro.sty` to the folder containing your presentation (or install it in your local TeX tree). Then load the theme using `\usetheme{jambro}` in the preamble of your Beamer document.
+Download `beamerthemejambro.sty` to the folder containing your presentation (or install it in your local TeX tree), then load it with `\usetheme{jambro}`:
+
+```latex
+\documentclass{beamer}
+\usetheme{jambro}
+```
 
 The theme loads its own dependencies (fonts, TikZ, tcolorbox, tabularx, and the Augie handwriting font); a recent TeX Live (2022 or newer) is recommended. Features that draw arrows to named nodes need **two compiler passes** to resolve. Compile with `latexmk -pdf Demo.tex`.
 

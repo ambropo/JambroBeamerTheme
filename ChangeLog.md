@@ -10,7 +10,7 @@ Bring the README into structural parity with the sibling `notesthemejambro` READ
 - `README.md`: Status line (version + changelog pointer); a **Package options** table documenting all 13 class options (`red`, `night`, `light`, `cabin`, `roboto`, `3to2`, `itemsep`, `onesec`, `centertitle`, `shownotes`, `handout2x1`, `wiggle=<n>`, `hidememo`); a **Public API** reference (typography/fonts, pencil marks & arrows, notes & annotations, math/tables/code) covering `\hand`, `\handbold`, `\lapis`, `\lapisbox`, `\lapisboxeq`, `\jarrow{u,d,l,r}`, `\marker`, `\lapisnote`, `\stabilo`, `\NB`, `\memo`, `\shownotesblock(zero)`, `\EE`, `Y`/`S` columns, `\sym`, `\jverb`/`jVerb`, `\jcode`/`\jCode`, `\citej`, `\vs`, `changemargin`, `\cmark`/`\xmark`; a **Colors** section; and a **Changelog** pointer. All entries verified against `beamerthemejambro.sty`.
 
 ### Changed
-- `README.md`: Reworked the title/lead into a one-paragraph description plus a `Demo.tex`/`Demo.pdf` showcase link, and added horizontal-rule section separators, matching the Notes README layout.
+- `README.md`: Reworked the title/lead into a one-paragraph description plus a `Demo.tex`/`Demo.pdf` showcase link, and added horizontal-rule section separators, matching the Notes README layout. Removed the **Features** section (redundant with the new lead paragraph) and added a minimal `\documentclass{beamer}` / `\usetheme{jambro}` load example to **Getting Started**.
 
 ## 2026-06-24 — Larger frame titles and opt-in centered titles
 
