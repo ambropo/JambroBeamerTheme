@@ -371,12 +371,29 @@
             \item \texttt{shownotes}: show notes to the slides
             \item \texttt{handout2x1}: make 2x1 handouts (portrait). Useful in combination with \texttt{shownotes}
             \item \texttt{onesec}: visualize only one section at the time in footline (default is all of them)
-            \item \texttt{itemsep}: use generous spacing between itemize items (default is standard Beamer spacing)
+            \item \texttt{itemsep}: use generous spacing between itemize/enumerate items (default is standard Beamer spacing)
             \item \texttt{centertitle}: center frame titles across the page (default is left-aligned)
             \item \texttt{wiggle=<n>}: set the amplitude of the pencil/sketch effect globally (or ad-hoc with \texttt{\textbackslash jambrowiggleamp\{\textit{dimen}\}})
             \item \texttt{hidememo}: suppress all \texttt{\textbackslash memo\{...\}} annotations
         \end{itemize}
     \end{itemize}
+\end{frame}
+%.......................................................
+\shownotesblock{}
+
+%=============================================================
+\begin{frame}
+    {Enumerate lists}
+    \begin{enumerate}
+        \item Numbered lists use the 1) 2) style, set via the \texttt{enumerate item} template
+        \item With the \texttt{itemsep} option, enumerate gets the same generous spacing as itemize
+        \item Nested itemize works as usual:
+        \begin{itemize}
+            \item A level-2 item with tighter spacing
+            \item Another level-2 item
+        \end{itemize}
+        \item Override the spacing per list with \texttt{\textbackslash begin\{enumerate\}[8pt]}, as for itemize
+    \end{enumerate}
 \end{frame}
 %.......................................................
 \shownotesblock{}

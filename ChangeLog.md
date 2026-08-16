@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2026-07-23 — Enumerate: 1) 2) numbering and `itemsep` spacing
+
+Both features ported from a downstream deck (`VAR-BofE`), aligning enumerate with the existing itemize treatment.
+
+### Added
+- `beamerthemejambro.sty`: The `itemsep` option now also applies to `enumerate` (previously itemize only). Same per-level defaults as itemize (14pt at level 1, 5pt at level 2, 3pt lead-in before nested lists) and the same optional spacing override, e.g. `\begin{enumerate}[8pt]`.
+- `Demo.tex`: New "Enumerate lists" slide (after "Theme's options (cont'd)") exercising the 1) 2) numbering, the `itemsep` spacing, a nested itemize, and the `[8pt]` override syntax.
+
+### Changed
+- `beamerthemejambro.sty`: Top-level enumerate labels now render as `1)` `2)` instead of beamer's default `1.` `2.`, via `\setbeamertemplate{enumerate item}{\insertenumlabel)}`. Applies to all decks; revert per-deck with `\setbeamertemplate{enumerate items}[default]`.
+- `Demo.tex`: The `itemsep` bullet on the "Theme's options (cont'd)" slide now says "itemize/enumerate items".
+
+### BREAKING
+- `beamerthemejambro.sty`: With the `itemsep` option enabled, enumerate's optional argument is claimed for spacing (mirroring itemize), so beamer's mini-template syntax `\begin{enumerate}[1)]` is no longer available in `itemsep` decks. Migration: set the numbering style via the `enumerate item` template instead (the new `1)` style is already the theme default). Decks without `itemsep` are unaffected.
+
 ## 2026-06-29 — Expand README for parity with the Notes theme
 
 Bring the README into structural parity with the sibling `notesthemejambro` README; additive only — existing material (Features prose, screenshots, minimal example, GPL license) is preserved.

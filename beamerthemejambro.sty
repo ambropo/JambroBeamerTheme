@@ -25,7 +25,7 @@
 %% - red          : Use red color scheme instead of blue
 %% - night        : Dark mode color scheme (overrides red)
 %% - onesec       : Show only current section in footline
-%% - itemsep      : Use generous itemize spacing (default: standard Beamer spacing)
+%% - itemsep      : Use generous itemize/enumerate spacing (default: standard Beamer spacing)
 %% - wiggle=<n>   : Amplitude of pencil/sketch effect (default: 0.4, larger=more expressive)
 %% - hidememo     : Suppress all \memo{} output (for clean/final output)
 %% ===========================================================================
@@ -458,8 +458,9 @@
 \defbeamertemplate{itemize subsubitem}{third}{\ssmall\raisebox{.03cm}{\ding{59}}}
 \setbeamertemplate{itemize subsubitem}[third]
 
-% --- Enumerate style ---
-\setbeamertemplate{enumerate items}[default]
+% --- Enumerate style: 1) 2) instead of 1. 2. ---
+% To revert to the standard 1. 2. style: \setbeamertemplate{enumerate items}[default]
+\setbeamertemplate{enumerate item}{\insertenumlabel)}
 
 % --- List item colors ---
 \setbeamercolor{itemize item}{fg=main}
@@ -470,12 +471,16 @@
 
 
 %=============================================================================
-%  ITEMIZE SPACING CUSTOMIZATION (optional, enabled with 'itemsep' option)
+%  LIST SPACING CUSTOMIZATION (optional, enabled with 'itemsep' option)
 %-----------------------------------------------------------------------------
-% When enabled, provides generous vertical spacing in itemize environments.
+% When enabled, provides generous vertical spacing in itemize and enumerate
+% environments.
 % Usage: \begin{itemize}[<spacing>] or just \begin{itemize} for defaults
-% Example: \begin{itemize}[8pt] for custom 8pt spacing
+% Example: \begin{itemize}[8pt] for custom 8pt spacing (same for enumerate)
 % Without 'itemsep' option: standard Beamer spacing is used.
+% Note: with 'itemsep' enabled, enumerate's optional argument is claimed for
+% spacing, so beamer's mini-template syntax \begin{enumerate}[1)] is not
+% available (the numbering style is set via the 'enumerate item' template).
 %=============================================================================
 
 \if@OptionItemsep
@@ -510,6 +515,38 @@
     \fi
 }{%
     \endolditemize
+}
+
+% --- Same treatment for enumerate ---
+\let\oldenumerate\enumerate
+\let\endoldenumerate\endenumerate
+
+\RenewDocumentEnvironment{enumerate}{ O{\relax} }{%
+    % Add vertical space before level-2 lists
+    \ifnum\@listdepth=1
+        \vspace{3pt}%
+    \fi
+    % Start enumerate environment
+    \oldenumerate
+    \ifx#1\relax
+        % No explicit spacing argument → use per-level defaults
+        \ifnum\@listdepth=1
+            \setlength{\itemsep}{14pt}%      % Level 1: generous spacing
+            \setlength{\topsep}{14pt}%
+        \else\ifnum\@listdepth=2
+            \setlength{\itemsep}{5pt}%       % Level 2: tighter spacing
+            \setlength{\topsep}{5pt}%
+        \fi\fi
+        % Zero out extra equation spacing; let itemsep control vertical rhythm
+        \setlength{\belowdisplayskip}{0pt}%
+        \setlength{\belowdisplayshortskip}{0pt}%
+    \else
+        % Explicit override provided (e.g., [8pt])
+        \setlength{\itemsep}{#1}%
+        \setlength{\topsep}{#1}%
+    \fi
+}{%
+    \endoldenumerate
 }
 \makeatother
 \fi
